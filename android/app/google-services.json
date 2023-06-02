@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "571806460921",
+    "project_id": "aljouf-1b970",
+    "storage_bucket": "aljouf-1b970.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:571806460921:android:5584a8514aff69d5796b28",
+        "android_client_info": {
+          "package_name": "com.aljouf.aljouf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "571806460921-dunc9g0ltad434sjfevdmu394aogih3n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4X6_6eYcRCLHSElXskRhl5cvBmOuN9n4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "571806460921-dunc9g0ltad434sjfevdmu394aogih3n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "571806460921-6fmql0c52ogao1bllnigh25elupinb5o.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.DigitalPartner.aljouf"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

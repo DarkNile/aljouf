@@ -1,0 +1,8 @@
+<svg id="grid_view_black_24dp_2_" data-name="grid_view_black_24dp (2)" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <rect id="Rectangle_1934" data-name="Rectangle 1934" width="6" height="6" transform="translate(4 4)" fill="#0d0e10"/>
+  <rect id="Rectangle_1935" data-name="Rectangle 1935" width="6" height="6" transform="translate(4 14)" fill="#0d0e10"/>
+  <rect id="Rectangle_1936" data-name="Rectangle 1936" width="6" height="6" transform="translate(14 14)" fill="#0d0e10"/>
+  <path id="Path_4308" data-name="Path 4308" d="M0,0H24V24H0Z" fill="none" fill-rule="evenodd"/>
+  <path id="Path_4309" data-name="Path 4309" d="M3,3v8h8V3ZM9,9H5V5H9ZM3,13v8h8V13Zm6,6H5V15H9ZM13,3v8h8V3Zm6,6H15V5h4Zm-6,4v8h8V13Zm6,6H15V15h4Z" fill="#0d0e10" fill-rule="evenodd"/>
+  <rect id="Rectangle_1933" data-name="Rectangle 1933" width="6" height="6" transform="translate(14 4)" fill="#0d0e10"/>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="ic_cart" transform="translate(-14 -49)">
+    <g id="shopping_bag_black_24dp" transform="translate(14 49)">
+      <rect id="Rectangle_2016" data-name="Rectangle 2016" width="24" height="24" fill="none"/>
+      <path id="Path_32086" data-name="Path 32086" d="M20,6H16A4,4,0,0,0,8,6H4V22H20ZM10,11H8V8h2Zm2-7a2.006,2.006,0,0,1,2,2H10A2.006,2.006,0,0,1,12,4Zm4,7H14V8h2Z" fill="#0d0e10"/>
+    </g>
+  </g>
+</svg>

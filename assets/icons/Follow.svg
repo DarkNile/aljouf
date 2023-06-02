@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="124" height="36" viewBox="0 0 124 36">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" y1="0.008" x2="0.5" y2="0.998" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#e09b3d"/>
+      <stop offset="0.3" stop-color="#c74c4d"/>
+      <stop offset="0.6" stop-color="#c21975"/>
+      <stop offset="1" stop-color="#7024c4"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" y1="-0.451" y2="1.462" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-3" y1="-1.396" y2="6.586" xlink:href="#linear-gradient"/>
+  </defs>
+  <g id="Follow" transform="translate(-205 -728)">
+    <g id="Group_2872" data-name="Group 2872" transform="translate(0 -3)">
+      <g id="Group_2869" data-name="Group 2869">
+        <g id="Rectangle_1853" data-name="Rectangle 1853" transform="translate(249 731)" fill="#fff" stroke="#eee" stroke-width="1">
+          <rect width="36" height="36" rx="18" stroke="none"/>
+          <rect x="0.5" y="0.5" width="35" height="35" rx="17.5" fill="none"/>
+        </g>
+        <path id="facebook_3_" data-name="facebook(3)" d="M14.135,3.229H15.91V.137A22.923,22.923,0,0,0,13.324,0C10.765,0,9.011,1.61,9.011,4.569V7.292H6.187v3.456H9.011v8.7h3.463v-8.7h2.71l.43-3.456H12.473V4.912c0-1,.27-1.683,1.662-1.683Z" transform="translate(255.814 739)" fill="#385da8"/>
+      </g>
+      <g id="Group_2876" data-name="Group 2876" transform="translate(44)">
+        <g id="Group_2878" data-name="Group 2878">
+          <g id="Rectangle_1853-2" data-name="Rectangle 1853" transform="translate(249 731)" fill="#fff" stroke="#eee" stroke-width="1">
+            <rect width="36" height="36" rx="18" stroke="none"/>
+            <rect x="0.5" y="0.5" width="35" height="35" rx="17.5" fill="none"/>
+          </g>
+          <g id="Icons" transform="translate(256.016 739.847)">
+            <g id="Color-">
+              <path id="Twitter" d="M321.969,166.167a8.8,8.8,0,0,1-2.588.727,4.612,4.612,0,0,0,1.982-2.556,8.887,8.887,0,0,1-2.864,1.12A4.444,4.444,0,0,0,315.21,164a4.565,4.565,0,0,0-4.505,4.622,4.713,4.713,0,0,0,.116,1.052,12.689,12.689,0,0,1-9.291-4.83,4.707,4.707,0,0,0-.61,2.326,4.652,4.652,0,0,0,2.005,3.847,4.426,4.426,0,0,1-2.043-.577v.057a4.6,4.6,0,0,0,3.617,4.532,4.3,4.3,0,0,1-1.188.163,4.394,4.394,0,0,1-.849-.082,4.524,4.524,0,0,0,4.21,3.208,8.9,8.9,0,0,1-5.6,1.98,9.061,9.061,0,0,1-1.076-.064,12.551,12.551,0,0,0,6.909,2.075c8.291,0,12.824-7.042,12.824-13.149,0-.2,0-.4-.012-.6a9.248,9.248,0,0,0,2.248-2.392" transform="translate(-300 -164)" fill="#00aaec" fill-rule="evenodd"/>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g id="Group_2868" data-name="Group 2868" transform="translate(17)">
+        <g id="Group_2871" data-name="Group 2871">
+          <g id="Rectangle_1854" data-name="Rectangle 1854" transform="translate(188 731)" fill="#fff" stroke="#eee" stroke-width="1">
+            <rect width="36" height="36" rx="18" stroke="none"/>
+            <rect x="0.5" y="0.5" width="35" height="35" rx="17.5" fill="none"/>
+          </g>
+          <g id="XMLID_13_" transform="translate(196 739)">
+            <path id="XMLID_17_" d="M14.042,0H5.958A5.965,5.965,0,0,0,0,5.958v8.084A5.965,5.965,0,0,0,5.958,20h8.084A5.965,5.965,0,0,0,20,14.042V5.958A5.965,5.965,0,0,0,14.042,0Zm3.946,14.042a3.946,3.946,0,0,1-3.946,3.946H5.958a3.946,3.946,0,0,1-3.946-3.946V5.958A3.946,3.946,0,0,1,5.958,2.012h8.084a3.946,3.946,0,0,1,3.946,3.946v8.084Z" fill="url(#linear-gradient)"/>
+            <path id="XMLID_81_" d="M138.173,133a5.173,5.173,0,1,0,5.173,5.173A5.179,5.179,0,0,0,138.173,133Zm0,8.333a3.161,3.161,0,1,1,3.161-3.161A3.161,3.161,0,0,1,138.173,141.333Z" transform="translate(-128.173 -128.173)" fill="url(#linear-gradient-2)"/>
+            <circle id="XMLID_83_" cx="1.239" cy="1.239" r="1.239" transform="translate(13.943 3.627)" fill="url(#linear-gradient-3)"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
