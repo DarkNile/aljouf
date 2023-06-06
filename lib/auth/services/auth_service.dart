@@ -253,10 +253,17 @@ class AuthService {
     required BuildContext context,
   }) async {
     final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.post(
       Uri.parse('$baseUrl route=rest/login/socialLogin&language=$lang'),
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+      },
       body: json.encode({
         "email": email.trim(),
         "social_access_token": accessToken,

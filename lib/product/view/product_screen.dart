@@ -1,8 +1,9 @@
+import 'dart:math' as math;
+import 'package:aljouf/checkout/view/cart_screen.dart';
 import 'package:aljouf/product/widgets/nutrition_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:aljouf/checkout/controllers/checkout_controller.dart';
 import 'package:aljouf/constants/colors.dart';
@@ -37,7 +38,7 @@ class ProductScreen extends StatefulWidget {
 class _ProductScreenState extends State<ProductScreen>
     with TickerProviderStateMixin {
   final _homeController = Get.put(HomeController());
-  final _productsController = Get.put(ProductController());
+  final _productController = Get.put(ProductController());
   final _checkoutController = Get.put(CheckoutController());
 
   bool onFavoritePressed = false;
@@ -50,9 +51,12 @@ class _ProductScreenState extends State<ProductScreen>
   @override
   void initState() {
     super.initState();
+    widget.product.originalImages!.addIf(
+        !widget.product.originalImages!.contains(widget.product.originalImage!),
+        widget.product.originalImage!);
     _tabController = TabController(length: 2, vsync: this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      _productsController.getProductsByCategoryId(
+      _productController.getProductsByCategoryId(
         categoryId: widget.categoryId,
         homeController: _homeController,
       );
@@ -92,6 +96,35 @@ class _ProductScreenState extends State<ProductScreen>
                           return const CustomLoadingWidget();
                         },
                       ),
+                      if (widget.product.quantity == 0)
+                        Positioned.directional(
+                          textDirection: Directionality.of(context),
+                          top: 60,
+                          start: -10,
+                          child: Transform.rotate(
+                            angle: AppUtil.rtlDirection(context)
+                                ? math.pi / 5.0
+                                : math.pi / -5.0,
+                            alignment: Alignment.center,
+                            child: Container(
+                              width: width / 2,
+                              height: 32,
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.all(4),
+                              decoration: const BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4)),
+                                color: vermillion,
+                              ),
+                              child: CustomText(
+                                text: 'outOfStock'.tr,
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                        ),
                       Padding(
                         padding: const EdgeInsets.only(
                           top: 32,
@@ -111,10 +144,45 @@ class _ProductScreenState extends State<ProductScreen>
                                   },
                                   icon: const Icon(Icons.arrow_back),
                                 ),
-                                InkWell(
-                                  onTap: () {},
-                                  child: SvgPicture.asset(
-                                    'assets/icons/order.svg',
+                                IconButton(
+                                  onPressed: () {
+                                    Get.to(() => const CartScreen());
+                                  },
+                                  icon: Stack(
+                                    alignment: Alignment.bottomCenter,
+                                    clipBehavior: Clip.none,
+                                    children: [
+                                      const Icon(
+                                        Icons.shopping_cart_outlined,
+                                        color: Colors.black,
+                                        size: 24,
+                                      ),
+                                      Positioned.directional(
+                                        textDirection:
+                                            Directionality.of(context),
+                                        bottom: -15,
+                                        end: 15,
+                                        child: Container(
+                                          width: 18,
+                                          height: 18,
+                                          alignment: Alignment.center,
+                                          decoration: const BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            color: yellow,
+                                          ),
+                                          child: Obx(() {
+                                            return CustomText(
+                                              text: _checkoutController
+                                                  .cartItems.value
+                                                  .toString(),
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w400,
+                                              textAlign: TextAlign.center,
+                                            );
+                                          }),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
@@ -130,36 +198,28 @@ class _ProductScreenState extends State<ProductScreen>
                                 InkWell(
                                   onTap: () {
                                     setState(() {
-                                      onFavoritePressed = !onFavoritePressed;
+                                      widget.product.fav = !widget.product.fav!;
                                     });
-                                    if (onFavoritePressed) {
+                                    if (widget.product.fav!) {
                                       _homeController.addToWishlist(
                                         id: widget.product.id.toString(),
-                                        productController: _productsController,
+                                        productController: _productController,
                                       );
                                     } else {
                                       _homeController.deleteFromWishlist(
                                         id: widget.product.id.toString(),
-                                        productController: _productsController,
+                                        productController: _productController,
                                       );
                                     }
                                   },
-                                  child: Container(
-                                      width: 32,
-                                      height: 32,
-                                      alignment: Alignment.center,
-                                      decoration: const BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: Icon(
-                                        onFavoritePressed
-                                            ? Icons.favorite
-                                            : Icons.favorite_border,
-                                        color: onFavoritePressed
-                                            ? vermillion
-                                            : Colors.black,
-                                      )),
+                                  child: Icon(
+                                    widget.product.fav!
+                                        ? Icons.favorite
+                                        : Icons.favorite_border,
+                                    color: widget.product.fav!
+                                        ? vermillion
+                                        : Colors.black,
+                                  ),
                                 ),
                               ],
                             ),
@@ -205,7 +265,7 @@ class _ProductScreenState extends State<ProductScreen>
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(top: 23),
-                                child: Row(
+                                child: Column(
                                   children: [
                                     RichText(
                                       text: TextSpan(children: [
@@ -213,11 +273,15 @@ class _ProductScreenState extends State<ProductScreen>
                                           text:
                                               '${double.parse(widget.product.price.toString()).toStringAsFixed(2)} ',
                                           style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w700,
-                                            color: widget.product.special != 0
-                                                ? vermillion
-                                                : Colors.black,
+                                            fontSize:
+                                                widget.product.special != 0
+                                                    ? 16
+                                                    : 18,
+                                            fontWeight:
+                                                widget.product.special != 0
+                                                    ? FontWeight.w400
+                                                    : FontWeight.w600,
+                                            color: Colors.black,
                                             decoration:
                                                 widget.product.special != 0
                                                     ? TextDecoration.lineThrough
@@ -227,19 +291,16 @@ class _ProductScreenState extends State<ProductScreen>
                                         TextSpan(
                                           text: 'riyal'.tr,
                                           style: TextStyle(
-                                            fontSize: 12,
-                                            color: widget.product.special != 0
-                                                ? vermillion
-                                                : Colors.black,
-                                            fontWeight: FontWeight.w500,
+                                            fontSize:
+                                                widget.product.special != 0
+                                                    ? 12
+                                                    : 14,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w400,
                                           ),
                                         ),
                                       ]),
                                     ),
-                                    if (widget.product.special != 0)
-                                      const SizedBox(
-                                        width: 8,
-                                      ),
                                     if (widget.product.special != 0)
                                       RichText(
                                         text: TextSpan(children: [
@@ -247,17 +308,17 @@ class _ProductScreenState extends State<ProductScreen>
                                             text:
                                                 '${double.parse(widget.product.special.toString()).toStringAsFixed(2)} ',
                                             style: const TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w700,
-                                              color: Colors.black,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w600,
+                                              color: vermillion,
                                             ),
                                           ),
                                           TextSpan(
                                             text: 'riyal'.tr,
                                             style: const TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.w500,
+                                              fontSize: 14,
+                                              color: vermillion,
+                                              fontWeight: FontWeight.w400,
                                             ),
                                           ),
                                         ]),
@@ -265,36 +326,36 @@ class _ProductScreenState extends State<ProductScreen>
                                   ],
                                 ),
                               ),
-                              if (widget.product.priceExcludingTax != null)
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 8),
-                                  child: RichText(
-                                    text: TextSpan(children: [
-                                      TextSpan(
-                                        text: 'priceWithoutTax'.tr,
-                                        style: const TextStyle(
-                                          fontSize: 10,
-                                          color: black51,
-                                        ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8),
+                                child: RichText(
+                                  text: TextSpan(children: [
+                                    TextSpan(
+                                      text: 'priceWithoutTax'.tr,
+                                      style: const TextStyle(
+                                        fontSize: 10,
+                                        color: brownishGrey,
                                       ),
-                                      TextSpan(
-                                        text:
-                                            ' ${double.parse(widget.product.priceExcludingTax.toString()).toStringAsFixed(2)} ',
-                                        style: const TextStyle(
-                                          fontSize: 10,
-                                          color: black51,
-                                        ),
+                                    ),
+                                    TextSpan(
+                                      text: widget.product.special != 0
+                                          ? ' ${double.parse(widget.product.specialExcludingTax.toString()).toStringAsFixed(2)} '
+                                          : ' ${double.parse(widget.product.priceExcludingTax.toString()).toStringAsFixed(2)} ',
+                                      style: const TextStyle(
+                                        fontSize: 10,
+                                        color: brownishGrey,
                                       ),
-                                      TextSpan(
-                                        text: 'riyal'.tr,
-                                        style: const TextStyle(
-                                          fontSize: 10,
-                                          color: black51,
-                                        ),
+                                    ),
+                                    TextSpan(
+                                      text: 'riyal'.tr,
+                                      style: const TextStyle(
+                                        fontSize: 10,
+                                        color: brownishGrey,
                                       ),
-                                    ]),
-                                  ),
+                                    ),
+                                  ]),
                                 ),
+                              ),
                             ],
                           ),
                         ),
@@ -309,15 +370,15 @@ class _ProductScreenState extends State<ProductScreen>
                                   height: 80,
                                   color: darkGrey,
                                 ),
-                                const SizedBox(
-                                  width: 24,
+                                SizedBox(
+                                  width: width * 0.125,
                                 ),
                                 Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Row(
                                       children: [
-                                        widget.product.quantity == '0'
+                                        widget.product.quantity == 0
                                             ? const Icon(
                                                 Icons.close,
                                                 color: vermillion,
@@ -332,7 +393,7 @@ class _ProductScreenState extends State<ProductScreen>
                                           width: 4,
                                         ),
                                         CustomText(
-                                          text: widget.product.quantity == '0'
+                                          text: widget.product.quantity == 0
                                               ? 'productNotAvailable'.tr
                                               : 'productAvailable'.tr,
                                           color: widget.product.quantity == 0
@@ -512,17 +573,17 @@ class _ProductScreenState extends State<ProductScreen>
                   SizedBox(
                     height: 250,
                     child: Obx(() {
-                      if (_productsController.isProductsLoading.value ||
+                      if (_productController.isProductsLoading.value ||
                           _homeController.isWishListProductsLoading.value) {
                         return Container();
                       }
                       return ListView.separated(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
-                          itemCount: _productsController.products.length > 8
+                          itemCount: _productController.products.length > 8
                               ? 8
-                              : _productsController.products.length,
+                              : _productController.products.length,
                           separatorBuilder: (context, index) {
                             return const SizedBox(
                               width: 8,
@@ -530,7 +591,7 @@ class _ProductScreenState extends State<ProductScreen>
                           },
                           itemBuilder: (context, index) {
                             return CustomProductCard(
-                              product: _productsController.products[index],
+                              product: _productController.products[index],
                               categoryId: widget.categoryId,
                               isRelated: true,
                             );
@@ -555,24 +616,29 @@ class _ProductScreenState extends State<ProductScreen>
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: CustomButton(
-            onPressed: () async {
-              final isSuccess = await _checkoutController.addToCart(
-                productId: widget.product.id.toString(),
-                quantity: '1',
-              );
-              if (isSuccess) {
-                if (context.mounted) {
-                  AppUtil.successToast(
-                    context,
-                    'productAddedToCart'.tr,
-                  );
-                }
-              }
-            },
-            title: 'addToCart'.tr,
-            radius: 4,
-          ),
+          child: widget.product.quantity == 0
+              ? CustomButton(
+                  onPressed: null,
+                  title: 'outOfStock'.tr,
+                  color: brownishGrey,
+                )
+              : CustomButton(
+                  onPressed: () async {
+                    final isSuccess = await _checkoutController.addToCart(
+                      productId: widget.product.id.toString(),
+                      quantity: '1',
+                    );
+                    if (isSuccess) {
+                      if (context.mounted) {
+                        AppUtil.successToast(
+                          context,
+                          'productAddedToCart'.tr,
+                        );
+                      }
+                    }
+                  },
+                  title: 'addToCart'.tr,
+                ),
         ),
       ),
     );

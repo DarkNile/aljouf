@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:aljouf/product/controllers/product_controller.dart';
 import 'package:aljouf/widgets/custom_product_border.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -102,32 +103,60 @@ class _CustomProductCardState extends State<CustomProductCard> {
                           ),
                         ),
                       ),
-                      Positioned.directional(
-                        textDirection: Directionality.of(context),
-                        bottom: 0,
-                        start: 0,
-                        child: InkWell(
-                          onTap: () async {
-                            final isSuccess =
-                                await _checkoutController.addToCart(
-                              productId: widget.product.id.toString(),
-                              quantity: '1',
-                            );
-                            if (isSuccess) {
-                              if (context.mounted) {
-                                AppUtil.successToast(
-                                  context,
-                                  'productAddedToCart'.tr,
-                                );
-                              }
-                            }
-                          },
-                          child: const Icon(
-                            Icons.add_shopping_cart,
-                            color: greenAccent,
+                      if (widget.product.quantity == 0)
+                        Positioned.directional(
+                          textDirection: Directionality.of(context),
+                          top: AppUtil.rtlDirection(context) ? 4 : 10,
+                          start: AppUtil.rtlDirection(context) ? -8 : -10,
+                          child: Transform.rotate(
+                            angle: AppUtil.rtlDirection(context)
+                                ? math.pi / 5.0
+                                : math.pi / -5.0,
+                            alignment: Alignment.center,
+                            child: Container(
+                              alignment: Alignment.center,
+                              padding: const EdgeInsets.all(4),
+                              decoration: const BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(4)),
+                                color: vermillion,
+                              ),
+                              child: CustomText(
+                                text: 'notAvailable'.tr,
+                                color: Colors.white,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      if (widget.product.quantity != 0)
+                        Positioned.directional(
+                          textDirection: Directionality.of(context),
+                          bottom: 0,
+                          start: 0,
+                          child: InkWell(
+                            onTap: () async {
+                              final isSuccess =
+                                  await _checkoutController.addToCart(
+                                productId: widget.product.id.toString(),
+                                quantity: '1',
+                              );
+                              if (isSuccess) {
+                                if (context.mounted) {
+                                  AppUtil.successToast(
+                                    context,
+                                    'productAddedToCart'.tr,
+                                  );
+                                }
+                              }
+                            },
+                            child: const Icon(
+                              Icons.add_shopping_cart,
+                              color: greenAccent,
+                            ),
+                          ),
+                        ),
                     ],
                   ),
                 ),
@@ -146,6 +175,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                           fontWeight: FontWeight.w400,
                           maxlines: 2,
                           color: Colors.black,
+                          height: 1.5,
                         ),
                       ),
                       const SizedBox(
@@ -252,6 +282,33 @@ class _CustomProductCardState extends State<CustomProductCard> {
                               ),
                             ),
                           ),
+                          if (widget.product.quantity == 0)
+                            Positioned.directional(
+                              textDirection: Directionality.of(context),
+                              top: AppUtil.rtlDirection(context) ? 4 : 10,
+                              start: AppUtil.rtlDirection(context) ? -8 : -10,
+                              child: Transform.rotate(
+                                angle: AppUtil.rtlDirection(context)
+                                    ? math.pi / 5.0
+                                    : math.pi / -5.0,
+                                alignment: Alignment.center,
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(4)),
+                                    color: vermillion,
+                                  ),
+                                  child: CustomText(
+                                    text: 'notAvailable'.tr,
+                                    color: Colors.white,
+                                    fontSize: 10,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            ),
                         ],
                       ),
                     ),
@@ -268,6 +325,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                           fontWeight: FontWeight.w400,
                           maxlines: 2,
                           color: Colors.black,
+                          height: 1.5,
                         ),
                       ),
                     ),
@@ -336,27 +394,28 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                 ),
                             ],
                           ),
-                          InkWell(
-                            onTap: () async {
-                              final isSuccess =
-                                  await _checkoutController.addToCart(
-                                productId: widget.product.id.toString(),
-                                quantity: '1',
-                              );
-                              if (isSuccess) {
-                                if (context.mounted) {
-                                  AppUtil.successToast(
-                                    context,
-                                    'productAddedToCart'.tr,
-                                  );
+                          if (widget.product.quantity != 0)
+                            InkWell(
+                              onTap: () async {
+                                final isSuccess =
+                                    await _checkoutController.addToCart(
+                                  productId: widget.product.id.toString(),
+                                  quantity: '1',
+                                );
+                                if (isSuccess) {
+                                  if (context.mounted) {
+                                    AppUtil.successToast(
+                                      context,
+                                      'productAddedToCart'.tr,
+                                    );
+                                  }
                                 }
-                              }
-                            },
-                            child: const Icon(
-                              Icons.add_shopping_cart,
-                              color: greenAccent,
+                              },
+                              child: const Icon(
+                                Icons.add_shopping_cart,
+                                color: greenAccent,
+                              ),
                             ),
-                          ),
                         ],
                       ),
                     ),

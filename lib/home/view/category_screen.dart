@@ -17,6 +17,7 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    homeController.categories.sort((a, b) => b.id.compareTo(a.id));
     return Column(
       children: [
         CustomBodyTitle(title: 'categories'.tr),
