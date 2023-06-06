@@ -204,27 +204,27 @@ class _LoginScreenState extends State<LoginScreen> {
                     // const SizedBox(
                     //   width: 8,
                     // ),
-                    if (Platform.isIOS)
-                      Expanded(
-                        child: CustomCard(
-                          onTap: () async {
-                            final user = await FirebaseService()
-                                .signInWithApple(context: context);
-                            if (user != null) {
-                              setState(() {
-                                _profileController.getAccount();
-                                _checkoutController.getCartItems();
-                              });
-                              Get.offAll(() => const HomePage());
-                            }
-                          },
-                          icon: 'apple_icon',
-                        ),
-                      ),
-                    if (Platform.isIOS)
-                      const SizedBox(
-                        width: 8,
-                      ),
+                    // if (Platform.isIOS)
+                    //   Expanded(
+                    //     child: CustomCard(
+                    //       onTap: () async {
+                    //         final user = await FirebaseService()
+                    //             .signInWithApple(context: context);
+                    //         if (user != null) {
+                    //           setState(() {
+                    //             _profileController.getAccount();
+                    //             _checkoutController.getCartItems();
+                    //           });
+                    //           Get.offAll(() => const HomePage());
+                    //         }
+                    //       },
+                    //       icon: 'apple_icon',
+                    //     ),
+                    //   ),
+                    // if (Platform.isIOS)
+                    //   const SizedBox(
+                    //     width: 8,
+                    //   ),
                     Expanded(
                       child: CustomCard(
                         onTap: () async {

@@ -191,4 +191,6 @@ const Map<String, String> en = {
   'congratulationsCoupon':
       'Congratulations! You have got a voucher with 20% discount when you shop now',
   'shopNow': 'Shop Now',
+  'outOfStock': 'Out of Stock',
+  'notAvailable': 'Not Available',
 };
