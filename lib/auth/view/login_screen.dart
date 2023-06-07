@@ -151,10 +151,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         context: context,
                       );
                       if (user != null) {
-                        setState(() {
-                          _profileController.getAccount();
-                          _checkoutController.getCartItems();
-                        });
+                        _profileController.getAccount();
+                        _checkoutController.getCartItems();
                         Get.offAll(() => const HomePage());
                       }
                     }
@@ -162,88 +160,84 @@ class _LoginScreenState extends State<LoginScreen> {
                   title: 'signIn'.tr,
                 );
               }),
-              const SizedBox(
-                height: 29,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    color: Colors.grey,
-                    height: 1,
-                    width: 99,
-                  ),
-                  CustomText(
-                    text: 'loginThrough'.tr,
-                    fontWeight: FontWeight.w400,
-                    color: warmGrey,
-                    textAlign: TextAlign.center,
-                  ),
-                  Container(
-                    color: Colors.grey,
-                    height: 1,
-                    width: 99,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 29,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  textDirection: TextDirection.ltr,
-                  children: [
-                    // Expanded(
-                    //   child: CustomCard(
-                    //     onTap: () {},
-                    //     icon: 'facebook_icon',
-                    //   ),
-                    // ),
-                    // const SizedBox(
-                    //   width: 8,
-                    // ),
-                    // if (Platform.isIOS)
-                    //   Expanded(
-                    //     child: CustomCard(
-                    //       onTap: () async {
-                    //         final user = await FirebaseService()
-                    //             .signInWithApple(context: context);
-                    //         if (user != null) {
-                    //           setState(() {
-                    //             _profileController.getAccount();
-                    //             _checkoutController.getCartItems();
-                    //           });
-                    //           Get.offAll(() => const HomePage());
-                    //         }
-                    //       },
-                    //       icon: 'apple_icon',
-                    //     ),
-                    //   ),
-                    // if (Platform.isIOS)
-                    //   const SizedBox(
-                    //     width: 8,
-                    //   ),
-                    Expanded(
-                      child: CustomCard(
-                        onTap: () async {
-                          final user = await FirebaseService()
-                              .signInWithGoogle(context: context);
-                          if (user != null) {
-                            setState(() {
-                              _profileController.getAccount();
-                              _checkoutController.getCartItems();
-                            });
-                            Get.offAll(() => const HomePage());
-                          }
-                        },
-                        icon: 'google_icon',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              // const SizedBox(
+              //   height: 29,
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //   children: [
+              //     Container(
+              //       color: Colors.grey,
+              //       height: 1,
+              //       width: 99,
+              //     ),
+              //     CustomText(
+              //       text: 'loginThrough'.tr,
+              //       fontWeight: FontWeight.w400,
+              //       color: warmGrey,
+              //       textAlign: TextAlign.center,
+              //     ),
+              //     Container(
+              //       color: Colors.grey,
+              //       height: 1,
+              //       width: 99,
+              //     ),
+              //   ],
+              // ),
+              // const SizedBox(
+              //   height: 29,
+              // ),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 12),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     textDirection: TextDirection.ltr,
+              //     children: [
+              //       Expanded(
+              //         child: CustomCard(
+              //           onTap: () {},
+              //           icon: 'facebook_icon',
+              //         ),
+              //       ),
+              //       const SizedBox(
+              //         width: 8,
+              //       ),
+              //       if (Platform.isIOS)
+              //         Expanded(
+              //           child: CustomCard(
+              //             onTap: () async {
+              //               final user = await FirebaseService()
+              //                   .signInWithApple(context: context);
+              //               if (user != null) {
+              //                   _profileController.getAccount();
+              //                   _checkoutController.getCartItems();
+              //                 Get.offAll(() => const HomePage());
+              //               }
+              //             },
+              //             icon: 'apple_icon',
+              //           ),
+              //         ),
+              //       if (Platform.isIOS)
+              //         const SizedBox(
+              //           width: 8,
+              //         ),
+              //       Expanded(
+              //         child: CustomCard(
+              //           onTap: () async {
+              //             final user = await FirebaseService()
+              //                 .signInWithGoogle(context: context);
+              //             if (user != null) {
+              //                 _profileController.getAccount();
+              //                 _checkoutController.getCartItems();
+              //               Get.offAll(() => const HomePage());
+              //             }
+              //           },
+              //           icon: 'google_icon',
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
               const SizedBox(
                 height: 32,
               ),
