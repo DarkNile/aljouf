@@ -1,11 +1,6 @@
-import 'dart:convert';
-import 'dart:io';
-
+import 'package:aljouf/auth/view/login_screen.dart';
 import 'package:aljouf/utils/app_util.dart';
 import 'package:aljouf/widgets/custom_text.dart';
-import 'package:android_id/android_id.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
 import 'package:get/get.dart';
@@ -21,7 +16,7 @@ import 'package:aljouf/home/widgets/home.dart';
 import 'package:aljouf/product/view/products_screen.dart';
 import 'package:aljouf/widgets/custom_app_bar.dart';
 import 'package:aljouf/widgets/custom_bottom_navigation_bar.dart';
-import 'package:http/http.dart' as http;
+import 'package:get_storage/get_storage.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class HomePage extends StatefulWidget {
@@ -34,6 +29,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final getStorage = GetStorage();
   final _homeController = Get.put(HomeController());
   final _profileController = Get.put(ProfileController());
   final _authController = Get.put(AuthController());
@@ -41,10 +37,12 @@ class _HomePageState extends State<HomePage> {
   late PageController _pageController;
   late int _currentIndex;
   final _checker = AppVersionChecker();
+  late String? customerId;
 
   @override
   void initState() {
     super.initState();
+    customerId = getStorage.read('customerId');
     _pageController = PageController(initialPage: widget.pageIndex ?? 0);
     _currentIndex = widget.pageIndex ?? 0;
     checkAppVersion();
@@ -92,10 +90,23 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: CustomBottomNavigationBar(
           currentIndex: _currentIndex,
           onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-            _pageController.jumpToPage(_currentIndex);
+            if (index == 4) {
+              if (customerId != null &&
+                  customerId!.isNotEmpty &&
+                  customerId == _profileController.user.value.id.toString()) {
+                setState(() {
+                  _currentIndex = index;
+                });
+                _pageController.jumpToPage(_currentIndex);
+              } else {
+                Get.to(() => const LoginScreen());
+              }
+            } else {
+              setState(() {
+                _currentIndex = index;
+              });
+              _pageController.jumpToPage(_currentIndex);
+            }
           }),
       body: PageView(
         physics: const NeverScrollableScrollPhysics(),

@@ -267,10 +267,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         context: context,
                       );
                       if (user != null) {
-                        setState(() {
-                          _profileController.getAccount();
-                          _checkoutController.getCartItems();
-                        });
+                        _profileController.getAccount();
+                        _checkoutController.getCartItems();
                         Get.offAll(() => const HomePage());
                       }
                     }
