@@ -58,7 +58,7 @@ class StaticPage extends StatelessWidget {
                       .split('&nbsp;')
                       .join(),
                   textAlign: TextAlign.justify,
-                  height: 1.5,
+                  height: 1.875,
                 ),
               ),
             ],

@@ -60,6 +60,7 @@ dependencies:
   firebase_auth: ^4.6.2
   the_apple_sign_in: ^1.1.1
   flutter_phoenix: ^1.1.1
+  flutter_share: ^2.0.0
 
 dev_dependencies:
   flutter_test:

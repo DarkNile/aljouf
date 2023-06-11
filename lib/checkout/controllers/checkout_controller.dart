@@ -24,6 +24,8 @@ class CheckoutController extends GetxController {
   var isAddingPaymentMethodLoading = false.obs;
   var total = 0.0.obs;
   var cartItems = 0.obs;
+  var isCouponAdded = false.obs;
+  var couponController = TextEditingController().obs;
 
   Future<Cart?> getCartItems() async {
     try {
@@ -247,6 +249,13 @@ class CheckoutController extends GetxController {
         context: context,
         coupon: coupon,
       );
+      if (isSuccess) {
+        isCouponAdded(true);
+        couponController.value.text = coupon;
+        if (context.mounted) {
+          confirmOrder(context: context);
+        }
+      }
       return isSuccess;
     } catch (e) {
       print(e);
@@ -264,6 +273,13 @@ class CheckoutController extends GetxController {
       final isSuccess = await CheckoutService.deleteCoupon(
         context: context,
       );
+      if (isSuccess) {
+        isCouponAdded(false);
+        couponController.value.clear();
+        if (context.mounted) {
+          confirmOrder(context: context);
+        }
+      }
       return isSuccess;
     } catch (e) {
       print(e);

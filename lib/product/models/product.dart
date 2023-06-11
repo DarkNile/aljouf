@@ -163,9 +163,9 @@ class Product {
     image = json["image"];
     images = json["images"] == null ? null : List<String>.from(json["images"]);
     originalImage = json["original_image"];
-    originalImages = json["original_images"] == null
+    originalImages = (json["original_images"] == null
         ? null
-        : List<String>.from(json["original_images"]);
+        : List<String>.from(json["original_images"]));
     priceExcludingTax = json["price_excluding_tax"];
     priceExcludingTaxFormated = json["price_excluding_tax_formated"];
     price = json["price"];
