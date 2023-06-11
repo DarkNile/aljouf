@@ -8,7 +8,7 @@ import 'package:aljouf/widgets/custom_button.dart';
 import 'package:aljouf/widgets/custom_text.dart';
 import 'package:aljouf/widgets/custom_text_field.dart';
 
-class OrderSummaryPage extends StatefulWidget {
+class OrderSummaryPage extends StatelessWidget {
   const OrderSummaryPage({
     super.key,
     required this.checkoutController,
@@ -25,20 +25,6 @@ class OrderSummaryPage extends StatefulWidget {
   final VoidCallback onEditShippingTap;
   final VoidCallback onEditPaymentTap;
   final VoidCallback onConfirmOrderTap;
-
-  @override
-  State<OrderSummaryPage> createState() => _OrderSummaryPageState();
-}
-
-class _OrderSummaryPageState extends State<OrderSummaryPage> {
-  final _couponController = TextEditingController();
-  bool isCouponAdded = false;
-
-  @override
-  void dispose() {
-    super.dispose();
-    _couponController.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,11 +52,11 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                         children: [
                           CustomText(
                             text:
-                                '${'purchases'.tr} ( ${widget.checkoutController.order!.products!.length} )',
+                                '${'purchases'.tr} ( ${checkoutController.order!.products!.length} )',
                             fontWeight: FontWeight.w400,
                           ),
                           InkWell(
-                            onTap: widget.onEditPurchasesTap,
+                            onTap: onEditPurchasesTap,
                             child: Row(
                               children: [
                                 SvgPicture.asset('assets/icons/edit.svg'),
@@ -99,8 +85,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                       ),
                       ListView.separated(
                         shrinkWrap: true,
-                        itemCount:
-                            widget.checkoutController.order!.products!.length,
+                        itemCount: checkoutController.order!.products!.length,
                         physics: const NeverScrollableScrollPhysics(),
                         separatorBuilder: (context, index) {
                           return const SizedBox(
@@ -109,8 +94,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                         },
                         itemBuilder: (context, index) {
                           return CustomCheckoutItem(
-                            product: widget
-                                .checkoutController.order!.products![index],
+                            product: checkoutController.order!.products![index],
                           );
                         },
                       ),
@@ -137,7 +121,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                             fontWeight: FontWeight.w400,
                           ),
                           InkWell(
-                            onTap: widget.onEditAddressTap,
+                            onTap: onEditAddressTap,
                             child: Row(
                               children: [
                                 SvgPicture.asset('assets/icons/edit.svg'),
@@ -165,7 +149,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                         height: 20,
                       ),
                       CustomText(
-                        text: widget.checkoutController.order!.shippingAddress!,
+                        text: checkoutController.order!.shippingAddress!,
                         color: almostBlack,
                       ),
                       const SizedBox(
@@ -173,7 +157,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                       ),
                       CustomText(
                         text:
-                            '${widget.checkoutController.order!.shippingCity!} - ${widget.checkoutController.order!.shippingZone!} - ${widget.checkoutController.order!.shippingCountry!.tr}',
+                            '${checkoutController.order!.shippingCity!} - ${checkoutController.order!.shippingZone!} - ${checkoutController.order!.shippingCountry!.tr}',
                         color: almostBlack,
                         fontWeight: FontWeight.w500,
                       ),
@@ -182,14 +166,14 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                       ),
                       CustomText(
                         text:
-                            '${widget.checkoutController.order!.shippingFirstName!} ${widget.checkoutController.order!.shippingLastName!}',
+                            '${checkoutController.order!.shippingFirstName!} ${checkoutController.order!.shippingLastName!}',
                         color: almostBlack,
                       ),
                       const SizedBox(
                         height: 8,
                       ),
                       CustomText(
-                        text: widget.checkoutController.order!.phone!,
+                        text: checkoutController.order!.phone!,
                         color: almostBlack,
                         fontWeight: FontWeight.w600,
                       ),
@@ -216,7 +200,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                             fontWeight: FontWeight.w400,
                           ),
                           InkWell(
-                            onTap: widget.onEditShippingTap,
+                            onTap: onEditShippingTap,
                             child: Row(
                               children: [
                                 SvgPicture.asset('assets/icons/edit.svg'),
@@ -247,12 +231,10 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomText(
-                            text:
-                                widget.checkoutController.order!.shippingCode ==
-                                        'aramex.aramex'
-                                    ? 'shippingThroughAramex'.tr
-                                    : widget.checkoutController.order!
-                                        .shippingCode!,
+                            text: checkoutController.order!.shippingCode ==
+                                    'aramex.aramex'
+                                ? 'shippingThroughAramex'.tr
+                                : checkoutController.order!.shippingCode!,
                             color: almostBlack,
                             fontWeight: FontWeight.w500,
                           ),
@@ -284,7 +266,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                             fontWeight: FontWeight.w400,
                           ),
                           InkWell(
-                            onTap: widget.onEditPaymentTap,
+                            onTap: onEditPaymentTap,
                             child: Row(
                               children: [
                                 SvgPicture.asset('assets/icons/edit.svg'),
@@ -311,7 +293,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                       const SizedBox(
                         height: 20,
                       ),
-                      if (widget.checkoutController.order!.paymentCode ==
+                      if (checkoutController.order!.paymentCode ==
                           'payfort_fort')
                         Image.asset(
                           'assets/images/cards.png',
@@ -357,11 +339,14 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                           Expanded(
                             flex: 3,
                             child: CustomTextField(
-                              controller: _couponController,
+                              controller:
+                                  checkoutController.couponController.value,
                               validator: false,
                               hintText: 'couponCode'.tr,
                               textInputType: TextInputType.text,
-                              readOnly: isCouponAdded ? true : false,
+                              readOnly: checkoutController.isCouponAdded.value
+                                  ? true
+                                  : false,
                             ),
                           ),
                           const SizedBox(
@@ -370,42 +355,29 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                           Expanded(
                             flex: 1,
                             child: Obx(() {
-                              if (widget
-                                  .checkoutController.isCouponLoading.value) {
+                              if (checkoutController.isCouponLoading.value) {
                                 return const Center(
                                   child: CircularProgressIndicator(),
                                 );
                               }
                               return ElevatedButton(
-                                onPressed: () async {
-                                  if (isCouponAdded) {
-                                    final isSuccess = await widget
-                                        .checkoutController
-                                        .deleteCoupon(
+                                onPressed: () {
+                                  if (checkoutController.isCouponAdded.value) {
+                                    checkoutController.deleteCoupon(
                                       context: context,
                                     );
-                                    if (isSuccess) {
-                                      setState(() {
-                                        isCouponAdded = false;
-                                      });
-                                    }
                                   } else {
-                                    final isSuccess = await widget
-                                        .checkoutController
-                                        .addCoupon(
-                                            context: context,
-                                            coupon: _couponController.text);
-                                    if (isSuccess) {
-                                      setState(() {
-                                        isCouponAdded = true;
-                                      });
-                                    }
+                                    checkoutController.addCoupon(
+                                      context: context,
+                                      coupon: checkoutController
+                                          .couponController.value.text,
+                                    );
                                   }
                                 },
                                 style: ButtonStyle(
                                     elevation: MaterialStateProperty.all(0),
                                     backgroundColor: MaterialStateProperty.all(
-                                        isCouponAdded
+                                        checkoutController.isCouponAdded.value
                                             ? vermillion
                                             : almostBlack),
                                     foregroundColor:
@@ -417,8 +389,9 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(4))))),
                                 child: CustomText(
-                                  text:
-                                      isCouponAdded ? 'remove'.tr : 'apply'.tr,
+                                  text: checkoutController.isCouponAdded.value
+                                      ? 'remove'.tr
+                                      : 'apply'.tr,
                                   fontWeight: FontWeight.w400,
                                   fontSize: 14,
                                   color: Colors.white,
@@ -434,8 +407,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                       ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount:
-                              widget.checkoutController.order!.totals!.length,
+                          itemCount: checkoutController.order!.totals!.length,
                           separatorBuilder: (context, index) {
                             return const SizedBox(
                               height: 20,
@@ -446,11 +418,11 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 CustomText(
-                                    text: widget.checkoutController.order!
-                                        .totals![index].title!),
+                                    text: checkoutController
+                                        .order!.totals![index].title!),
                                 CustomText(
-                                  text: widget.checkoutController.order!
-                                      .totals![index].text!,
+                                  text: checkoutController
+                                      .order!.totals![index].text!,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -476,7 +448,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
                                 height: 4,
                               ),
                               CustomText(
-                                text: widget.checkoutController.order!.total
+                                text: checkoutController.order!.total
                                     .toStringAsFixed(2),
                                 fontSize: 20,
                                 fontWeight: FontWeight.w700,
@@ -523,7 +495,7 @@ class _OrderSummaryPageState extends State<OrderSummaryPage> {
               bottom: 32,
             ),
             child: CustomButton(
-              onPressed: widget.onConfirmOrderTap,
+              onPressed: onConfirmOrderTap,
               title: 'confirmOrder'.tr,
             ),
           ),

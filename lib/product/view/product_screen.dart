@@ -4,6 +4,7 @@ import 'package:aljouf/product/widgets/nutrition_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
 import 'package:get/get.dart';
 import 'package:aljouf/checkout/controllers/checkout_controller.dart';
 import 'package:aljouf/constants/colors.dart';
@@ -53,9 +54,10 @@ class _ProductScreenState extends State<ProductScreen>
   @override
   void initState() {
     super.initState();
-    widget.product.originalImages!.addIf(
-        !widget.product.originalImages!.contains(widget.product.originalImage!),
-        widget.product.originalImage!);
+    if (!widget.product.originalImages!
+        .contains(widget.product.originalImage!)) {
+      widget.product.originalImages!.insert(0, widget.product.originalImage!);
+    }
     _tabController = TabController(length: 2, vsync: this);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _productController.getProductsByCategoryId(
@@ -197,31 +199,50 @@ class _ProductScreenState extends State<ProductScreen>
                                   activeIndex: _activeIndex,
                                   isBlack: true,
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    setState(() {
-                                      widget.product.fav = !widget.product.fav!;
-                                    });
-                                    if (widget.product.fav!) {
-                                      _homeController.addToWishlist(
-                                        id: widget.product.id.toString(),
-                                        productController: _productController,
-                                      );
-                                    } else {
-                                      _homeController.deleteFromWishlist(
-                                        id: widget.product.id.toString(),
-                                        productController: _productController,
-                                      );
-                                    }
-                                  },
-                                  child: Icon(
-                                    widget.product.fav!
-                                        ? Icons.favorite
-                                        : Icons.favorite_border,
-                                    color: widget.product.fav!
-                                        ? vermillion
-                                        : Colors.black,
-                                  ),
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          widget.product.fav =
+                                              !widget.product.fav!;
+                                        });
+                                        if (widget.product.fav!) {
+                                          _homeController.addToWishlist(
+                                            id: widget.product.id.toString(),
+                                            productController:
+                                                _productController,
+                                          );
+                                        } else {
+                                          _homeController.deleteFromWishlist(
+                                            id: widget.product.id.toString(),
+                                            productController:
+                                                _productController,
+                                          );
+                                        }
+                                      },
+                                      child: Icon(
+                                        widget.product.fav!
+                                            ? Icons.favorite
+                                            : Icons.favorite_border,
+                                        color: widget.product.fav!
+                                            ? vermillion
+                                            : Colors.black,
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () async {
+                                        await FlutterShare.share(
+                                            title: widget.product.name!,
+                                            linkUrl: widget.product.url,
+                                            chooserTitle:
+                                                'Share ${widget.product.name}');
+                                      },
+                                      icon: const Icon(
+                                        Icons.share,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
