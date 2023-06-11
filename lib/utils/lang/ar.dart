@@ -189,4 +189,7 @@ const Map<String, String> ar = {
   'shopNow': 'تسوق الأن',
   'outOfStock': 'غير موجود بالمخزن',
   'notAvailable': 'غير متوفر',
+  'changePassword': 'تغيير كلمة المرور',
+  'changeOwnPassword': 'تغيير كلمة المرور الخاصة بي',
+  'passwordChangeSuccessfully': 'تم تغيير كلمة المرور بنجاح',
 };

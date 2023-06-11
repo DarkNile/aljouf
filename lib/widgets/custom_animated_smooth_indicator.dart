@@ -23,7 +23,7 @@ class CustomAnimatedSmoothIndicator extends StatelessWidget {
           spacing: 8,
           dotDecoration: DotDecoration(
             color: isBlack
-                ? Colors.black.withOpacity(0.1)
+                ? Colors.black.withOpacity(0.2)
                 : Colors.white.withOpacity(0.5),
             width: 8,
             height: 8,
@@ -31,9 +31,9 @@ class CustomAnimatedSmoothIndicator extends StatelessWidget {
           ),
           activeDotDecoration: const DotDecoration(
             color: green,
-            width: 8,
-            height: 8,
-            borderRadius: BorderRadius.all(Radius.circular(4)),
+            width: 12,
+            height: 12,
+            borderRadius: BorderRadius.all(Radius.circular(6)),
           )),
     );
   }

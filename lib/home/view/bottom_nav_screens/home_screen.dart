@@ -10,32 +10,17 @@ import 'package:aljouf/widgets/custom_loading_widget.dart';
 import 'package:aljouf/widgets/custom_text.dart';
 import 'package:aljouf/widgets/custom_product_card.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key, required this.homeController});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key, required this.homeController});
 
   final HomeController homeController;
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeScreenState extends State<HomeScreen> {
   int _activeIndex = 0;
-
-  // late TabController _tabController;
-  // int _tabIndex = 0;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _tabController = TabController(length: 2, vsync: this);
-  // }
-
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   _tabController.dispose();
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -48,30 +33,30 @@ class _HomeState extends State<Home> {
           Obx(() {
             if (widget.homeController.isBannersLoading.value) {
               return SizedBox(
-                height: height * 0.2,
+                height: height * 0.25,
               );
             }
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: CarouselSlider.builder(
-                  itemCount: widget.homeController.banners.length,
-                  options: CarouselOptions(
-                    height: height * 0.2,
-                    enlargeCenterPage: true,
-                    autoPlay: true,
-                    viewportFraction: 1,
-                    enableInfiniteScroll: false,
-                    onPageChanged: (index, reason) {
-                      setState(() {
-                        _activeIndex = index;
-                      });
-                    },
-                  ),
-                  itemBuilder: (context, index, page) {
-                    return Stack(
-                      alignment: AlignmentDirectional.bottomCenter,
-                      children: [
-                        ClipRRect(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CarouselSlider.builder(
+                      itemCount: widget.homeController.banners.length,
+                      options: CarouselOptions(
+                        height: height * 0.2,
+                        enlargeCenterPage: true,
+                        autoPlay: true,
+                        viewportFraction: 1,
+                        enableInfiniteScroll: false,
+                        onPageChanged: (index, reason) {
+                          setState(() {
+                            _activeIndex = index;
+                          });
+                        },
+                      ),
+                      itemBuilder: (context, index, page) {
+                        return ClipRRect(
                           borderRadius:
                               const BorderRadius.all(Radius.circular(12)),
                           child: CachedNetworkImage(
@@ -83,17 +68,18 @@ class _HomeState extends State<Home> {
                               return const CustomLoadingWidget();
                             },
                           ),
-                        ),
-                        Positioned(
-                          bottom: 8,
-                          child: CustomAnimatedSmoothIndicator(
-                            count: widget.homeController.banners.length,
-                            activeIndex: _activeIndex,
-                          ),
-                        ),
-                      ],
-                    );
-                  }),
+                        );
+                      }),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 12),
+                    child: CustomAnimatedSmoothIndicator(
+                      count: widget.homeController.banners.length,
+                      activeIndex: _activeIndex,
+                      isBlack: true,
+                    ),
+                  ),
+                ],
+              ),
             );
           }),
           const SizedBox(

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:aljouf/checkout/controllers/checkout_controller.dart';
 import 'package:aljouf/checkout/view/failure_screen.dart';
 import 'package:aljouf/checkout/view/thank_you_screen.dart';
-import 'package:aljouf/home/view/home_screen.dart';
+import 'package:aljouf/home/view/home_page.dart';
 import 'package:aljouf/widgets/custom_header.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 

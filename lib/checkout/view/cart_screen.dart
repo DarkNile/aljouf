@@ -1,6 +1,4 @@
-import 'dart:io';
-
-import 'package:aljouf/auth/services/firebase_service.dart';
+import 'package:aljouf/product/view/product_screen.dart';
 import 'package:aljouf/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,11 +8,10 @@ import 'package:aljouf/auth/view/register_screen.dart';
 import 'package:aljouf/checkout/controllers/checkout_controller.dart';
 import 'package:aljouf/checkout/view/checkout_screen.dart';
 import 'package:aljouf/constants/colors.dart';
-import 'package:aljouf/home/view/home_screen.dart';
+import 'package:aljouf/home/view/home_page.dart';
 import 'package:aljouf/checkout/view/widgets/custom_cart_item.dart';
 import 'package:aljouf/widgets/custom_body_title.dart';
 import 'package:aljouf/widgets/custom_button.dart';
-import 'package:aljouf/widgets/custom_card.dart';
 import 'package:aljouf/widgets/custom_text.dart';
 import 'package:lottie/lottie.dart';
 
@@ -28,14 +25,6 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   final _checkoutController = Get.put(CheckoutController());
   final _profileController = Get.put(ProfileController());
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   WidgetsBinding.instance.addPostFrameCallback((_) {
-  //     _checkoutController.getCartItems();
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -132,59 +121,72 @@ class _CartScreenState extends State<CartScreen> {
                   );
                 },
                 itemBuilder: (context, index) {
-                  return CustomCartItem(
-                    product: _checkoutController.cart!.products![index],
-                    checkoutController: _checkoutController,
-                    onIncrementTap: () {
-                      if (_checkoutController.cart!.products![index].qty !=
-                          _checkoutController.cart!.products![index].quantity) {
+                  return InkWell(
+                    onTap: () {
+                      Get.to(
+                        () => ProductScreen(
+                          product: _checkoutController.cart!.products![index],
+                          categoryId: '',
+                          isFromCart: true,
+                        ),
+                      );
+                    },
+                    child: CustomCartItem(
+                      product: _checkoutController.cart!.products![index],
+                      checkoutController: _checkoutController,
+                      onIncrementTap: () {
+                        if (_checkoutController.cart!.products![index].qty !=
+                            _checkoutController
+                                .cart!.products![index].quantity) {
+                          setState(() {
+                            _checkoutController.cart!.products![index]
+                                .quantity = (int.parse(_checkoutController
+                                        .cart!.products![index].quantity) +
+                                    1)
+                                .toString();
+                          });
+                          _checkoutController.updateCartItemQuantity(
+                            productId: _checkoutController
+                                .cart!.products![index].id
+                                .toString(),
+                            quantity: _checkoutController
+                                .cart!.products![index].quantity
+                                .toString(),
+                          );
+                        }
+                      },
+                      onDecrementTap: () {
+                        if (_checkoutController
+                                .cart!.products![index].quantity !=
+                            '1') {
+                          setState(() {
+                            _checkoutController.cart!.products![index]
+                                .quantity = (int.parse(_checkoutController
+                                        .cart!.products![index].quantity) -
+                                    1)
+                                .toString();
+                          });
+                          _checkoutController.updateCartItemQuantity(
+                            productId: _checkoutController
+                                .cart!.products![index].id
+                                .toString(),
+                            quantity: _checkoutController
+                                .cart!.products![index].quantity
+                                .toString(),
+                          );
+                        }
+                      },
+                      onDeleteTap: () {
+                        _checkoutController.deleteCartItem(
+                            productId: _checkoutController
+                                .cart!.products![index].id
+                                .toString());
                         setState(() {
-                          _checkoutController.cart!.products![index].quantity =
-                              (int.parse(_checkoutController
-                                          .cart!.products![index].quantity) +
-                                      1)
-                                  .toString();
+                          _checkoutController.cart!.products!.remove(
+                              _checkoutController.cart!.products![index]);
                         });
-                        _checkoutController.updateCartItemQuantity(
-                          productId: _checkoutController
-                              .cart!.products![index].id
-                              .toString(),
-                          quantity: _checkoutController
-                              .cart!.products![index].quantity
-                              .toString(),
-                        );
-                      }
-                    },
-                    onDecrementTap: () {
-                      if (_checkoutController.cart!.products![index].quantity !=
-                          '1') {
-                        setState(() {
-                          _checkoutController.cart!.products![index].quantity =
-                              (int.parse(_checkoutController
-                                          .cart!.products![index].quantity) -
-                                      1)
-                                  .toString();
-                        });
-                        _checkoutController.updateCartItemQuantity(
-                          productId: _checkoutController
-                              .cart!.products![index].id
-                              .toString(),
-                          quantity: _checkoutController
-                              .cart!.products![index].quantity
-                              .toString(),
-                        );
-                      }
-                    },
-                    onDeleteTap: () {
-                      _checkoutController.deleteCartItem(
-                          productId: _checkoutController
-                              .cart!.products![index].id
-                              .toString());
-                      setState(() {
-                        _checkoutController.cart!.products!
-                            .remove(_checkoutController.cart!.products![index]);
-                      });
-                    },
+                      },
+                    ),
                   );
                 },
               ),

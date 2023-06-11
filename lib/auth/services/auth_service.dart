@@ -6,7 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:aljouf/auth/models/user.dart';
 import 'package:aljouf/constants/urls.dart';
-import 'package:aljouf/home/view/home_screen.dart';
+import 'package:aljouf/home/view/home_page.dart';
 import 'package:aljouf/screens/splash/splash_screen.dart';
 import 'package:aljouf/utils/app_util.dart';
 

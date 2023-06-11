@@ -26,10 +26,12 @@ class ProductScreen extends StatefulWidget {
     super.key,
     required this.product,
     required this.categoryId,
+    this.isFromCart = false,
   });
 
   final Product product;
   final String categoryId;
+  final bool isFromCart;
 
   @override
   State<ProductScreen> createState() => _ProductScreenState();
@@ -271,7 +273,7 @@ class _ProductScreenState extends State<ProductScreen>
                                       text: TextSpan(children: [
                                         TextSpan(
                                           text:
-                                              '${double.parse(widget.product.price.toString()).toStringAsFixed(2)} ',
+                                              '${double.parse(widget.isFromCart ? widget.product.priceRaw.toString() : widget.product.price.toString()).toStringAsFixed(2)} ',
                                           style: TextStyle(
                                             fontSize:
                                                 widget.product.special != 0
@@ -338,7 +340,8 @@ class _ProductScreenState extends State<ProductScreen>
                                       ),
                                     ),
                                     TextSpan(
-                                      text: widget.product.special != 0
+                                      text: widget.product.special != 0 &&
+                                              !widget.isFromCart
                                           ? ' ${double.parse(widget.product.specialExcludingTax.toString()).toStringAsFixed(2)} '
                                           : ' ${double.parse(widget.product.priceExcludingTax.toString()).toStringAsFixed(2)} ',
                                       style: const TextStyle(
@@ -541,11 +544,12 @@ class _ProductScreenState extends State<ProductScreen>
                       Get.to(
                         () => ProductsScreen(
                           categoryId: widget.categoryId,
-                          categoryName: _homeController.categories
-                              .where((element) =>
-                                  element.id.toString() == widget.categoryId)
-                              .first
-                              .name,
+                          // categoryName: _homeController.categories
+                          //     .where((element) =>
+                          //         element.id.toString() == widget.categoryId)
+                          //     .first
+                          //     .name,
+                          categoryName: 'related'.tr,
                         ),
                       );
                     },

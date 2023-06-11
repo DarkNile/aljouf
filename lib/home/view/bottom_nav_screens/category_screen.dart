@@ -41,7 +41,7 @@ class CategoryScreen extends StatelessWidget {
                       Get.to(
                         () => SubCategoryScreen(
                           homeController: homeController,
-                          category: homeController.categories[index],
+                          categoryName: homeController.categories[index].name,
                         ),
                       );
                     } else {

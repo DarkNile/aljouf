@@ -10,6 +10,7 @@ class CustomCard extends StatelessWidget {
     this.height = 39,
     this.radius = 4,
     this.width,
+    this.isPng = false,
   });
 
   final String icon;
@@ -17,6 +18,7 @@ class CustomCard extends StatelessWidget {
   final double height;
   final double radius;
   final double? width;
+  final bool isPng;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,9 @@ class CustomCard extends StatelessWidget {
             color: lighGrey,
           ),
         ),
-        child: SvgPicture.asset('assets/icons/$icon.svg'),
+        child: isPng
+            ? Image.asset('assets/icons/$icon.png')
+            : SvgPicture.asset('assets/icons/$icon.svg'),
       ),
     );
   }

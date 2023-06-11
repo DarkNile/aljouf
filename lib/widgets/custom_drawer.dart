@@ -1,4 +1,3 @@
-import 'package:aljouf/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -14,6 +13,7 @@ import 'package:aljouf/widgets/custom_card.dart';
 import 'package:aljouf/widgets/custom_drawer_item.dart';
 import 'package:aljouf/widgets/custom_text.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({
@@ -256,7 +256,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   Get.updateLocale(Locale(lang));
                   final getStorage = GetStorage();
                   getStorage.write('lang', lang);
-                  Get.offAll(const SplashScreen());
+                  Get.deleteAll(force: true);
+                  Phoenix.rebirth(Get.context!);
+                  Get.reset();
                 }),
             const SizedBox(
               height: 16,
@@ -319,11 +321,28 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   icon: 'facebook_icon',
                   onTap: () async {
                     await launchUrlString(
-                        'https://www.facebook.com/aljoufAgri');
+                      'https://www.facebook.com/aljoufAgri',
+                      mode: LaunchMode.externalApplication,
+                    );
                   },
                   width: 36,
                   height: 36,
                   radius: 18,
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                CustomCard(
+                  icon: 'linkedin',
+                  onTap: () async {
+                    await launchUrlString(
+                      'https://www.linkedin.com/company/al-jouf-agricultural-development-co',
+                    );
+                  },
+                  width: 36,
+                  height: 36,
+                  radius: 18,
+                  isPng: true,
                 ),
               ],
             ),

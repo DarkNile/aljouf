@@ -193,4 +193,7 @@ const Map<String, String> en = {
   'shopNow': 'Shop Now',
   'outOfStock': 'Out of Stock',
   'notAvailable': 'Not Available',
+  'changePassword': 'Change Password',
+  'changeOwnPassword': 'Change my own password',
+  'passwordChangeSuccessfully': 'Your password has changed successfully',
 };
