@@ -1,6 +1,5 @@
 import 'package:aljouf/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:aljouf/checkout/controllers/checkout_controller.dart';
 import 'package:aljouf/checkout/view/cart_screen.dart';
@@ -46,7 +45,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
       title: Image.asset(
         'assets/images/logo.png',
         height: 80,
-        width: 80,
+        width: 100,
       ),
       actions: [
         IconButton(

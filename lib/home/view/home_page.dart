@@ -1,4 +1,10 @@
 import 'package:aljouf/auth/view/login_screen.dart';
+import 'package:aljouf/home/view/bottom_nav_screens/category_screen.dart';
+import 'package:aljouf/home/view/bottom_nav_screens/favorite_screen.dart';
+import 'package:aljouf/home/view/bottom_nav_screens/home_screen.dart';
+import 'package:aljouf/home/view/bottom_nav_screens/order_screen.dart';
+import 'package:aljouf/home/view/bottom_nav_screens/profile_screen.dart';
+import 'package:aljouf/home/view/sub_category_screen.dart';
 import 'package:aljouf/utils/app_util.dart';
 import 'package:aljouf/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
@@ -6,13 +12,8 @@ import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
 import 'package:get/get.dart';
 import 'package:aljouf/auth/controllers/auth_controller.dart';
 import 'package:aljouf/home/controllers/home_controller.dart';
-import 'package:aljouf/home/view/category_screen.dart';
-import 'package:aljouf/home/view/favorite_screen.dart';
-import 'package:aljouf/home/view/order_screen.dart';
-import 'package:aljouf/home/view/profile_screen.dart';
 import 'package:aljouf/profile/controllers/profile_controller.dart';
 import 'package:aljouf/widgets/custom_drawer.dart';
-import 'package:aljouf/home/widgets/home.dart';
 import 'package:aljouf/product/view/products_screen.dart';
 import 'package:aljouf/widgets/custom_app_bar.dart';
 import 'package:aljouf/widgets/custom_bottom_navigation_bar.dart';
@@ -79,12 +80,21 @@ class _HomePageState extends State<HomePage> {
         },
         onCategoryTileTap: (String id, String name) {
           Get.back();
-          Get.to(
-            () => ProductsScreen(
-              categoryId: id,
-              categoryName: name,
-            ),
-          );
+          if (id == '228') {
+            Get.to(
+              () => SubCategoryScreen(
+                homeController: _homeController,
+                categoryName: name,
+              ),
+            );
+          } else {
+            Get.to(
+              () => ProductsScreen(
+                categoryId: id,
+                categoryName: name,
+              ),
+            );
+          }
         },
       ),
       bottomNavigationBar: CustomBottomNavigationBar(
@@ -112,7 +122,7 @@ class _HomePageState extends State<HomePage> {
         physics: const NeverScrollableScrollPhysics(),
         controller: _pageController,
         children: [
-          Home(homeController: _homeController),
+          HomeScreen(homeController: _homeController),
           CategoryScreen(homeController: _homeController),
           OrderScreen(profileController: _profileController),
           FavoriteScreen(homeController: _homeController),

@@ -1,4 +1,4 @@
-import 'package:aljouf/home/view/home_screen.dart';
+import 'package:aljouf/home/view/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aljouf/checkout/controllers/checkout_controller.dart';

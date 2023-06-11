@@ -1,3 +1,4 @@
+import 'package:aljouf/home/view/sub_category_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -5,7 +6,7 @@ import 'package:aljouf/constants/colors.dart';
 import 'package:aljouf/home/controllers/home_controller.dart';
 import 'package:aljouf/home/models/category.dart';
 
-import 'package:aljouf/home/view/home_screen.dart';
+import 'package:aljouf/home/view/home_page.dart';
 
 import 'package:aljouf/product/controllers/product_controller.dart';
 import 'package:aljouf/utils/app_util.dart';
@@ -44,12 +45,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
   double maxPrice = 1000.0;
   var currentRangeValues = const RangeValues(0.0, 1000.0);
   final categoryController = TextEditingController();
-  final sizeController = TextEditingController();
-  List<String> sizes = [];
-  String? sizeGroupValue;
   Category? categoryGroupValue;
   Category? category;
-  String? size;
   String? categoryName;
   bool isListViewLayout = false;
 
@@ -81,7 +78,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
     super.dispose();
     _scrollController.dispose();
     categoryController.dispose();
-    sizeController.dispose();
   }
 
   @override
@@ -104,16 +100,25 @@ class _ProductsScreenState extends State<ProductsScreen> {
           Get.offAll(() => const HomePage());
         },
         onCategoryTileTap: (id, name) {
-          setState(() {
-            categoryName = name;
-          });
           Get.back();
-          _productsController.page(1);
-          _productsController.filteredProducts.clear();
-          _productsController.getFilteredProducts(
-            categoryId: id,
-            homeController: _homeController,
-          );
+          if (id == '228') {
+            Get.off(
+              () => SubCategoryScreen(
+                homeController: _homeController,
+                categoryName: name,
+              ),
+            );
+          } else {
+            setState(() {
+              categoryName = name;
+            });
+            _productsController.page(1);
+            _productsController.filteredProducts.clear();
+            _productsController.getFilteredProducts(
+              categoryId: id,
+              homeController: _homeController,
+            );
+          }
         },
       ),
       body: Obx(() {
@@ -272,10 +277,11 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                       width: width * 0.67,
                                       radius: 8,
                                       onPressed: () {
-                                        _productsController.page(1);
-                                        _productsController.filteredProducts
-                                            .clear();
+                                        Get.back();
                                         if (widget.isCategoryPage) {
+                                          _productsController.page(1);
+                                          _productsController.filteredProducts
+                                              .clear();
                                           _productsController.filterByPrice(
                                             homeController: _homeController,
                                             categoryId: widget.categoryId,
@@ -285,19 +291,32 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                                 .toString(),
                                           );
                                         } else {
-                                          _productsController.filterByPrice(
-                                            homeController: _homeController,
-                                            categoryId:
-                                                categoryController.text.isEmpty
-                                                    ? ''
-                                                    : category!.id.toString(),
-                                            minPrice: currentRangeValues.start
-                                                .toString(),
-                                            maxPrice: currentRangeValues.end
-                                                .toString(),
-                                          );
+                                          if (category != null &&
+                                              category!.id.toString() ==
+                                                  '228') {
+                                            Get.off(
+                                              () => SubCategoryScreen(
+                                                homeController: _homeController,
+                                                categoryName: category!.name,
+                                              ),
+                                            );
+                                          } else {
+                                            _productsController.page(1);
+                                            _productsController.filteredProducts
+                                                .clear();
+                                            _productsController.filterByPrice(
+                                              homeController: _homeController,
+                                              categoryId: categoryController
+                                                      .text.isEmpty
+                                                  ? ''
+                                                  : category!.id.toString(),
+                                              minPrice: currentRangeValues.start
+                                                  .toString(),
+                                              maxPrice: currentRangeValues.end
+                                                  .toString(),
+                                            );
+                                          }
                                         }
-                                        Get.back();
                                       },
                                     ),
                                     const SizedBox(
@@ -311,12 +330,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                         setState(() {
                                           currentRangeValues =
                                               const RangeValues(0.0, 1000.0);
-                                          size = null;
                                           category = null;
                                           categoryController.clear();
-                                          sizeController.clear();
                                           categoryGroupValue = null;
-                                          sizeGroupValue = null;
                                         });
                                         _productsController.page(1);
                                         _productsController.filteredProducts
@@ -679,17 +695,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
-                              if (isCategory) {
-                                setState(() {
-                                  category = options[index];
-                                  categoryGroupValue = options[index];
-                                });
-                              } else {
-                                setState(() {
-                                  size = options[index];
-                                  sizeGroupValue = options[index];
-                                });
-                              }
+                              setState(() {
+                                category = options[index];
+                                categoryGroupValue = options[index];
+                              });
                             },
                             child: Padding(
                               padding:
@@ -707,21 +716,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                   Radio(
                                       value: options[index],
                                       activeColor: vermillion,
-                                      groupValue: isCategory
-                                          ? categoryGroupValue
-                                          : sizeGroupValue,
+                                      groupValue: categoryGroupValue,
                                       onChanged: (v) {
-                                        if (isCategory) {
-                                          setState(() {
-                                            category = options[index];
-                                            categoryGroupValue = v!;
-                                          });
-                                        } else {
-                                          setState(() {
-                                            size = options[index];
-                                            sizeGroupValue = v!;
-                                          });
-                                        }
+                                        setState(() {
+                                          category = options[index];
+                                          categoryGroupValue = v!;
+                                        });
                                       }),
                                 ],
                               ),
@@ -734,15 +734,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   ),
                   InkWell(
                     onTap: () {
-                      if (isCategory) {
-                        setState(() {
-                          categoryController.text = category!.name;
-                        });
-                      } else {
-                        setState(() {
-                          sizeController.text = size!;
-                        });
-                      }
+                      setState(() {
+                        categoryController.text = category!.name;
+                      });
                       Get.back();
                     },
                     child: Container(

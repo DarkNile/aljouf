@@ -1,5 +1,4 @@
 import 'package:aljouf/home/controllers/home_controller.dart';
-import 'package:aljouf/home/models/category.dart';
 import 'package:aljouf/product/view/products_screen.dart';
 import 'package:aljouf/widgets/custom_body_title.dart';
 import 'package:aljouf/widgets/custom_header.dart';
@@ -11,20 +10,20 @@ import 'package:get/get.dart';
 class SubCategoryScreen extends StatelessWidget {
   const SubCategoryScreen({
     super.key,
-    required this.category,
     required this.homeController,
+    required this.categoryName,
   });
 
-  final Category category;
   final HomeController homeController;
+  final String categoryName;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomHeader(title: category.name),
+      appBar: CustomHeader(title: categoryName),
       body: Column(
         children: [
-          CustomBodyTitle(title: category.name),
+          CustomBodyTitle(title: categoryName),
           const SizedBox(
             height: 20,
           ),

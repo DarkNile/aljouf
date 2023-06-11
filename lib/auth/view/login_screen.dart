@@ -1,6 +1,3 @@
-import 'dart:io';
-
-import 'package:aljouf/auth/services/firebase_service.dart';
 import 'package:aljouf/checkout/controllers/checkout_controller.dart';
 import 'package:aljouf/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +7,9 @@ import 'package:aljouf/auth/controllers/auth_controller.dart';
 import 'package:aljouf/auth/view/forget_password_screen.dart';
 import 'package:aljouf/auth/view/register_screen.dart';
 import 'package:aljouf/constants/colors.dart';
-import 'package:aljouf/home/view/home_screen.dart';
+import 'package:aljouf/home/view/home_page.dart';
 import 'package:aljouf/utils/app_util.dart';
 import 'package:aljouf/widgets/custom_button.dart';
-import 'package:aljouf/widgets/custom_card.dart';
 import 'package:aljouf/widgets/custom_text.dart';
 import 'package:aljouf/widgets/custom_text_field.dart';
 

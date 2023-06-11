@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:aljouf/auth/controllers/auth_controller.dart';
-import 'package:aljouf/home/view/home_screen.dart';
+import 'package:aljouf/home/view/home_page.dart';
 import 'package:aljouf/utils/app_util.dart';
 import 'package:aljouf/widgets/custom_button.dart';
 import 'package:aljouf/widgets/custom_text.dart';

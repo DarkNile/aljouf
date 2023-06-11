@@ -1,10 +1,11 @@
+import 'package:aljouf/auth/view/change_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:aljouf/auth/controllers/auth_controller.dart';
 import 'package:aljouf/auth/view/edit_details_screen.dart';
 import 'package:aljouf/constants/colors.dart';
-import 'package:aljouf/home/view/home_screen.dart';
+import 'package:aljouf/home/view/home_page.dart';
 import 'package:aljouf/home/widgets/custom_profile_item.dart';
 import 'package:aljouf/profile/controllers/profile_controller.dart';
 import 'package:aljouf/profile/view/address_screen.dart';
@@ -187,6 +188,18 @@ class ProfileScreen extends StatelessWidget {
               title: 'editDetailsTitle',
               subtitle: 'editDetailsSubtitle',
               icon: 'edit',
+            ),
+            CustomProfileItem(
+              onTap: () {
+                Get.to(
+                  () => ChangePasswordScreen(
+                    email: profileController.user.value.email!,
+                  ),
+                );
+              },
+              title: 'changePassword',
+              subtitle: 'changeOwnPassword',
+              icon: 'lock',
             ),
             CustomProfileItem(
               onTap: () {

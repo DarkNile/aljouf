@@ -1,5 +1,4 @@
 import 'package:aljouf/auth/controllers/auth_controller.dart';
-import 'package:aljouf/home/view/home_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

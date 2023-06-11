@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aljouf/constants/colors.dart';
-import 'package:aljouf/home/view/home_screen.dart';
+import 'package:aljouf/home/view/home_page.dart';
 import 'package:aljouf/widgets/custom_button.dart';
 import 'package:aljouf/widgets/custom_text.dart';
 import 'package:lottie/lottie.dart';

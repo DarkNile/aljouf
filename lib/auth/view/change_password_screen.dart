@@ -7,6 +7,7 @@ import 'package:aljouf/utils/app_util.dart';
 import 'package:aljouf/widgets/custom_button.dart';
 import 'package:aljouf/widgets/custom_text.dart';
 import 'package:aljouf/widgets/custom_text_field.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key, required this.email});
@@ -18,6 +19,7 @@ class ChangePasswordScreen extends StatefulWidget {
 }
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
+  final getStorage = GetStorage();
   final _authController = Get.put(AuthController());
   final _formKey = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
@@ -146,7 +148,13 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                         context: context,
                       );
                       if (isSuccess) {
-                        Get.to(() => const LoginScreen());
+                        getStorage.remove('token');
+                        getStorage.remove('customerId');
+                        Get.offAll(() => const LoginScreen());
+                        if (context.mounted) {
+                          AppUtil.successToast(
+                              context, "passwordChangeSuccessfully".tr);
+                        }
                       }
                     }
                   },
