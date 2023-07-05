@@ -100,18 +100,18 @@ class _ProductScreenState extends State<ProductScreen>
                           return const CustomLoadingWidget();
                         },
                       ),
-                      if (widget.product.quantity == 0)
+                      if (widget.product.quantity < 1)
                         Positioned.directional(
                           textDirection: Directionality.of(context),
                           top: 60,
-                          start: -10,
+                          start: 50,
                           child: Transform.rotate(
                             angle: AppUtil.rtlDirection(context)
                                 ? math.pi / 5.0
                                 : math.pi / -5.0,
                             alignment: Alignment.center,
                             child: Container(
-                              width: width / 2,
+                              width: width / 4,
                               height: 32,
                               alignment: Alignment.center,
                               padding: const EdgeInsets.all(4),
@@ -121,7 +121,7 @@ class _ProductScreenState extends State<ProductScreen>
                                 color: vermillion,
                               ),
                               child: CustomText(
-                                text: 'outOfStock'.tr,
+                                text: 'notAvailable'.tr,
                                 color: Colors.white,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -402,7 +402,7 @@ class _ProductScreenState extends State<ProductScreen>
                                   children: [
                                     Row(
                                       children: [
-                                        widget.product.quantity == 0
+                                        widget.product.quantity < 1
                                             ? const Icon(
                                                 Icons.close,
                                                 color: vermillion,
@@ -417,10 +417,10 @@ class _ProductScreenState extends State<ProductScreen>
                                           width: 4,
                                         ),
                                         CustomText(
-                                          text: widget.product.quantity == 0
+                                          text: widget.product.quantity < 1
                                               ? 'productNotAvailable'.tr
                                               : 'productAvailable'.tr,
-                                          color: widget.product.quantity == 0
+                                          color: widget.product.quantity < 1
                                               ? vermillion
                                               : jadeGreen,
                                           fontWeight: FontWeight.w400,
@@ -641,7 +641,7 @@ class _ProductScreenState extends State<ProductScreen>
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: widget.product.quantity == 0
+          child: widget.product.quantity < 1
               ? CustomButton(
                   onPressed: null,
                   title: 'outOfStock'.tr,

@@ -103,7 +103,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                           ),
                         ),
                       ),
-                      if (widget.product.quantity == 0)
+                      if (widget.product.quantity < 1)
                         Positioned.directional(
                           textDirection: Directionality.of(context),
                           top: AppUtil.rtlDirection(context) ? 4 : 10,
@@ -282,7 +282,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                               ),
                             ),
                           ),
-                          if (widget.product.quantity == 0)
+                          if (widget.product.quantity < 1)
                             Positioned.directional(
                               textDirection: Directionality.of(context),
                               top: AppUtil.rtlDirection(context) ? 4 : 10,
