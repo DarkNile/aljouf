@@ -51,17 +51,18 @@ dependencies:
   webview_flutter: ^4.2.1
   flutter_paytabs_bridge: ^2.3.6
   flutter_app_version_checker: ^0.3.2
-  firebase_core: ^2.8.0
-  firebase_messaging: ^14.3.0
+  firebase_core: ^2.15.0
+  firebase_messaging: ^14.6.5
   # device_info_plus: ^9.0.2
   # android_id: ^0.3.2
-  cloud_firestore: ^4.7.1
+  cloud_firestore: ^4.8.3
   flutter_rating_bar: ^4.0.1
-  firebase_auth: ^4.6.2
+  firebase_auth: ^4.7.0
   the_apple_sign_in: ^1.1.1
   flutter_phoenix: ^1.1.1
   flutter_share: ^2.0.0
   in_app_review: ^2.0.6
+  appsflyer_sdk: ^6.11.3
 
 
 
