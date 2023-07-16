@@ -1,3 +1,5 @@
+import 'package:aljouf/checkout/services/rating_service.dart';
+import 'package:aljouf/home/services/apps_flyer_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aljouf/checkout/models/cart.dart';
@@ -22,10 +24,30 @@ class CheckoutController extends GetxController {
   var isSavingOrderLoading = false.obs;
   var isAddingShippingMethodLoading = false.obs;
   var isAddingPaymentMethodLoading = false.obs;
+  var isRatingLoading = false.obs;
   var total = 0.0.obs;
   var cartItems = 0.obs;
   var isCouponAdded = false.obs;
   var couponController = TextEditingController().obs;
+
+
+  Future<bool?> showRatingApp() async {
+    try {
+      isRatingLoading(true);
+      final isSuccess = await RatingService().showRating();
+      if (isSuccess) {
+        return isSuccess;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
+    } finally {
+      isRatingLoading(false);
+    }
+  }
+
 
   Future<Cart?> getCartItems() async {
     try {
@@ -311,11 +333,19 @@ class CheckoutController extends GetxController {
     }
   }
 
-  Future<bool> saveOrderToDatabase() async {
+  Future<bool> saveOrderToDatabase({
+    required Order order,
+  }) async {
     try {
       isSavingOrderLoading(true);
       final isSuccess = await CheckoutService.saveOrderToDatabase();
       if (isSuccess) {
+        AppsFlyerService.logPurchase(
+          orderId: order.orderId.toString(),
+          price: double.parse(order.total.toString()),
+          currency: 'SAR',
+          quantity: order.products!.length,
+        );
         clearCart();
       }
       return isSuccess;
