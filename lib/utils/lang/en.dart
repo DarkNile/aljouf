@@ -196,4 +196,10 @@ const Map<String, String> en = {
   'changePassword': 'Change Password',
   'changeOwnPassword': 'Change my own password',
   'passwordChangeSuccessfully': 'Your password has changed successfully',
+
+  // App Rating
+  'appRating': 'App Rating',
+  'ratingDialog': 'Do you like this app? Please leave a rating, thank you.',
+  'rating': 'Rating',
+
 };

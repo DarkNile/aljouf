@@ -1,3 +1,4 @@
+import 'package:aljouf/checkout/view/thank_you_screen.dart';
 import 'package:aljouf/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -80,7 +81,7 @@ class _MyAppState extends State<MyApp> {
         fontFamily: 'ReadexPro',
         primarySwatch: primaryGreen,
       ),
-      home: const SplashScreen(),
+      home: const ThankYouScreen(orderId: 5, email: 'staysafe@gmail.com'),
     );
   }
 }

@@ -192,4 +192,11 @@ const Map<String, String> ar = {
   'changePassword': 'تغيير كلمة المرور',
   'changeOwnPassword': 'تغيير كلمة المرور الخاصة بي',
   'passwordChangeSuccessfully': 'تم تغيير كلمة المرور بنجاح',
+
+  // App Rating
+  'appRating': 'تقييم التطبيق',
+  'ratingDialog': 'هل أعجبك هذا التطبيق؟ الرجاء ترك تقييم ، شكرا لك.',
+  'rating': 'تقييم',
+
+
 };
