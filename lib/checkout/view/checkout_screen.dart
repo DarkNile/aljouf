@@ -401,8 +401,11 @@ class _CheckoutScreenState extends State<CheckoutScreen>
           if (event["status"] == "success") {
             var transactionDetails = event["data"];
             print(transactionDetails);
-            _checkoutController.saveOrderToDatabase();
+            _checkoutController.saveOrderToDatabase(
+              order: _checkoutController.order!,
+            );
             Get.off(() => ThankYouScreen(
+                  checkOutController: _checkoutController,
                   orderId: _checkoutController.order!.orderId!,
                   email: _checkoutController.order!.email!,
                 ));
