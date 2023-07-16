@@ -19,6 +19,7 @@ class FirebaseService {
           .then((userCredential) async {
         print(userCredential.credential!.providerId);
         print(userCredential.user!.email!);
+        print('My Phone Number -----------> : ${userCredential.user!.phoneNumber!}');
         print('Access Token: ${userCredential.credential!.accessToken!}');
         user = await _authController.loginUsingSocialMedia(
           context: context,

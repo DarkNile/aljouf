@@ -20,11 +20,16 @@ class RatingService {
   Future<bool> showRating() async {
     try {
       final isAvailable = await _inAppReview.isAvailable();
-      (isAvailable)
+      if(isAvailable){
+        _inAppReview.openStoreListing(
+          appStoreId: platformRecognition(),
+        );
+      }
+      /*(isAvailable)
           ? _inAppReview.requestReview()
           : _inAppReview.openStoreListing(
               appStoreId: platformRecognition(),
-            );
+            );*/
       return true;
     } catch (e) {
       return false;
