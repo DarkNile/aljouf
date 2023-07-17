@@ -6,31 +6,32 @@ class RatingService {
   final InAppReview _inAppReview = InAppReview.instance;
 
   String platformRecognition() {
-    const String appleStoreId = 'com.aljouf.aljouf';
-    const String playStoreId = 'com.DigitalPartner.aljouf';
+    const String playStoreId = 'com.aljouf.aljouf';
+    const String appleStoreId = '1661838035';
 
     if (Platform.isAndroid) {
       return playStoreId;
     } else if (Platform.isIOS) {
       return appleStoreId;
     }
-    return appleStoreId;
+    return playStoreId;
   }
 
   Future<bool> showRating() async {
     try {
       final isAvailable = await _inAppReview.isAvailable();
-      if(isAvailable){
+      if (isAvailable) {
         _inAppReview.openStoreListing(
           appStoreId: platformRecognition(),
         );
+        // _inAppReview.requestReview();
       }
       /*(isAvailable)
           ? _inAppReview.requestReview()
           : _inAppReview.openStoreListing(
               appStoreId: platformRecognition(),
             );*/
-      return true;
+      return isAvailable;
     } catch (e) {
       return false;
     }

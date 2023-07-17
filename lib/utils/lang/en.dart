@@ -199,7 +199,6 @@ const Map<String, String> en = {
 
   // App Rating
   'appRating': 'App Rating',
-  'ratingDialog': 'Do you like this app? Please leave a rating, thank you.',
-  'rating': 'Rating',
-
+  'ratingDialog': 'Do you like this app? Please leave a rating thank you!',
+  'rating': 'Rate Now',
 };

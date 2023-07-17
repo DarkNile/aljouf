@@ -195,8 +195,6 @@ const Map<String, String> ar = {
 
   // App Rating
   'appRating': 'تقييم التطبيق',
-  'ratingDialog': 'هل أعجبك هذا التطبيق؟ الرجاء ترك تقييم ، شكرا لك.',
-  'rating': 'تقييم',
-
-
+  'ratingDialog': 'هل أعجبك هذا التطبيق؟ الرجاء ترك تقييم شكرا لك!',
+  'rating': 'قيم الآن',
 };
