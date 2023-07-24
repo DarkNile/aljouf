@@ -29,6 +29,7 @@ const Map<String, String> en = {
   'signUp': 'Sign up',
   'verifyPhoneNumber': 'Verify Phone Number',
   'otpSent': 'Verification code has been sent to email',
+  'otpSent2': 'Verification code has been sent to number',
   'verify': 'Verify',
   'resendCode': 'Resend Code',
   'verificationCode': 'Verification Code',

@@ -1,4 +1,5 @@
 import 'package:aljouf/firebase_options.dart';
+import 'package:aljouf/home/services/apps_flyer_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,7 @@ void main() async {
     systemNavigationBarIconBrightness: Brightness.dark,
   ));
   await GetStorage.init();
+  await AppsFlyerService.initAppsFlyer();
   runApp(Phoenix(child: const MyApp()));
 }
 

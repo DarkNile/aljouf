@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 import 'package:aljouf/checkout/view/cart_screen.dart';
+import 'package:aljouf/home/services/apps_flyer_service.dart';
 import 'package:aljouf/product/widgets/nutrition_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -660,6 +661,13 @@ class _ProductScreenState extends State<ProductScreen>
                           'productAddedToCart'.tr,
                         );
                       }
+                      AppsFlyerService.logAddToCart(
+                        id: widget.product.id.toString(),
+                        name: widget.product.name!,
+                        price: double.parse(widget.product.price.toString()),
+                        currency: 'SAR',
+                        quantity: 1,
+                      );
                     }
                   },
                   title: 'addToCart'.tr,

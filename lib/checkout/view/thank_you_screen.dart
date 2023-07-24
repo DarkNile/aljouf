@@ -10,6 +10,7 @@ import 'package:aljouf/home/view/home_page.dart';
 import 'package:aljouf/widgets/custom_button.dart';
 import 'package:aljouf/widgets/custom_text.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:lottie/lottie.dart';
 
 class ThankYouScreen extends StatefulWidget {
@@ -29,15 +30,23 @@ class ThankYouScreen extends StatefulWidget {
 }
 
 class _ThankYouScreenState extends State<ThankYouScreen> {
+  final InAppReview inAppReview = InAppReview.instance;
+
   @override
   void initState() {
     Future.delayed(
       const Duration(
         seconds: 3,
       ),
-      () => showRatingPopup(),
+      () => rateApp(),
     );
     super.initState();
+  }
+
+  Future<void> rateApp() async {
+    if (await inAppReview.isAvailable()) {
+      inAppReview.requestReview();
+    }
   }
 
   showRatingPopup() {

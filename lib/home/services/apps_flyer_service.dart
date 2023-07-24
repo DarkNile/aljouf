@@ -8,7 +8,7 @@ class AppsFlyerService {
   static Future<void> initAppsFlyer() async {
     final AppsFlyerOptions options = AppsFlyerOptions(
       afDevKey: 'pYfv6d6JdZPUoZFKNstWzj',
-      appId: Platform.isAndroid ? 'com.DigitalPartner.palta' : '6450650134',
+      appId: Platform.isAndroid ? 'com.aljouf.aljouf' : '1661838035',
       showDebug: true,
     );
     appsflyerSdk = AppsflyerSdk(options);
@@ -28,6 +28,7 @@ class AppsFlyerService {
       'af_price': price,
       'af_currency': currency,
       'af_quantity': quantity,
+      'af_revenue': price,
     });
   }
 
@@ -42,6 +43,7 @@ class AppsFlyerService {
       'af_price': price,
       'af_currency': currency,
       'af_quantity': quantity,
+      'af_revenue': price,
     });
   }
 }

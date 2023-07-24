@@ -29,6 +29,7 @@ const Map<String, String> ar = {
   'signUp': 'تسجيل',
   'verifyPhoneNumber': 'تأكيد رقم الجوال',
   'otpSent': 'تم إرسال كود التحقق على بريد',
+  'otpSent2': 'تم إرسال كود التحقق على رقم',
   'verify': 'تأكيد',
   'resendCode': 'إعادة إرسال الكود',
   'verificationCode': 'كود التحقق',

@@ -1,4 +1,5 @@
 import 'package:aljouf/checkout/services/rating_service.dart';
+import 'package:aljouf/home/services/apps_flyer_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aljouf/checkout/models/cart.dart';
@@ -337,12 +338,12 @@ class CheckoutController extends GetxController {
       isSavingOrderLoading(true);
       final isSuccess = await CheckoutService.saveOrderToDatabase();
       if (isSuccess) {
-        // AppsFlyerService.logPurchase(
-        //   orderId: order.orderId.toString(),
-        //   price: double.parse(order.total.toString()),
-        //   currency: 'SAR',
-        //   quantity: order.products!.length,
-        // );
+        AppsFlyerService.logPurchase(
+          orderId: order.orderId.toString(),
+          price: double.parse(order.total.toString()),
+          currency: 'SAR',
+          quantity: order.products!.length,
+        );
         clearCart();
       }
       return isSuccess;

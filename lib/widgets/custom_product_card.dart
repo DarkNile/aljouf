@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'package:aljouf/home/services/apps_flyer_service.dart';
 import 'package:aljouf/product/controllers/product_controller.dart';
 import 'package:aljouf/widgets/custom_product_border.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -149,6 +150,14 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                     'productAddedToCart'.tr,
                                   );
                                 }
+                                AppsFlyerService.logAddToCart(
+                                  id: widget.product.id.toString(),
+                                  name: widget.product.name!,
+                                  price: double.parse(
+                                      widget.product.price.toString()),
+                                  currency: 'SAR',
+                                  quantity: 1,
+                                );
                               }
                             },
                             child: const Icon(
@@ -409,6 +418,14 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                       'productAddedToCart'.tr,
                                     );
                                   }
+                                  AppsFlyerService.logAddToCart(
+                                    id: widget.product.id.toString(),
+                                    name: widget.product.name!,
+                                    price: double.parse(
+                                        widget.product.price.toString()),
+                                    currency: 'SAR',
+                                    quantity: 1,
+                                  );
                                 }
                               },
                               child: const Icon(
