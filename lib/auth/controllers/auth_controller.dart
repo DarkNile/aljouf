@@ -11,6 +11,8 @@ class AuthController extends GetxController {
   var isProfileLoading = false.obs;
   var isChangePasswordLoading = false.obs;
   var isSocialLoginLoading = false.obs;
+  var isVerifyPhoneLoading = false.obs;
+  var isVerifyOtpLoading = false.obs;
   var user = User().obs;
 
   Future<User?> register({
@@ -95,6 +97,50 @@ class AuthController extends GetxController {
       return false;
     } finally {
       isForgetPasswordLoading(false);
+    }
+  }
+
+  Future<bool> verifyPhone({
+    required String customerId,
+    required String phone,
+    required BuildContext context,
+  }) async {
+    try {
+      isVerifyPhoneLoading(true);
+      final isSuccess = await AuthService.verifyPhone(
+        customerId: customerId,
+        phone: phone,
+        context: context,
+      );
+      return isSuccess;
+    } catch (e) {
+      print(e);
+      return false;
+    } finally {
+      isVerifyPhoneLoading(false);
+    }
+  }
+
+  Future<bool> verifyOTP({
+    required String customerId,
+    required String phone,
+    required String otp,
+    required BuildContext context,
+  }) async {
+    try {
+      isVerifyOtpLoading(true);
+      final isSuccess = await AuthService.verifyOTP(
+        customerId: customerId,
+        phone: phone,
+        otp: otp,
+        context: context,
+      );
+      return isSuccess;
+    } catch (e) {
+      print(e);
+      return false;
+    } finally {
+      isVerifyOtpLoading(false);
     }
   }
 

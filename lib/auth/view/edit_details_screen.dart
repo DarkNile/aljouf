@@ -1,3 +1,4 @@
+import 'package:aljouf/auth/view/verify_phone_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -9,9 +10,24 @@ import 'package:aljouf/widgets/custom_text_field.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 
 class EditDetailsScreen extends StatefulWidget {
-  const EditDetailsScreen({super.key, required this.profileController});
+  const EditDetailsScreen({
+    super.key,
+    required this.profileController,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.phone,
+    this.isFromSocialLogin = false,
+    this.customerId,
+  });
 
   final ProfileController profileController;
+  final String? firstName;
+  final String? lastName;
+  final String? email;
+  final String? phone;
+  final bool isFromSocialLogin;
+  final String? customerId;
 
   @override
   State<EditDetailsScreen> createState() => _EditDetailsScreenState();
@@ -28,13 +44,17 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
   void initState() {
     super.initState();
     _firstNameController = TextEditingController(
-        text: widget.profileController.user.value.firstName);
+      text: widget.firstName ?? widget.profileController.user.value.firstName,
+    );
     _lastNameController = TextEditingController(
-        text: widget.profileController.user.value.lastName);
-    _emailController =
-        TextEditingController(text: widget.profileController.user.value.email);
-    _phoneNumberController =
-        TextEditingController(text: widget.profileController.user.value.phone);
+      text: widget.lastName ?? widget.profileController.user.value.lastName,
+    );
+    _emailController = TextEditingController(
+      text: widget.email ?? widget.profileController.user.value.email,
+    );
+    _phoneNumberController = TextEditingController(
+      text: widget.phone ?? widget.profileController.user.value.phone,
+    );
   }
 
   @override
@@ -61,14 +81,15 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
                     ),
-                    InkWell(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: AppUtil.rtlDirection(context)
-                          ? SvgPicture.asset('assets/icons/left_arrow.svg')
-                          : SvgPicture.asset('assets/icons/right_arrow.svg'),
-                    ),
+                    if (!widget.isFromSocialLogin)
+                      InkWell(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: AppUtil.rtlDirection(context)
+                            ? SvgPicture.asset('assets/icons/left_arrow.svg')
+                            : SvgPicture.asset('assets/icons/right_arrow.svg'),
+                      ),
                   ],
                 ),
               ),
@@ -139,6 +160,7 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
                 hintText: 'emailAddress'.tr,
                 textInputType: TextInputType.emailAddress,
                 prefixIcon: const Icon(Icons.alternate_email),
+                readOnly: widget.isFromSocialLogin,
               ),
               const SizedBox(
                 height: 26,
@@ -175,25 +197,6 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
                       )
                     : null,
               ),
-              // const SizedBox(
-              //   height: 54,
-              // ),
-              // Row(
-              //   children: [
-              //     Checkbox(
-              //         fillColor: MaterialStateProperty.all(Colors.black),
-              //         activeColor: Colors.black,
-              //         value: _isSubscribed,
-              //         onChanged: (value) {
-              //           setState(() {
-              //             _isSubscribed = value!;
-              //           });
-              //         }),
-              //     CustomText(
-              //       text: 'subscribe'.tr,
-              //     ),
-              //   ],
-              // ),
               const SizedBox(
                 height: 40,
               ),
@@ -226,7 +229,14 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
 
                       if (isSuccess) {
                         await widget.profileController.getAccount();
-                        Get.back();
+                        if (widget.isFromSocialLogin) {
+                          Get.to(() => VerifyPhoneScreen(
+                                customerId: widget.customerId!,
+                                phone: _phoneNumberController.text,
+                              ));
+                        } else {
+                          Get.back();
+                        }
                       }
                     }
                   },
