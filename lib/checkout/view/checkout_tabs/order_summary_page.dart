@@ -301,8 +301,8 @@ class OrderSummaryPage extends StatelessWidget {
                         )
                       else
                         Image.asset(
-                          'assets/images/apple_pay.png',
-                          height: 20,
+                          'assets/images/apple_pay_new.png',
+                          height: 50,
                         ),
                     ],
                   ),
