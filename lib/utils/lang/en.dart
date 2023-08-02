@@ -191,6 +191,7 @@ const Map<String, String> en = {
   'updateNow': 'Update Now',
   'congratulationsCoupon':
       'Congratulations! You have got a voucher with 20% discount when you shop now',
+  'loginToCoupon': 'Sign in now to receive your coupon',
   'shopNow': 'Shop Now',
   'outOfStock': 'Out of Stock',
   'notAvailable': 'Not Available',

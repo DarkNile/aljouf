@@ -187,6 +187,7 @@ const Map<String, String> ar = {
   'updateNow': 'التحديث الأن',
   'congratulationsCoupon':
       'مبروك! لقد حصلت على قسيمة شراء بخصم ٢٠٪ عند تسوقك الأن',
+  'loginToCoupon': 'قم بتسجيل الدخول الأن للحصول على الكوبون',
   'shopNow': 'تسوق الأن',
   'outOfStock': 'غير موجود بالمخزن',
   'notAvailable': 'غير متوفر',
