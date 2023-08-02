@@ -29,6 +29,10 @@ class HomeController extends GetxController {
   var staticPageData = <String, dynamic>{}.obs;
   var isLocationsLoading = false.obs;
   var locations = <Location>[].obs;
+  //
+  var isCreatingCouponLoading = false.obs;
+  var isCouponLoading = false.obs;
+  var coupon = ''.obs;
 
   Future<List<dynamic>?> getBanners({required String id}) async {
     try {
@@ -379,6 +383,41 @@ class HomeController extends GetxController {
       return null;
     } finally {
       isLocationsLoading(false);
+    }
+  }
+
+  // ----------------------------------------------------------------
+
+  Future<String?> createCoupon({
+    required String customerId,
+  }) async {
+    try {
+      isCreatingCouponLoading(true);
+      final data = await HomeService.createCoupon(customerId: customerId);
+      return data;
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isCreatingCouponLoading(false);
+    }
+  }
+
+  Future<String?> getCoupon() async {
+    try {
+      isCouponLoading(true);
+      final data = await HomeService.getCoupon();
+      if (data != null) {
+        coupon(data);
+        return coupon.value;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isCouponLoading(false);
     }
   }
 }

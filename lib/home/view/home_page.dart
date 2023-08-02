@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:aljouf/auth/view/login_screen.dart';
+import 'package:aljouf/constants/colors.dart';
 import 'package:aljouf/home/view/bottom_nav_screens/category_screen.dart';
 import 'package:aljouf/home/view/bottom_nav_screens/favorite_screen.dart';
 import 'package:aljouf/home/view/bottom_nav_screens/home_screen.dart';
@@ -7,6 +10,9 @@ import 'package:aljouf/home/view/bottom_nav_screens/profile_screen.dart';
 import 'package:aljouf/home/view/sub_category_screen.dart';
 import 'package:aljouf/utils/app_util.dart';
 import 'package:aljouf/widgets/custom_text.dart';
+import 'package:android_id/android_id.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
 import 'package:get/get.dart';
@@ -136,22 +142,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> checkAppVersion() async {
-    // String? deviceId;
-    // if (Platform.isIOS) {
-    //   var deviceInfo = DeviceInfoPlugin();
-    //   var iosDeviceInfo = await deviceInfo.iosInfo;
-    //   deviceId = iosDeviceInfo.identifierForVendor;
-    // } else if (Platform.isAndroid) {
-    //   const androidId = AndroidId();
-    //   deviceId = await androidId.getId();
-    // }
-    // print('Device ID: $deviceId'); // unique Device ID
-    // var doc = await FirebaseFirestore.instance
-    //     .collection('Devices')
-    //     .doc(deviceId)
-    //     .get();
-    // if (doc.exists) {
-    //   print('exists');
     await _checker.checkUpdate().then((value) async {
       print(value.canUpdate); //return true if update is available
       print(value.currentVersion); //return current app version
@@ -191,57 +181,117 @@ class _HomePageState extends State<HomePage> {
         );
       }
     });
-    // } else {
-    //   await http
-    //       .post(Uri.parse(
-    //           'https://aljouf.com/index.php?route==feed/rest_api/coupon_firstdownload_app'))
-    //       .then((response) async {
-    //     if (response.statusCode == 200) {
-    //       String coupon = jsonDecode(response.body)['data'][0]['coupon'];
-    //       await AppUtil.dialog2(
-    //         context,
-    //         'congratulationsCoupon'.tr,
-    //         [
-    //           CustomText(
-    //             text: coupon,
-    //             textAlign: TextAlign.center,
-    //             fontSize: 18,
-    //             fontWeight: FontWeight.w700,
-    //             color: Colors.purple,
-    //           ),
-    //           const SizedBox(
-    //             height: 20,
-    //           ),
-    //           ElevatedButton(
-    //             style: ButtonStyle(
-    //               fixedSize:
-    //                   MaterialStateProperty.all(const Size.fromHeight(40)),
-    //               shape: MaterialStateProperty.all(
-    //                 const RoundedRectangleBorder(
-    //                   borderRadius: BorderRadius.all(Radius.circular(8)),
-    //                 ),
-    //               ),
-    //             ),
-    //             onPressed: () async {
-    //               await FirebaseFirestore.instance
-    //                   .collection('Devices')
-    //                   .doc(deviceId)
-    //                   .set({'deviceId': deviceId});
-    //               Get.back();
-    //             },
-    //             child: CustomText(
-    //               text: 'shopNow'.tr,
-    //               textAlign: TextAlign.center,
-    //               color: Colors.white,
-    //               fontSize: 16,
-    //               fontWeight: FontWeight.w500,
-    //             ),
-    //           ),
-    //         ],
-    //         barrierDismissible: false,
-    //       );
-    //     }
-    //   });
-    // }
+    //
+    String? deviceId;
+    if (Platform.isIOS) {
+      var deviceInfo = DeviceInfoPlugin();
+      var iosDeviceInfo = await deviceInfo.iosInfo;
+      deviceId = iosDeviceInfo.identifierForVendor;
+    } else if (Platform.isAndroid) {
+      const androidId = AndroidId();
+      deviceId = await androidId.getId();
+    }
+    print('Device ID: $deviceId'); // unique Device ID
+    var doc = await FirebaseFirestore.instance
+        .collection('Devices')
+        .doc(deviceId)
+        .get();
+    if (doc.exists) {
+      print('exists ${doc.id}');
+    } else {
+      if (customerId != null &&
+          customerId!.isNotEmpty &&
+          customerId == _profileController.user.value.id.toString()) {
+        final coupon =
+            await _homeController.createCoupon(customerId: customerId!);
+        if (coupon != null && context.mounted) {
+          await AppUtil.dialog2(
+            context,
+            'congratulationsCoupon'.tr,
+            [
+              SelectableText(
+                coupon,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  color: brown,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                  fixedSize:
+                      MaterialStateProperty.all(const Size.fromHeight(40)),
+                  shape: MaterialStateProperty.all(
+                    const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                  ),
+                ),
+                onPressed: () async {
+                  await FirebaseFirestore.instance
+                      .collection('Devices')
+                      .doc(deviceId)
+                      .set({'deviceId': deviceId});
+                  Get.back();
+                },
+                child: CustomText(
+                  text: 'shopNow'.tr,
+                  textAlign: TextAlign.center,
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+            barrierDismissible: false,
+          );
+        }
+      } else {
+        if (context.mounted) {
+          await AppUtil.dialog2(
+            context,
+            'congratulationsCoupon'.tr,
+            [
+              CustomText(
+                text: 'loginToCoupon'.tr,
+                textAlign: TextAlign.center,
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                color: vermillion,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              ElevatedButton(
+                style: ButtonStyle(
+                  fixedSize:
+                      MaterialStateProperty.all(const Size.fromHeight(40)),
+                  shape: MaterialStateProperty.all(
+                    const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                    ),
+                  ),
+                ),
+                onPressed: () async {
+                  Get.to(() => const LoginScreen());
+                },
+                child: CustomText(
+                  text: 'signIn'.tr,
+                  textAlign: TextAlign.center,
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+            barrierDismissible: false,
+          );
+        }
+      }
+    }
   }
 }

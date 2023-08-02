@@ -1,3 +1,4 @@
+import 'package:aljouf/home/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ class OrderSummaryPage extends StatelessWidget {
     required this.onEditShippingTap,
     required this.onEditPaymentTap,
     required this.onConfirmOrderTap,
+    required this.homeController,
   });
 
   final CheckoutController checkoutController;
@@ -25,6 +27,7 @@ class OrderSummaryPage extends StatelessWidget {
   final VoidCallback onEditShippingTap;
   final VoidCallback onEditPaymentTap;
   final VoidCallback onConfirmOrderTap;
+  final HomeController homeController;
 
   @override
   Widget build(BuildContext context) {
@@ -334,73 +337,87 @@ class OrderSummaryPage extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      Row(
-                        children: [
-                          Expanded(
-                            flex: 3,
-                            child: CustomTextField(
-                              controller:
-                                  checkoutController.couponController.value,
-                              validator: false,
-                              hintText: 'couponCode'.tr,
-                              textInputType: TextInputType.text,
-                              readOnly: checkoutController.isCouponAdded.value
-                                  ? true
-                                  : false,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Obx(() {
-                              if (checkoutController.isCouponLoading.value) {
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              }
-                              return ElevatedButton(
-                                onPressed: () {
-                                  if (checkoutController.isCouponAdded.value) {
-                                    checkoutController.deleteCoupon(
-                                      context: context,
-                                    );
-                                  } else {
-                                    checkoutController.addCoupon(
-                                      context: context,
-                                      coupon: checkoutController
-                                          .couponController.value.text,
+                      Obx(() {
+                        if (homeController.coupon.value != 'null') {
+                          return CustomTextField(
+                            initialValue: homeController.coupon.value,
+                            readOnly: true,
+                          );
+                        } else {
+                          return Row(
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: CustomTextField(
+                                  controller:
+                                      checkoutController.couponController.value,
+                                  validator: false,
+                                  hintText: 'couponCode'.tr,
+                                  textInputType: TextInputType.text,
+                                  readOnly:
+                                      checkoutController.isCouponAdded.value
+                                          ? true
+                                          : false,
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 8,
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Obx(() {
+                                  if (checkoutController
+                                      .isCouponLoading.value) {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
                                     );
                                   }
-                                },
-                                style: ButtonStyle(
-                                    elevation: MaterialStateProperty.all(0),
-                                    backgroundColor: MaterialStateProperty.all(
-                                        checkoutController.isCouponAdded.value
-                                            ? vermillion
-                                            : almostBlack),
-                                    foregroundColor:
-                                        MaterialStateProperty.all(Colors.white),
-                                    fixedSize: MaterialStateProperty.all(
-                                        const Size.fromHeight(54)),
-                                    shape: MaterialStateProperty.all(
-                                        const RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(4))))),
-                                child: CustomText(
-                                  text: checkoutController.isCouponAdded.value
-                                      ? 'remove'.tr
-                                      : 'apply'.tr,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                ),
-                              );
-                            }),
-                          ),
-                        ],
-                      ),
+                                  return ElevatedButton(
+                                    onPressed: () {
+                                      if (checkoutController
+                                          .isCouponAdded.value) {
+                                        checkoutController.deleteCoupon(
+                                          context: context,
+                                        );
+                                      } else {
+                                        checkoutController.addCoupon(
+                                          context: context,
+                                          coupon: checkoutController
+                                              .couponController.value.text,
+                                        );
+                                      }
+                                    },
+                                    style: ButtonStyle(
+                                        elevation: MaterialStateProperty.all(0),
+                                        backgroundColor: MaterialStateProperty.all(
+                                            checkoutController.isCouponAdded.value
+                                                ? vermillion
+                                                : almostBlack),
+                                        foregroundColor:
+                                            MaterialStateProperty.all(
+                                                Colors.white),
+                                        fixedSize: MaterialStateProperty.all(
+                                            const Size.fromHeight(54)),
+                                        shape: MaterialStateProperty.all(
+                                            const RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(4))))),
+                                    child: CustomText(
+                                      text:
+                                          checkoutController.isCouponAdded.value
+                                              ? 'remove'.tr
+                                              : 'apply'.tr,
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 14,
+                                      color: Colors.white,
+                                    ),
+                                  );
+                                }),
+                              ),
+                            ],
+                          );
+                        }
+                      }),
                       const SizedBox(
                         height: 28,
                       ),

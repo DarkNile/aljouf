@@ -273,4 +273,87 @@ class HomeService {
       return null;
     }
   }
+
+  // ------------------------------------------<Coupon>------------------------------
+
+  static Future<String?> createCoupon({
+    required String customerId,
+  }) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final response = await http.post(
+      Uri.parse('${baseUrl}route=rest/couponfirstdownload/createnew'),
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+      },
+      body: jsonEncode({
+        'customer_id': customerId,
+      }),
+    );
+    print('response status code: ${response.statusCode}');
+    if (jsonDecode(response.body)['success'] == 1) {
+      String coupon = jsonDecode(response.body)['data'][0]['code'].toString();
+      return coupon;
+    } else {
+      return null;
+    }
+  }
+
+  static Future<String?> getCoupon() async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final String? customerId = getStorage.read('customerId');
+    print(customerId);
+    final response = await http.get(
+      Uri.parse(
+          '${baseUrl}route=rest/couponfirstdownload/get_first_download_coupon&customer_id=$customerId'),
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+      },
+    );
+    print('response status code: ${response.statusCode}');
+    print(
+        '${baseUrl}route=rest/couponfirstdownload/get_first_download_coupon&customer_id=$customerId');
+    if (jsonDecode(response.body)['success'] == 1) {
+      String coupon = jsonDecode(response.body)['data'][0]['code'].toString();
+      print('coupon: $coupon');
+      await addCouponToCart(coupon: coupon, customerId: customerId!);
+      return coupon;
+    } else {
+      return null;
+    }
+  }
+
+  static Future<void> addCouponToCart({
+    required String coupon,
+    required String customerId,
+  }) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final response = await http.post(
+      Uri.parse('${baseUrl}route=rest/couponfirstdownload/couponaddtocart'),
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+      },
+      body: jsonEncode({
+        'coupon': coupon,
+        'customer_id': customerId,
+      }),
+    );
+    print('response status code: ${response.statusCode}');
+    if (jsonDecode(response.body)['success'] == 1) {
+      print('success');
+    } else {
+      print('error');
+    }
+  }
 }
