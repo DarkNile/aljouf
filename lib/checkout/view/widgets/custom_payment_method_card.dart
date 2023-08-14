@@ -51,8 +51,8 @@ class CustomPaymentMethodCard extends StatelessWidget {
               )
             else
               Image.asset(
-                'assets/images/apple_pay_new.png',
-                height: 50,
+                'assets/images/apple_pay_btn.png',
+                height: 36,
               ),
           ],
         ),

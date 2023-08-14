@@ -62,6 +62,8 @@
 	<string>YES</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Al Jouf needs access to your camera to upload products</string>
+	<key>NSAdvertisingAttributionReportEndpoint</key>
+    <string>https://appsflyer-skadnetwork.com/</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
