@@ -295,7 +295,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                         );
                         if (isSuccess) {
                           if (context.mounted) {
-                            _homeController.getCoupon();
+                            // _homeController.getCoupon();
                             _checkoutController.confirmOrder(context: context);
                           }
                           setState(() {
@@ -306,7 +306,8 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                       });
                 }),
                 Obx(() {
-                  if (_homeController.isCouponLoading.value ||
+                  if (
+                      // _homeController.isCouponLoading.value ||
                       _checkoutController.isConfirmOrderLoading.value) {
                     return const Center(
                       child: CircularProgressIndicator(),
@@ -406,14 +407,20 @@ class _CheckoutScreenState extends State<CheckoutScreen>
           if (event["status"] == "success") {
             var transactionDetails = event["data"];
             print(transactionDetails);
-            _checkoutController.saveOrderToDatabase(
-              order: _checkoutController.order!,
-            );
-            Get.off(() => ThankYouScreen(
-                  checkOutController: _checkoutController,
-                  orderId: _checkoutController.order!.orderId!,
-                  email: _checkoutController.order!.email!,
-                ));
+            print('${transactionDetails["isSuccess"]}');
+            if (transactionDetails["isSuccess"]) {
+              print("successful transaction");
+              _checkoutController.saveOrderToDatabase(
+                order: _checkoutController.order!,
+              );
+              Get.off(() => ThankYouScreen(
+                    checkOutController: _checkoutController,
+                    orderId: _checkoutController.order!.orderId!,
+                    email: _checkoutController.order!.email!,
+                  ));
+            } else {
+              print("failed transaction");
+            }
           } else if (event["status"] == "error") {
             // Handle error here.
             print(event["status"]);

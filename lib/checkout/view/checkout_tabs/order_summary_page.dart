@@ -304,8 +304,8 @@ class OrderSummaryPage extends StatelessWidget {
                         )
                       else
                         Image.asset(
-                          'assets/images/apple_pay_new.png',
-                          height: 50,
+                          'assets/images/apple_pay_btn.png',
+                          height: 36,
                         ),
                     ],
                   ),
@@ -338,85 +338,82 @@ class OrderSummaryPage extends StatelessWidget {
                         height: 20,
                       ),
                       Obx(() {
-                        if (homeController.coupon.value != 'null') {
-                          return CustomTextField(
-                            initialValue: homeController.coupon.value,
-                            readOnly: true,
-                          );
-                        } else {
-                          return Row(
-                            children: [
-                              Expanded(
-                                flex: 3,
-                                child: CustomTextField(
-                                  controller:
-                                      checkoutController.couponController.value,
-                                  validator: false,
-                                  hintText: 'couponCode'.tr,
-                                  textInputType: TextInputType.text,
-                                  readOnly:
-                                      checkoutController.isCouponAdded.value
-                                          ? true
-                                          : false,
-                                ),
+                        // if (homeController.coupon.value != 'null') {
+                        //   return CustomTextField(
+                        //     initialValue: homeController.coupon.value,
+                        //     readOnly: true,
+                        //   );
+                        // } else {
+                        return Row(
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              child: CustomTextField(
+                                controller:
+                                    checkoutController.couponController.value,
+                                validator: false,
+                                hintText: 'couponCode'.tr,
+                                textInputType: TextInputType.text,
+                                readOnly: checkoutController.isCouponAdded.value
+                                    ? true
+                                    : false,
                               ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Obx(() {
-                                  if (checkoutController
-                                      .isCouponLoading.value) {
-                                    return const Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  }
-                                  return ElevatedButton(
-                                    onPressed: () {
-                                      if (checkoutController
-                                          .isCouponAdded.value) {
-                                        checkoutController.deleteCoupon(
-                                          context: context,
-                                        );
-                                      } else {
-                                        checkoutController.addCoupon(
-                                          context: context,
-                                          coupon: checkoutController
-                                              .couponController.value.text,
-                                        );
-                                      }
-                                    },
-                                    style: ButtonStyle(
-                                        elevation: MaterialStateProperty.all(0),
-                                        backgroundColor: MaterialStateProperty.all(
-                                            checkoutController.isCouponAdded.value
-                                                ? vermillion
-                                                : almostBlack),
-                                        foregroundColor:
-                                            MaterialStateProperty.all(
-                                                Colors.white),
-                                        fixedSize: MaterialStateProperty.all(
-                                            const Size.fromHeight(54)),
-                                        shape: MaterialStateProperty.all(
-                                            const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(4))))),
-                                    child: CustomText(
-                                      text:
-                                          checkoutController.isCouponAdded.value
-                                              ? 'remove'.tr
-                                              : 'apply'.tr,
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 14,
-                                      color: Colors.white,
-                                    ),
+                            ),
+                            const SizedBox(
+                              width: 8,
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Obx(() {
+                                if (checkoutController.isCouponLoading.value) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
                                   );
-                                }),
-                              ),
-                            ],
-                          );
-                        }
+                                }
+                                return ElevatedButton(
+                                  onPressed: () {
+                                    if (checkoutController
+                                        .isCouponAdded.value) {
+                                      checkoutController.deleteCoupon(
+                                        context: context,
+                                      );
+                                    } else {
+                                      checkoutController.addCoupon(
+                                        context: context,
+                                        coupon: checkoutController
+                                            .couponController.value.text,
+                                      );
+                                    }
+                                  },
+                                  style: ButtonStyle(
+                                      elevation: MaterialStateProperty.all(0),
+                                      backgroundColor: MaterialStateProperty.all(
+                                          checkoutController.isCouponAdded.value
+                                              ? vermillion
+                                              : almostBlack),
+                                      foregroundColor:
+                                          MaterialStateProperty.all(
+                                              Colors.white),
+                                      fixedSize: MaterialStateProperty.all(
+                                          const Size.fromHeight(54)),
+                                      shape: MaterialStateProperty.all(
+                                          const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(4))))),
+                                  child: CustomText(
+                                    text: checkoutController.isCouponAdded.value
+                                        ? 'remove'.tr
+                                        : 'apply'.tr,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                    color: Colors.white,
+                                  ),
+                                );
+                              }),
+                            ),
+                          ],
+                        );
+                        //  }
                       }),
                       const SizedBox(
                         height: 28,
