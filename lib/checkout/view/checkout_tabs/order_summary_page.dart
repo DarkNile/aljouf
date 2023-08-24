@@ -237,13 +237,14 @@ class OrderSummaryPage extends StatelessWidget {
                             text: checkoutController.order!.shippingCode ==
                                     'aramex.aramex'
                                 ? 'shippingThroughAramex'.tr
-                                : checkoutController.order!.shippingCode!,
+                                // : checkoutController.order!.shippingCode!,
+                                : 'freeShipping'.tr,
                             color: almostBlack,
                             fontWeight: FontWeight.w500,
                           ),
-                          // if (widget.checkoutController.order!.shippingCode ==
-                          //     'aramex.aramex')
-                          Image.asset('assets/images/aramex.png'),
+                          if (checkoutController.order!.shippingCode ==
+                              'aramex.aramex')
+                            Image.asset('assets/images/aramex.png'),
                         ],
                       ),
                     ],

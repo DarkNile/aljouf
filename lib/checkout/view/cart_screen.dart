@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:aljouf/auth/services/firebase_service.dart';
 import 'package:aljouf/auth/view/edit_details_screen.dart';
-import 'package:aljouf/home/controllers/home_controller.dart';
+// import 'package:aljouf/home/controllers/home_controller.dart';
 import 'package:aljouf/product/view/product_screen.dart';
 import 'package:aljouf/profile/controllers/profile_controller.dart';
 import 'package:aljouf/widgets/custom_card.dart';
@@ -31,7 +31,7 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   final _checkoutController = Get.put(CheckoutController());
   final _profileController = Get.put(ProfileController());
-  final _homeController = Get.put(HomeController());
+  // final _homeController = Get.put(HomeController());
 
   // @override
   // void initState() {

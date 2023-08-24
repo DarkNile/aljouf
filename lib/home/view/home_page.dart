@@ -1,7 +1,7 @@
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:aljouf/auth/view/login_screen.dart';
-import 'package:aljouf/constants/colors.dart';
+// import 'package:aljouf/constants/colors.dart';
 import 'package:aljouf/home/view/bottom_nav_screens/category_screen.dart';
 import 'package:aljouf/home/view/bottom_nav_screens/favorite_screen.dart';
 import 'package:aljouf/home/view/bottom_nav_screens/home_screen.dart';
@@ -10,9 +10,9 @@ import 'package:aljouf/home/view/bottom_nav_screens/profile_screen.dart';
 import 'package:aljouf/home/view/sub_category_screen.dart';
 import 'package:aljouf/utils/app_util.dart';
 import 'package:aljouf/widgets/custom_text.dart';
-import 'package:android_id/android_id.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:device_info_plus/device_info_plus.dart';
+// import 'package:android_id/android_id.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_version_checker/flutter_app_version_checker.dart';
 import 'package:get/get.dart';

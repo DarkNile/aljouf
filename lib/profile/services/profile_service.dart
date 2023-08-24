@@ -24,8 +24,8 @@ class ProfileService {
       Uri.parse('$baseUrl route=rest/account/account&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=$token; currency=SAR;",
       },
     );
 
@@ -59,8 +59,8 @@ class ProfileService {
       Uri.parse('$baseUrl route=rest/account/account&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=$token; currency=SAR;",
       },
       body: jsonEncode({
         "firstname": firstName.trim(),
@@ -95,8 +95,8 @@ class ProfileService {
       Uri.parse('$baseUrl route=feed/rest_api/countries&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=$token; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -119,8 +119,8 @@ class ProfileService {
       Uri.parse('$baseUrl route=feed/rest_api/countries&id=184&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=$token; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -146,8 +146,8 @@ class ProfileService {
           '$baseUrl route=feed/rest_api/cities&id=$zoneId&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=$token; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -172,8 +172,8 @@ class ProfileService {
       Uri.parse('$baseUrl route=rest/account/address&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=$token; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -215,8 +215,8 @@ class ProfileService {
       Uri.parse('$baseUrl route=rest/account/address&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=$token; currency=SAR;",
       },
       body: jsonEncode({
         "customer_id": customerId,
@@ -271,8 +271,8 @@ class ProfileService {
       Uri.parse('$baseUrl route=rest/account/address&id=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=$token; currency=SAR;",
       },
       body: jsonEncode({
         "firstname": firstName,
@@ -319,8 +319,8 @@ class ProfileService {
       Uri.parse('$baseUrl route=rest/account/address&id=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=$token; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -350,8 +350,8 @@ class ProfileService {
       Uri.parse('$baseUrl route=rest/account/transactions&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=$token; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -383,8 +383,8 @@ class ProfileService {
       Uri.parse('$baseUrl route=rest/order/orders&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=$token; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -414,8 +414,8 @@ class ProfileService {
           '$baseUrl route=rest/order/orders&order_status=$orderStatus&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=$token; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');

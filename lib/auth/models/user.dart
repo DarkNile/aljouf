@@ -22,7 +22,7 @@ class User {
       lastName: json['lastname'],
       email: json['email'],
       phone: json['telephone'],
-      token: json['access_token'],
+      token: json['session_id'],
     );
   }
 
