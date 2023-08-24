@@ -19,7 +19,7 @@ class ProductService {
           '$baseUrl route=feed/rest_api/products&category=$categoryId&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
+        // 'Authorization': 'Bearer $token',
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
       },
     );
@@ -50,7 +50,7 @@ class ProductService {
           '$baseUrl route=feed/rest_api/products&search=$search&page=$page&limit=20&language=$lang&category=$categoryId&order=$order&sort=$sort&filter_description=1'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
+        // 'Authorization': 'Bearer $token',
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
       },
     );
@@ -80,7 +80,7 @@ class ProductService {
           '$baseUrl route=feed/rest_api/search&page=$page&limit=20&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
+        // 'Authorization': 'Bearer $token',
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
       },
       body: json.encode(formData),

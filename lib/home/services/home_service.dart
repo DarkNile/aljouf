@@ -20,7 +20,7 @@ class HomeService {
       Uri.parse('$baseUrl route=feed/rest_api/banners&id=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
+        // 'Authorization': 'Bearer $token',
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
       },
     );
@@ -44,7 +44,7 @@ class HomeService {
       Uri.parse('$baseUrl route=feed/rest_api/categories&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
+        // 'Authorization': 'Bearer $token',
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
       },
     );
@@ -69,7 +69,7 @@ class HomeService {
           '$baseUrl route=feed/rest_api/categories&id=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
+        // 'Authorization': 'Bearer $token',
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
       },
     );
@@ -96,7 +96,7 @@ class HomeService {
           '$baseUrl route=feed/rest_api/products&category=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
+        // 'Authorization': 'Bearer $token',
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
       },
     );
@@ -120,7 +120,7 @@ class HomeService {
       Uri.parse('$baseUrl route=rest/wishlist/wishlist&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
+        // 'Authorization': 'Bearer $token',
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
       },
     );
@@ -146,7 +146,7 @@ class HomeService {
       Uri.parse('$baseUrl route=rest/wishlist/wishlist&id=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
+        // 'Authorization': 'Bearer $token',
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
       },
     );
@@ -174,7 +174,7 @@ class HomeService {
       Uri.parse('$baseUrl route=rest/wishlist/wishlist&id=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
+        // 'Authorization': 'Bearer $token',
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
       },
     );
@@ -204,7 +204,7 @@ class HomeService {
       Uri.parse('$baseUrl route=rest/contact/send&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
+        // 'Authorization': 'Bearer $token',
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
       },
       body: jsonEncode({
@@ -236,7 +236,7 @@ class HomeService {
           '$baseUrl route=feed/rest_api/information&id=$id&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
+        // 'Authorization': 'Bearer $token',
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
       },
     );
@@ -260,7 +260,7 @@ class HomeService {
       Uri.parse('$baseUrl route=feed/rest_api/locations&language=$lang'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
+        // 'Authorization': 'Bearer $token',
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
       },
     );
@@ -286,8 +286,8 @@ class HomeService {
       Uri.parse('${baseUrl}route=rest/couponfirstdownload/createnew'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=$token; currency=SAR;",
       },
       body: jsonEncode({
         'customer_id': customerId,
@@ -313,8 +313,8 @@ class HomeService {
           '${baseUrl}route=rest/couponfirstdownload/get_first_download_coupon&customer_id=$customerId'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=$token; currency=SAR;",
       },
     );
     print('response status code: ${response.statusCode}');
@@ -341,8 +341,8 @@ class HomeService {
       Uri.parse('${baseUrl}route=rest/couponfirstdownload/couponaddtocart'),
       headers: {
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
-        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+        // 'Authorization': 'Bearer $token',
+        "Cookie": "OCSESSID=$token; currency=SAR;",
       },
       body: jsonEncode({
         'coupon': coupon,

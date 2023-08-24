@@ -101,7 +101,7 @@ class _ProductScreenState extends State<ProductScreen>
                           return const CustomLoadingWidget();
                         },
                       ),
-                      if (widget.product.quantity < 1)
+                      if (int.parse(widget.product.quantity.toString()) < 1)
                         Positioned.directional(
                           textDirection: Directionality.of(context),
                           top: 60,
@@ -403,7 +403,9 @@ class _ProductScreenState extends State<ProductScreen>
                                   children: [
                                     Row(
                                       children: [
-                                        widget.product.quantity < 1
+                                        int.parse(widget.product.quantity
+                                                    .toString()) <
+                                                1
                                             ? const Icon(
                                                 Icons.close,
                                                 color: vermillion,
@@ -418,10 +420,16 @@ class _ProductScreenState extends State<ProductScreen>
                                           width: 4,
                                         ),
                                         CustomText(
-                                          text: widget.product.quantity < 1
+                                          text: int.parse(widget
+                                                      .product.quantity
+                                                      .toString()) <
+                                                  1
                                               ? 'productNotAvailable'.tr
                                               : 'productAvailable'.tr,
-                                          color: widget.product.quantity < 1
+                                          color: int.parse(widget
+                                                      .product.quantity
+                                                      .toString()) <
+                                                  1
                                               ? vermillion
                                               : jadeGreen,
                                           fontWeight: FontWeight.w400,
@@ -642,7 +650,7 @@ class _ProductScreenState extends State<ProductScreen>
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: widget.product.quantity < 1
+          child: int.parse(widget.product.quantity.toString()) < 1
               ? CustomButton(
                   onPressed: null,
                   title: 'outOfStock'.tr,
