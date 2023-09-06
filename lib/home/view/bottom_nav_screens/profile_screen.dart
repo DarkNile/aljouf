@@ -1,4 +1,5 @@
 import 'package:aljouf/auth/view/change_password_screen.dart';
+import 'package:aljouf/checkout/controllers/checkout_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -18,10 +19,12 @@ class ProfileScreen extends StatelessWidget {
     super.key,
     required this.profileController,
     required this.authController,
+    required this.checkoutController,
   });
 
   final ProfileController profileController;
   final AuthController authController;
+  final CheckoutController checkoutController;
 
   @override
   Widget build(BuildContext context) {

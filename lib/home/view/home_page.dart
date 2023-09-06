@@ -1,6 +1,7 @@
 // import 'dart:io';
 
 import 'package:aljouf/auth/view/login_screen.dart';
+import 'package:aljouf/checkout/controllers/checkout_controller.dart';
 // import 'package:aljouf/constants/colors.dart';
 import 'package:aljouf/home/view/bottom_nav_screens/category_screen.dart';
 import 'package:aljouf/home/view/bottom_nav_screens/favorite_screen.dart';
@@ -40,6 +41,7 @@ class _HomePageState extends State<HomePage> {
   final _homeController = Get.put(HomeController());
   final _profileController = Get.put(ProfileController());
   final _authController = Get.put(AuthController());
+  final _checkoutController = Get.put(CheckoutController());
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   late PageController _pageController;
   late int _currentIndex;
@@ -135,6 +137,7 @@ class _HomePageState extends State<HomePage> {
           ProfileScreen(
             profileController: _profileController,
             authController: _authController,
+            checkoutController: _checkoutController,
           ),
         ],
       ),

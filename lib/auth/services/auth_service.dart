@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:aljouf/auth/models/user.dart';
 import 'package:aljouf/constants/urls.dart';
-import 'package:aljouf/home/view/home_page.dart';
 import 'package:aljouf/screens/splash/splash_screen.dart';
 import 'package:aljouf/utils/app_util.dart';
 
@@ -128,10 +128,12 @@ class AuthService {
     print("response.statusCode");
     print(response.statusCode);
     print(response.body);
-    if (jsonDecode(response.body)['success'] == 1) {
+    if (response.statusCode == 200) {
       getStorage.remove('token');
       getStorage.remove('customerId');
-      Get.offAll(() => const HomePage());
+      Get.deleteAll(force: true);
+      Phoenix.rebirth(Get.context!);
+      Get.reset();
     } else {
       var errorMessage = jsonDecode(response.body)['error'];
       if (context.mounted) {

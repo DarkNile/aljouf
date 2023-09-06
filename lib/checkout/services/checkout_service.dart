@@ -61,7 +61,13 @@ class CheckoutService {
         'quantity': quantity,
       }),
     );
+
     print('response status code: ${response.statusCode}');
+    print(json.encode({
+      'product_id': productId,
+      'quantity': quantity,
+    }));
+
     if (json.decode(response.body)['success'] == 1) {
       final data = jsonDecode(response.body)['data'];
       print('data: $data');
