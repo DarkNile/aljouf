@@ -25,15 +25,16 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
-    final double height = MediaQuery.of(context).size.height;
+    // final double height = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Obx(() {
             if (widget.homeController.isBannersLoading.value) {
-              return SizedBox(
-                height: height * 0.25,
+              return const SizedBox(
+                // height: height * 0.25,
+                height: 330,
               );
             }
             return Padding(
@@ -44,7 +45,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   CarouselSlider.builder(
                       itemCount: widget.homeController.banners.length,
                       options: CarouselOptions(
-                        height: height * 0.2,
+                        // height: height * 0.2,
+                        height: 330,
                         enlargeCenterPage: true,
                         autoPlay: true,
                         viewportFraction: 1,
@@ -62,7 +64,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: CachedNetworkImage(
                             imageUrl: widget.homeController.banners[index]
                                 ['image'],
-                            width: width,
+                            // width: width,
+                            // height: 350,
                             fit: BoxFit.cover,
                             placeholder: (context, url) {
                               return const CustomLoadingWidget();

@@ -27,7 +27,7 @@ class CheckoutController extends GetxController {
   var isRatingLoading = false.obs;
   var total = 0.0.obs;
   var cartItems = 0.obs;
-    var isCouponAdded = false.obs;
+  var isCouponAdded = false.obs;
   var couponController = TextEditingController().obs;
 
   Future<bool?> showRatingApp() async {

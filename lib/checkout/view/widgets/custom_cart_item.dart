@@ -64,7 +64,9 @@ class CustomCartItem extends StatelessWidget {
                 RichText(
                   text: TextSpan(children: [
                     TextSpan(
-                      text: '${product.priceRaw.toStringAsFixed(2)} ',
+                      text: product.special != 0
+                          ? double.parse(product.special).toStringAsFixed(2)
+                          : '${product.priceRaw.toStringAsFixed(2)} ',
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w700,

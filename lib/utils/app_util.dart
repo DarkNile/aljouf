@@ -1,9 +1,9 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:aljouf/constants/colors.dart';
 import 'package:aljouf/widgets/custom_text.dart';
-import 'package:flutter_flushbar/flutter_flushbar.dart';
 
 class AppUtil {
   static bool rtlDirection(context) {
@@ -210,6 +210,8 @@ class AppUtil {
           ),
         ],
       ),
+      // reverseAnimationCurve: Curves.decelerate,
+      // forwardAnimationCurve: Curves.elasticOut,
       messageColor: Colors.white,
       messageSize: 18,
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),

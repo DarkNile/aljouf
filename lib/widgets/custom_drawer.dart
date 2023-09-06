@@ -131,7 +131,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               title: 'categories',
               leadingIcon: 'category_drawer',
               trailing: Icon(
-                showCategories ? Icons.arrow_drop_up : Icons.arrow_drop_down,
+                showCategories ? Icons.arrow_drop_down : Icons.arrow_right,
                 color: Colors.black,
                 size: 28,
               ),
@@ -204,62 +204,65 @@ class _CustomDrawerState extends State<CustomDrawer> {
             const SizedBox(
               height: 16,
             ),
-            DropdownButtonFormField<String>(
-                icon: const Icon(
-                  Icons.arrow_drop_down,
-                  size: 28,
-                  color: Colors.black,
-                ),
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.language),
-                  prefixIconColor: Colors.black,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    borderSide: BorderSide(
-                      color: Colors.grey,
+            ButtonTheme(
+              alignedDropdown: true,
+              child: DropdownButtonFormField<String>(
+                  icon: const Icon(
+                    Icons.arrow_right,
+                    size: 28,
+                    color: Colors.black,
+                  ),
+                  decoration: const InputDecoration(
+                    prefixIcon: Icon(Icons.language),
+                    prefixIconColor: Colors.black,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                      ),
+                    ),
+                    disabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(4)),
+                      borderSide: BorderSide(
+                        color: Colors.grey,
+                      ),
                     ),
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    borderSide: BorderSide(
-                      color: Colors.grey,
+                  items: [
+                    DropdownMenuItem(
+                      value: 'ar',
+                      child: Text('arabicLanguage'.tr),
                     ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    borderSide: BorderSide(
-                      color: Colors.grey,
+                    DropdownMenuItem(
+                      value: 'en-gb',
+                      child: Text('englishLanguage'.tr),
                     ),
-                  ),
-                  disabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(4)),
-                    borderSide: BorderSide(
-                      color: Colors.grey,
-                    ),
-                  ),
-                ),
-                items: [
-                  DropdownMenuItem(
-                    value: 'ar',
-                    child: Text('arabicLanguage'.tr),
-                  ),
-                  DropdownMenuItem(
-                    value: 'en-gb',
-                    child: Text('englishLanguage'.tr),
-                  ),
-                ],
-                value: Get.locale!.languageCode,
-                onChanged: (String? value) {
-                  setState(() {
-                    lang = value!;
-                  });
-                  Get.updateLocale(Locale(lang));
-                  final getStorage = GetStorage();
-                  getStorage.write('lang', lang);
-                  Get.deleteAll(force: true);
-                  Phoenix.rebirth(Get.context!);
-                  Get.reset();
-                }),
+                  ],
+                  value: Get.locale!.languageCode,
+                  onChanged: (String? value) {
+                    setState(() {
+                      lang = value!;
+                    });
+                    Get.updateLocale(Locale(lang));
+                    final getStorage = GetStorage();
+                    getStorage.write('lang', lang);
+                    Get.deleteAll(force: true);
+                    Phoenix.rebirth(Get.context!);
+                    Get.reset();
+                  }),
+            ),
             const SizedBox(
               height: 16,
             ),
