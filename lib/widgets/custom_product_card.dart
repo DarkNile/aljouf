@@ -143,7 +143,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                             ),
                           ),
                         ),
-                      if (widget.product.quantity != 0)
+                      if (widget.product.quantity > 0)
                         Positioned.directional(
                           textDirection: Directionality.of(context),
                           bottom: 0,
@@ -210,7 +210,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                                 ),
                                                 content: SingleChildScrollView(
                                                   padding: const EdgeInsets
-                                                          .symmetric(
+                                                      .symmetric(
                                                       horizontal: 20),
                                                   child: ListBody(
                                                     children: [
@@ -260,7 +260,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                                       Padding(
                                                         padding:
                                                             const EdgeInsets
-                                                                    .symmetric(
+                                                                .symmetric(
                                                                 horizontal: 4),
                                                         child: Row(
                                                           mainAxisAlignment:
@@ -705,7 +705,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                 ),
                             ],
                           ),
-                          if (widget.product.quantity != 0)
+                          if (widget.product.quantity > 0)
                             InkWell(
                               onTap: () async {
                                 final getStorage = GetStorage();
@@ -770,7 +770,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                                   content:
                                                       SingleChildScrollView(
                                                     padding: const EdgeInsets
-                                                            .symmetric(
+                                                        .symmetric(
                                                         horizontal: 20),
                                                     child: ListBody(
                                                       children: [
@@ -825,7 +825,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                                         Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                      .symmetric(
+                                                                  .symmetric(
                                                                   horizontal:
                                                                       4),
                                                           child: Row(

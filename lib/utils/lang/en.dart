@@ -203,4 +203,6 @@ const Map<String, String> en = {
   'appRating': 'App Rating',
   'ratingDialog': 'Do you like this app? Please leave a rating thank you!',
   'rating': 'Rate Now',
+  'emailMarketing':
+      'Please check your info as well as your email in order to complete your order',
 };

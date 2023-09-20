@@ -66,7 +66,7 @@ class CustomCartItem extends StatelessWidget {
                     TextSpan(
                       text: product.special != 0
                           ? double.parse(product.special).toStringAsFixed(2)
-                          : '${product.priceRaw.toStringAsFixed(2)} ',
+                          : product.priceRaw.toStringAsFixed(2),
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
@@ -74,7 +74,7 @@ class CustomCartItem extends StatelessWidget {
                       ),
                     ),
                     TextSpan(
-                      text: 'riyal'.tr,
+                      text: ' ${'riyal'.tr}',
                       style: const TextStyle(
                         fontSize: 12,
                         color: black51,
