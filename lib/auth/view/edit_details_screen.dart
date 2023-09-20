@@ -1,4 +1,5 @@
 import 'package:aljouf/auth/view/verify_phone_screen.dart';
+import 'package:aljouf/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -19,6 +20,7 @@ class EditDetailsScreen extends StatefulWidget {
     this.phone,
     this.isFromSocialLogin = false,
     this.customerId,
+    this.disableEmail = true,
   });
 
   final ProfileController profileController;
@@ -28,6 +30,7 @@ class EditDetailsScreen extends StatefulWidget {
   final String? phone;
   final bool isFromSocialLogin;
   final String? customerId;
+  final bool disableEmail;
 
   @override
   State<EditDetailsScreen> createState() => _EditDetailsScreenState();
@@ -93,9 +96,24 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 70,
+              SizedBox(
+                height: !widget.disableEmail ? 40 : 70,
               ),
+              if (!widget.disableEmail)
+                Center(
+                  child: CustomText(
+                    text: 'emailMarketing'.tr,
+                    textAlign: TextAlign.center,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    height: 1.5,
+                    color: vermillion,
+                  ),
+                ),
+              if (!widget.disableEmail)
+                const SizedBox(
+                  height: 40,
+                ),
               Row(
                 children: [
                   Expanded(
@@ -160,7 +178,7 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
                 hintText: 'emailAddress'.tr,
                 textInputType: TextInputType.emailAddress,
                 prefixIcon: const Icon(Icons.alternate_email),
-                readOnly: widget.isFromSocialLogin,
+                readOnly: widget.isFromSocialLogin && widget.disableEmail,
               ),
               const SizedBox(
                 height: 26,

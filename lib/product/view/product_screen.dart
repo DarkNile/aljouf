@@ -304,8 +304,12 @@ class _ProductScreenState extends State<ProductScreen>
                                     RichText(
                                       text: TextSpan(children: [
                                         TextSpan(
-                                          text:
-                                              '${double.parse(widget.isFromCart ? widget.product.originPrice.toString() : widget.product.price.toString()).toStringAsFixed(2)} ',
+                                          // text:
+                                          //     '${double.parse(widget.isFromCart ? widget.product.originPrice.toString() : widget.product.price.toString()).toStringAsFixed(2)} ',
+                                          text: double.parse(widget
+                                                  .product.price
+                                                  .toString())
+                                              .toStringAsFixed(2),
                                           style: TextStyle(
                                             fontSize:
                                                 widget.product.special != 0
@@ -323,7 +327,7 @@ class _ProductScreenState extends State<ProductScreen>
                                           ),
                                         ),
                                         TextSpan(
-                                          text: 'riyal'.tr,
+                                          text: ' ${'riyal'.tr}',
                                           style: TextStyle(
                                             fontSize:
                                                 widget.product.special != 0
@@ -339,8 +343,10 @@ class _ProductScreenState extends State<ProductScreen>
                                       RichText(
                                         text: TextSpan(children: [
                                           TextSpan(
-                                            text:
-                                                '${double.parse(widget.product.special.toString()).toStringAsFixed(2)} ',
+                                            text: double.parse(widget
+                                                    .product.special
+                                                    .toString())
+                                                .toStringAsFixed(2),
                                             style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w600,
@@ -348,7 +354,7 @@ class _ProductScreenState extends State<ProductScreen>
                                             ),
                                           ),
                                           TextSpan(
-                                            text: 'riyal'.tr,
+                                            text: ' ${'riyal'.tr}',
                                             style: const TextStyle(
                                               fontSize: 14,
                                               color: vermillion,

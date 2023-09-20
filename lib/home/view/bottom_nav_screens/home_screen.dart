@@ -25,64 +25,54 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
-    // final double height = MediaQuery.of(context).size.height;
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Obx(() {
             if (widget.homeController.isBannersLoading.value) {
-              return const SizedBox(
-                // height: height * 0.25,
-                height: 330,
+              return SizedBox(
+                width: width,
+                height: 361,
+                child: const CustomLoadingWidget(),
               );
             }
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  CarouselSlider.builder(
-                      itemCount: widget.homeController.banners.length,
-                      options: CarouselOptions(
-                        // height: height * 0.2,
-                        height: 330,
-                        enlargeCenterPage: true,
-                        autoPlay: true,
-                        viewportFraction: 1,
-                        enableInfiniteScroll: false,
-                        onPageChanged: (index, reason) {
-                          setState(() {
-                            _activeIndex = index;
-                          });
-                        },
-                      ),
-                      itemBuilder: (context, index, page) {
-                        return ClipRRect(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(12)),
-                          child: CachedNetworkImage(
-                            imageUrl: widget.homeController.banners[index]
-                                ['image'],
-                            // width: width,
-                            // height: 350,
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) {
-                              return const CustomLoadingWidget();
-                            },
-                          ),
-                        );
-                      }),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 12),
-                    child: CustomAnimatedSmoothIndicator(
-                      count: widget.homeController.banners.length,
-                      activeIndex: _activeIndex,
-                      isBlack: true,
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CarouselSlider.builder(
+                    itemCount: widget.homeController.banners.length,
+                    options: CarouselOptions(
+                      height: 361,
+                      enlargeCenterPage: true,
+                      autoPlay: true,
+                      viewportFraction: 1,
+                      enableInfiniteScroll: false,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          _activeIndex = index;
+                        });
+                      },
                     ),
+                    itemBuilder: (context, index, page) {
+                      return CachedNetworkImage(
+                        imageUrl: widget.homeController.banners[index]['image'],
+                        width: width,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) {
+                          return const CustomLoadingWidget();
+                        },
+                      );
+                    }),
+                Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: CustomAnimatedSmoothIndicator(
+                    count: widget.homeController.banners.length,
+                    activeIndex: _activeIndex,
+                    isBlack: true,
                   ),
-                ],
-              ),
+                ),
+              ],
             );
           }),
           const SizedBox(
