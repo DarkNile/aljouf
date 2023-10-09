@@ -497,12 +497,17 @@ class _CustomProductCardState extends State<CustomProductCard> {
                             text:
                                 '${double.parse(widget.product.price.toString()).toStringAsFixed(2)} ',
                             style: TextStyle(
-                              fontSize: widget.product.special != 0 ? 14 : 16,
-                              fontWeight: widget.product.special != 0
+                              fontSize: widget.product.special != null &&
+                                      widget.product.special != 0
+                                  ? 14
+                                  : 16,
+                              fontWeight: widget.product.special != null &&
+                                      widget.product.special != 0
                                   ? FontWeight.w400
                                   : FontWeight.w600,
                               color: Colors.black,
-                              decoration: widget.product.special != 0
+                              decoration: widget.product.special != null &&
+                                      widget.product.special != 0
                                   ? TextDecoration.lineThrough
                                   : TextDecoration.none,
                             ),
@@ -510,14 +515,18 @@ class _CustomProductCardState extends State<CustomProductCard> {
                           TextSpan(
                             text: 'riyal'.tr,
                             style: TextStyle(
-                              fontSize: widget.product.special != 0 ? 10 : 12,
+                              fontSize: widget.product.special != null &&
+                                      widget.product.special != 0
+                                  ? 10
+                                  : 12,
                               color: Colors.black,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
                         ]),
                       ),
-                      if (widget.product.special != 0)
+                      if (widget.product.special != null &&
+                          widget.product.special != 0)
                         RichText(
                           text: TextSpan(children: [
                             TextSpan(
@@ -660,28 +669,39 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                         '${double.parse(widget.product.price.toString()).toStringAsFixed(2)} ',
                                     style: TextStyle(
                                       fontSize:
-                                          widget.product.special != 0 ? 14 : 16,
-                                      fontWeight: widget.product.special != 0
-                                          ? FontWeight.w400
-                                          : FontWeight.w600,
+                                          widget.product.special != null &&
+                                                  widget.product.special != 0
+                                              ? 14
+                                              : 16,
+                                      fontWeight:
+                                          widget.product.special != null &&
+                                                  widget.product.special != 0
+                                              ? FontWeight.w400
+                                              : FontWeight.w600,
                                       color: Colors.black,
-                                      decoration: widget.product.special != 0
-                                          ? TextDecoration.lineThrough
-                                          : TextDecoration.none,
+                                      decoration:
+                                          widget.product.special != null &&
+                                                  widget.product.special != 0
+                                              ? TextDecoration.lineThrough
+                                              : TextDecoration.none,
                                     ),
                                   ),
                                   TextSpan(
                                     text: 'riyal'.tr,
                                     style: TextStyle(
                                       fontSize:
-                                          widget.product.special != 0 ? 10 : 12,
+                                          widget.product.special != null &&
+                                                  widget.product.special != 0
+                                              ? 10
+                                              : 12,
                                       color: Colors.black,
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
                                 ]),
                               ),
-                              if (widget.product.special != 0)
+                              if (widget.product.special != null &&
+                                  widget.product.special != 0)
                                 RichText(
                                   text: TextSpan(children: [
                                     TextSpan(

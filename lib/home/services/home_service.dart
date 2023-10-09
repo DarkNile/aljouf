@@ -17,7 +17,7 @@ class HomeService {
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.get(
-      Uri.parse('$baseUrl route=feed/rest_api/banners&id=$id&language=$lang'),
+      Uri.parse('$baseUrl route=feed/rest_api/banners&id=$id&language=ar'),
       headers: {
         'Accept': 'application/json',
         // 'Authorization': 'Bearer $token',

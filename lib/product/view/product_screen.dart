@@ -311,35 +311,42 @@ class _ProductScreenState extends State<ProductScreen>
                                                   .toString())
                                               .toStringAsFixed(2),
                                           style: TextStyle(
-                                            fontSize:
-                                                widget.product.special != 0
-                                                    ? 16
-                                                    : 18,
-                                            fontWeight:
-                                                widget.product.special != 0
-                                                    ? FontWeight.w400
-                                                    : FontWeight.w600,
+                                            fontSize: widget.product.special !=
+                                                        null &&
+                                                    widget.product.special != 0
+                                                ? 16
+                                                : 18,
+                                            fontWeight: widget
+                                                            .product.special !=
+                                                        null &&
+                                                    widget.product.special != 0
+                                                ? FontWeight.w400
+                                                : FontWeight.w600,
                                             color: Colors.black,
-                                            decoration:
-                                                widget.product.special != 0
-                                                    ? TextDecoration.lineThrough
-                                                    : TextDecoration.none,
+                                            decoration: widget
+                                                            .product.special !=
+                                                        null &&
+                                                    widget.product.special != 0
+                                                ? TextDecoration.lineThrough
+                                                : TextDecoration.none,
                                           ),
                                         ),
                                         TextSpan(
                                           text: ' ${'riyal'.tr}',
                                           style: TextStyle(
-                                            fontSize:
-                                                widget.product.special != 0
-                                                    ? 12
-                                                    : 14,
+                                            fontSize: widget.product.special !=
+                                                        null &&
+                                                    widget.product.special != 0
+                                                ? 12
+                                                : 14,
                                             color: Colors.black,
                                             fontWeight: FontWeight.w400,
                                           ),
                                         ),
                                       ]),
                                     ),
-                                    if (widget.product.special != 0)
+                                    if (widget.product.special != null &&
+                                        widget.product.special != 0)
                                       RichText(
                                         text: TextSpan(children: [
                                           TextSpan(
@@ -378,7 +385,8 @@ class _ProductScreenState extends State<ProductScreen>
                                       ),
                                     ),
                                     TextSpan(
-                                      text: widget.product.special != 0 &&
+                                      text: widget.product.special != null &&
+                                              widget.product.special != 0 &&
                                               !widget.isFromCart
                                           ? ' ${double.parse(widget.product.specialExcludingTax.toString()).toStringAsFixed(2)} '
                                           : ' ${double.parse(widget.product.priceExcludingTax.toString()).toStringAsFixed(2)} ',
