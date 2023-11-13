@@ -339,7 +339,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                     },
                     onConfirmOrderTap: () async {
                       if (_checkoutController.order!.paymentCode! ==
-                          'payfort_fort') {
+                          'paytabs_all') {
                         Get.to(() => PaymentWebviewScreen(
                               orderId: _checkoutController.order!.orderId!,
                               email: _checkoutController.order!.email!,
