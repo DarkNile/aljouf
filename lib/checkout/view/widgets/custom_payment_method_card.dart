@@ -44,7 +44,7 @@ class CustomPaymentMethodCard extends StatelessWidget {
             const SizedBox(
               width: 8,
             ),
-            if (paymentMethod.code == 'payfort_fort')
+            if (paymentMethod.code == 'paytabs_all')
               Image.asset(
                 'assets/images/cards.png',
                 height: 36,

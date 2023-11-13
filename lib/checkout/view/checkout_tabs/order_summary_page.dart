@@ -298,7 +298,7 @@ class OrderSummaryPage extends StatelessWidget {
                         height: 20,
                       ),
                       if (checkoutController.order!.paymentCode ==
-                          'payfort_fort')
+                          'paytabs_all')
                         Image.asset(
                           'assets/images/cards.png',
                           height: 36,

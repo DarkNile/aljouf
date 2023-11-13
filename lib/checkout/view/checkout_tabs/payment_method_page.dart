@@ -56,7 +56,7 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                 itemCount: Platform.isIOS
                     ? widget.checkoutController.paymentMethods.length
                     : widget.checkoutController.paymentMethods
-                        .where((element) => element.code == 'payfort_fort')
+                        .where((element) => element.code == 'paytabs_all')
                         .toList()
                         .length,
                 separatorBuilder: (context, index) {

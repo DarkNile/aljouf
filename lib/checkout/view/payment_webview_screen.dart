@@ -28,7 +28,7 @@ class PaymentWebviewScreen extends StatelessWidget {
           ..setJavaScriptMode(JavaScriptMode.unrestricted)
           ..loadRequest(
             Uri.parse(
-                'https://aljouf.com/index.php?route==rest/confirm/redirect_payfort&order_id=$orderId'),
+                'https://aljouf.com/index.php?route==rest/confirm/redirect_paytabs&order_id=$orderId'),
           )
           ..setNavigationDelegate(
             NavigationDelegate(
