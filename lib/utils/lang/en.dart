@@ -205,4 +205,5 @@ const Map<String, String> en = {
   'rating': 'Rate Now',
   'emailMarketing':
       'Please check your info as well as your email in order to complete your order',
+  'paymentFailed': 'Payment Failed!',
 };

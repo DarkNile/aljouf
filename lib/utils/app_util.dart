@@ -93,78 +93,81 @@ class AppUtil {
         context: context,
         barrierDismissible: barrierDismissible,
         builder: (context) {
-          return StatefulBuilder(builder: (context, setState) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AlertDialog(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  title: title is Widget
-                      ? title
-                      : Column(
-                          children: [
-                            if (showClose)
-                              Align(
-                                alignment: AppUtil.rtlDirection(context)
-                                    ? Alignment.topRight
-                                    : Alignment.topLeft,
-                                child: InkWell(
-                                  onTap: () {
-                                    Get.back();
-                                  },
-                                  child: SvgPicture.asset(
-                                      'assets/icons/close.svg'),
+          return PopScope(
+            canPop: false,
+            child: StatefulBuilder(builder: (context, setState) {
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  AlertDialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                    title: title is Widget
+                        ? title
+                        : Column(
+                            children: [
+                              if (showClose)
+                                Align(
+                                  alignment: AppUtil.rtlDirection(context)
+                                      ? Alignment.topRight
+                                      : Alignment.topLeft,
+                                  child: InkWell(
+                                    onTap: () {
+                                      Get.back();
+                                    },
+                                    child: SvgPicture.asset(
+                                        'assets/icons/close.svg'),
+                                  ),
                                 ),
+                              if (showClose)
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                              CustomText(
+                                text: title,
+                                textAlign: TextAlign.center,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                height: 2,
+                                color: Colors.black,
                               ),
-                            if (showClose)
-                              const SizedBox(
-                                height: 8,
-                              ),
-                            CustomText(
-                              text: title,
-                              textAlign: TextAlign.center,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              height: 2,
-                              color: jadeGreen,
-                            ),
-                          ],
-                        ),
-                  titlePadding: title is String && title.isEmpty
-                      ? const EdgeInsets.all(0)
-                      : null,
-                  content: SingleChildScrollView(
-                    child: ListBody(
-                      children: dialogBody,
+                            ],
+                          ),
+                    titlePadding: title is String && title.isEmpty
+                        ? const EdgeInsets.all(0)
+                        : null,
+                    content: SingleChildScrollView(
+                      child: ListBody(
+                        children: dialogBody,
+                      ),
                     ),
                   ),
-                ),
-                // if (showClose)
-                //   Material(
-                //     color: Colors.transparent,
-                //     child: InkWell(
-                //       onTap: () {
-                //         Get.back();
-                //       },
-                //       child: Container(
-                //         height: 35,
-                //         width: 35,
-                //         decoration: BoxDecoration(
-                //             borderRadius: BorderRadius.circular(20),
-                //             color: Colors.transparent,
-                //             border: Border.all(color: Colors.white)),
-                //         child: const Icon(
-                //           Icons.close,
-                //           color: Colors.white,
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-              ],
-            );
-          });
+                  // if (showClose)
+                  //   Material(
+                  //     color: Colors.transparent,
+                  //     child: InkWell(
+                  //       onTap: () {
+                  //         Get.back();
+                  //       },
+                  //       child: Container(
+                  //         height: 35,
+                  //         width: 35,
+                  //         decoration: BoxDecoration(
+                  //             borderRadius: BorderRadius.circular(20),
+                  //             color: Colors.transparent,
+                  //             border: Border.all(color: Colors.white)),
+                  //         child: const Icon(
+                  //           Icons.close,
+                  //           color: Colors.white,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                ],
+              );
+            }),
+          );
         });
   }
 

@@ -1,4 +1,5 @@
 import 'package:aljouf/home/controllers/home_controller.dart';
+import 'package:aljouf/utils/app_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_paytabs_bridge/BaseBillingShippingInfo.dart';
 import 'package:flutter_paytabs_bridge/PaymentSdkConfigurationDetails.dart';
@@ -10,7 +11,6 @@ import 'package:aljouf/checkout/view/checkout_tabs/order_summary_page.dart';
 import 'package:aljouf/checkout/view/checkout_tabs/payment_method_page.dart';
 import 'package:aljouf/checkout/view/checkout_tabs/shipping_address_page.dart';
 import 'package:aljouf/checkout/view/checkout_tabs/shipping_method_page.dart';
-import 'package:aljouf/checkout/view/payment_webview_screen.dart';
 import 'package:aljouf/checkout/view/thank_you_screen.dart';
 import 'package:aljouf/constants/colors.dart';
 import 'package:aljouf/profile/controllers/profile_controller.dart';
@@ -338,13 +338,14 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                       _tabController.animateTo(2);
                     },
                     onConfirmOrderTap: () async {
+                      print(_checkoutController.order!.paymentCode!);
                       if (_checkoutController.order!.paymentCode! ==
                           'paytabs_all') {
-                        Get.to(() => PaymentWebviewScreen(
-                              orderId: _checkoutController.order!.orderId!,
-                              email: _checkoutController.order!.email!,
-                              checkoutController: _checkoutController,
-                            ));
+                        payWithVisa(
+                          double.parse(_checkoutController.order!.total
+                              .toStringAsFixed(2)),
+                          _checkoutController.order!.orderId!.toString(),
+                        );
                       } else {
                         applePay(
                           double.parse(_checkoutController.order!.total
@@ -361,6 +362,76 @@ class _CheckoutScreenState extends State<CheckoutScreen>
         ],
       ),
     );
+  }
+
+  void payWithVisa(double amount, String orderId) {
+    print('amount $amount');
+    print('orderId $orderId');
+    var configuration = PaymentSdkConfigurationDetails(
+      profileId: "64604",
+      serverKey: "SZJNMJHBT2-J6JRLZ2JJW-BBT62LGDMR",
+      clientKey: "CVKMT9-VTRB6G-6RB9M6-DTDQG6",
+      cartId: orderId,
+      cartDescription: "Pay with Card",
+      merchantName: "Al-Jouf Agricultural Development Company",
+      screentTitle: "Pay with Card",
+      locale: PaymentSdkLocale.AR,
+      amount: amount,
+      currencyCode: "SAR",
+      merchantCountryCode: "SA",
+      billingDetails: BillingDetails(
+        '${_checkoutController.order!.shippingFirstName!} ${_checkoutController.order!.shippingLastName!}',
+        _checkoutController.order!.email!,
+        _checkoutController.order!.phone!,
+        _checkoutController.order!.shippingAddress!,
+        'SA',
+        _checkoutController.order!.shippingCity!,
+        _checkoutController.order!.shippingZone!,
+        '',
+      ),
+      shippingDetails: ShippingDetails(
+        '${_checkoutController.order!.shippingFirstName!} ${_checkoutController.order!.shippingLastName!}',
+        _checkoutController.order!.email!,
+        _checkoutController.order!.phone!,
+        _checkoutController.order!.shippingAddress!,
+        'SA',
+        _checkoutController.order!.shippingCity!,
+        _checkoutController.order!.shippingZone!,
+        '',
+      ),
+    );
+    FlutterPaytabsBridge.startCardPayment(configuration, (event) {
+      print(event);
+      setState(() {
+        setState(() {
+          if (event["status"] == "success") {
+            var transactionDetails = event["data"];
+            print(transactionDetails);
+            print('${transactionDetails["isSuccess"]}');
+            if (transactionDetails["isSuccess"]) {
+              print("successful transaction");
+              _checkoutController.saveOrderToDatabase(
+                order: _checkoutController.order!,
+              );
+              Get.off(() => ThankYouScreen(
+                    checkOutController: _checkoutController,
+                    orderId: _checkoutController.order!.orderId!,
+                    email: _checkoutController.order!.email!,
+                  ));
+            } else {
+              print("failed transaction");
+              AppUtil.errorToast(context, 'paymentFailed'.tr);
+            }
+          } else if (event["status"] == "error") {
+            // Handle error here.
+            print(event["status"]);
+          } else if (event["status"] == "event") {
+            // Handle cancel events here.
+            print(event["status"]);
+          }
+        });
+      });
+    });
   }
 
   void applePay(double amount, String orderId) {
@@ -420,6 +491,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                   ));
             } else {
               print("failed transaction");
+              AppUtil.errorToast(context, 'paymentFailed'.tr);
             }
           } else if (event["status"] == "error") {
             // Handle error here.
