@@ -201,4 +201,5 @@ const Map<String, String> ar = {
   'rating': 'قيم الآن',
   'emailMarketing':
       'يرجى التحقق من معلوماتك وكذلك بريدك الإلكتروني لإكمال طلبك',
+  'paymentFailed': 'فشل عملية الدفع!',
 };
