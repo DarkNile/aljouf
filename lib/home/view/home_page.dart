@@ -167,9 +167,11 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               onPressed: () async {
-                await launchUrlString(
-                  value.appURL!,
-                );
+                if (await canLaunchUrlString(value.appURL!)) {
+                  await launchUrlString(
+                    value.appURL!,
+                  );
+                }
               },
               child: CustomText(
                 text: 'updateNow'.tr,
