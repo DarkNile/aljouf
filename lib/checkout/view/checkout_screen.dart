@@ -241,6 +241,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                         if (context.mounted) {
                           _checkoutController.getShippingMethods(
                               context: context);
+                          _checkoutController.getShippingRate();
                         }
                         setState(() {
                           _tabIndex = 1;
@@ -251,7 +252,8 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                   );
                 }),
                 Obx(() {
-                  if (_checkoutController.isShippingMethodsLoading.value) {
+                  if (_checkoutController.isShippingMethodsLoading.value ||
+                      _checkoutController.isShippingRateLoading.value) {
                     return const Center(
                       child: CircularProgressIndicator(),
                     );
@@ -259,11 +261,25 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                   return ShippingMethodPage(
                     checkoutController: _checkoutController,
                     onNextTap: (checkedIndex) async {
+                      String shippingRate = '';
+                      if (_checkoutController.shippingMethods[checkedIndex]
+                          .quote.first.code.isNotEmpty) {
+                        shippingRate = _checkoutController
+                            .shippingMethods[checkedIndex].quote.first.code;
+                      } else {
+                        if (_checkoutController.total.value >=
+                            _checkoutController.shippingRate.value.toDouble()) {
+                          shippingRate = 'free.free';
+                        } else {
+                          shippingRate = 'aramex.aramex';
+                        }
+                      }
+                      print('Checkout Shipping Rate: $shippingRate');
+                      print('Checkout Total ${_checkoutController.total}');
                       final isSuccess =
                           await _checkoutController.addShippingMethod(
                         context: context,
-                        shippingMethodCode: _checkoutController
-                            .shippingMethods[checkedIndex].quote.first.code,
+                        shippingMethodCode: shippingRate,
                       );
                       if (isSuccess) {
                         if (context.mounted) {
