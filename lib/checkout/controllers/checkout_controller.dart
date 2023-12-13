@@ -29,6 +29,22 @@ class CheckoutController extends GetxController {
   var cartItems = 0.obs;
   var isCouponAdded = false.obs;
   var couponController = TextEditingController().obs;
+  var isShippingRateLoading = false.obs;
+  var shippingRate = 0.obs;
+
+  Future<int?> getShippingRate() async {
+    try {
+      isShippingRateLoading(true);
+      final data = await CheckoutService.getShippingRate();
+      shippingRate(data);
+      return shippingRate.value;
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isShippingRateLoading(false);
+    }
+  }
 
   Future<bool?> showRatingApp() async {
     try {
