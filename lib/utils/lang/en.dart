@@ -134,7 +134,7 @@ const Map<String, String> en = {
   'sameShippingPaymentAddress':
       'My shipping address and payment address are the same',
   'shippingMethod': 'Shipping Method',
-  'chooseShippingMethod': 'Choose one of the following shipping methods',
+  'chooseShippingMethod': 'Choose shipping method',
   'paymentMethod': 'Payment Method',
   'choosePaymentMethod': 'Choose one of the following payment methods',
   'orderSummary': 'Order Summary',
@@ -152,7 +152,7 @@ const Map<String, String> en = {
   'noDescription': 'There are no specifications',
   'productAvailable': 'Product is available',
   'productNotAvailable': 'Product isn\'t available',
-  'shippingThroughAramex': 'Shipping through Aramex',
+  'shippingThroughAramex': 'Shipping through',
   'noShippingMethod': 'Please select a shipping method',
   'noPaymentMethod': 'Please select a payment method',
   'creditCards': 'Credit Cards',

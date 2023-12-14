@@ -246,7 +246,10 @@ class OrderSummaryPage extends StatelessWidget {
                           ),
                           if (checkoutController.order!.shippingCode ==
                               'aramex.aramex')
-                            Image.asset('assets/images/aramex.png'),
+                            Image.asset(
+                              'assets/images/saee_aramex.png',
+                              width: 100,
+                            ),
                         ],
                       ),
                     ],

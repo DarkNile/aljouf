@@ -262,20 +262,22 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                     checkoutController: _checkoutController,
                     onNextTap: (checkedIndex) async {
                       String shippingRate = '';
-                      if (_checkoutController.shippingMethods[checkedIndex]
-                          .quote.first.code.isNotEmpty) {
-                        shippingRate = _checkoutController
-                            .shippingMethods[checkedIndex].quote.first.code;
+                      // if (_checkoutController.shippingMethods[checkedIndex]
+                      //     .quote.first.code.isNotEmpty) {
+                      //   shippingRate = _checkoutController
+                      //       .shippingMethods[checkedIndex].quote.first.code;
+                      // } else {
+                      if (_checkoutController.total.value >=
+                          _checkoutController.shippingRate.value.toDouble()) {
+                        shippingRate = 'free.free';
                       } else {
-                        if (_checkoutController.total.value >=
-                            _checkoutController.shippingRate.value.toDouble()) {
-                          shippingRate = 'free.free';
-                        } else {
-                          shippingRate = 'aramex.aramex';
-                        }
+                        shippingRate = 'aramex.aramex';
                       }
-                      print('Checkout Shipping Rate: $shippingRate');
+                      //   }
                       print('Checkout Total ${_checkoutController.total}');
+                      print(
+                          'Max Shipping Cost: ${_checkoutController.shippingRate.value.toDouble()}');
+                      print('Checkout Shipping Rate: $shippingRate');
                       final isSuccess =
                           await _checkoutController.addShippingMethod(
                         context: context,
@@ -403,7 +405,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
         'SA',
         _checkoutController.order!.shippingCity!,
         _checkoutController.order!.shippingZone!,
-        '',
+        _checkoutController.order!.shippingZone!,
       ),
       shippingDetails: ShippingDetails(
         '${_checkoutController.order!.shippingFirstName!} ${_checkoutController.order!.shippingLastName!}',
@@ -413,7 +415,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
         'SA',
         _checkoutController.order!.shippingCity!,
         _checkoutController.order!.shippingZone!,
-        '',
+        _checkoutController.order!.shippingZone!,
       ),
     );
     FlutterPaytabsBridge.startCardPayment(configuration, (event) {
