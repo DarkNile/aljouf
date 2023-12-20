@@ -206,4 +206,5 @@ const Map<String, String> en = {
   'emailMarketing':
       'Please check your info as well as your email in order to complete your order',
   'paymentFailed': 'Payment Failed!',
+  'warning': 'Warning',
 };

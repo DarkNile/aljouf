@@ -202,4 +202,5 @@ const Map<String, String> ar = {
   'emailMarketing':
       'يرجى التحقق من معلوماتك وكذلك بريدك الإلكتروني لإكمال طلبك',
   'paymentFailed': 'فشل عملية الدفع!',
+  'warning': 'تنبيه',
 };
