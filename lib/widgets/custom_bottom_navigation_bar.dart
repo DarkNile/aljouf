@@ -1,3 +1,4 @@
+import 'package:aljouf/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
       currentIndex: currentIndex,
       type: BottomNavigationBarType.fixed,
       unselectedItemColor: Colors.grey,
-      selectedItemColor: Colors.black,
+      selectedItemColor: secondaryGreen,
       selectedFontSize: 10,
       unselectedFontSize: 10,
       selectedLabelStyle: const TextStyle(
@@ -35,15 +36,16 @@ class CustomBottomNavigationBar extends StatelessWidget {
             icon: SvgPicture.asset(
               'assets/icons/home.svg',
               colorFilter: ColorFilter.mode(
-                  currentIndex == 0 ? Colors.black : Colors.grey,
-                  BlendMode.srcIn),
+                currentIndex == 0 ? secondaryGreen : Colors.grey,
+                BlendMode.srcIn,
+              ),
             ),
             label: 'home'.tr),
         BottomNavigationBarItem(
             icon: SvgPicture.asset(
               'assets/icons/category.svg',
               colorFilter: ColorFilter.mode(
-                  currentIndex == 1 ? Colors.black : Colors.grey,
+                  currentIndex == 1 ? secondaryGreen : Colors.grey,
                   BlendMode.srcIn),
             ),
             label: 'categories'.tr),
@@ -51,7 +53,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             icon: SvgPicture.asset(
               'assets/icons/order.svg',
               colorFilter: ColorFilter.mode(
-                  currentIndex == 2 ? Colors.black : Colors.grey,
+                  currentIndex == 2 ? secondaryGreen : Colors.grey,
                   BlendMode.srcIn),
             ),
             label: 'orders'.tr),
@@ -59,7 +61,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             icon: SvgPicture.asset(
               'assets/icons/favorite.svg',
               colorFilter: ColorFilter.mode(
-                  currentIndex == 3 ? Colors.black : Colors.grey,
+                  currentIndex == 3 ? secondaryGreen : Colors.grey,
                   BlendMode.srcIn),
             ),
             label: 'favorites'.tr),
@@ -67,7 +69,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
             icon: SvgPicture.asset(
               'assets/icons/profile.svg',
               colorFilter: ColorFilter.mode(
-                  currentIndex == 4 ? Colors.black : Colors.grey,
+                  currentIndex == 4 ? secondaryGreen : Colors.grey,
                   BlendMode.srcIn),
             ),
             label: 'profile'.tr),

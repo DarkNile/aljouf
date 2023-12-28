@@ -44,7 +44,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
       centerTitle: true,
       title: Image.asset(
         'assets/images/logo.png',
-        height: 80,
+        height: 100,
         width: 100,
       ),
       actions: [
@@ -58,7 +58,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             children: [
               const Icon(
                 Icons.shopping_cart_outlined,
-                color: Colors.black,
+                color: secondaryGreen,
                 size: 24,
               ),
               Positioned.directional(
@@ -71,7 +71,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   alignment: Alignment.center,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: yellow,
+                    color: secondaryGreen,
                   ),
                   child: Obx(() {
                     return CustomText(
@@ -163,7 +163,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             },
             icon: const Icon(
               Icons.search_outlined,
-              color: Colors.black,
+              color: secondaryGreen,
               size: 24,
             )),
         if (widget.showBackIcon)
@@ -173,7 +173,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             },
             icon: const Icon(
               Icons.arrow_forward_outlined,
-              color: Colors.black,
+              color: secondaryGreen,
               size: 24,
             ),
           ),
@@ -184,7 +184,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
         },
         icon: const Icon(
           Icons.menu,
-          color: Colors.black,
+          color: secondaryGreen,
           size: 24,
         ),
       ),

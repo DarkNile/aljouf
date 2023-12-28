@@ -111,8 +111,9 @@ class _CustomProductCardState extends State<CustomProductCard> {
                             widget.product.fav!
                                 ? Icons.favorite
                                 : Icons.favorite_border,
-                            color:
-                                widget.product.fav! ? vermillion : greenAccent,
+                            color: widget.product.fav!
+                                ? vermillion
+                                : secondaryGreen,
                           ),
                         ),
                       ),
@@ -462,7 +463,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                             },
                             child: const Icon(
                               Icons.add_shopping_cart,
-                              color: greenAccent,
+                              color: secondaryGreen,
                             ),
                           ),
                         ),
@@ -484,7 +485,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                           fontWeight: FontWeight.w400,
                           maxlines: 2,
                           textOverflow: TextOverflow.ellipsis,
-                          color: Colors.black,
+                          color: black,
                           height: 1.5,
                         ),
                       ),
@@ -505,7 +506,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                       widget.product.special != 0
                                   ? FontWeight.w400
                                   : FontWeight.w600,
-                              color: Colors.black,
+                              color: primaryGreen,
                               decoration: widget.product.special != null &&
                                       widget.product.special != 0
                                   ? TextDecoration.lineThrough
@@ -519,7 +520,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                       widget.product.special != 0
                                   ? 10
                                   : 12,
-                              color: Colors.black,
+                              color: primaryGreen,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -597,7 +598,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                     : Icons.favorite_border,
                                 color: widget.product.fav!
                                     ? vermillion
-                                    : greenAccent,
+                                    : secondaryGreen,
                               ),
                             ),
                           ),
@@ -644,7 +645,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                           fontWeight: FontWeight.w400,
                           maxlines: 2,
                           textOverflow: TextOverflow.ellipsis,
-                          color: Colors.black,
+                          color: black,
                           height: 1.5,
                         ),
                       ),
@@ -678,7 +679,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                                   widget.product.special != 0
                                               ? FontWeight.w400
                                               : FontWeight.w600,
-                                      color: Colors.black,
+                                      color: primaryGreen,
                                       decoration:
                                           widget.product.special != null &&
                                                   widget.product.special != 0
@@ -694,7 +695,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                                   widget.product.special != 0
                                               ? 10
                                               : 12,
-                                      color: Colors.black,
+                                      color: primaryGreen,
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),
@@ -1043,7 +1044,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                               },
                               child: const Icon(
                                 Icons.add_shopping_cart,
-                                color: greenAccent,
+                                color: secondaryGreen,
                               ),
                             ),
                         ],
