@@ -71,7 +71,7 @@ class CategoryScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           child: CustomOutlinedButton(
               backgroundColor: Colors.white,
-              foregroundColor: Colors.black,
+              foregroundColor: black,
               onPressed: () {
                 Get.to(
                   () => ProductsScreen(
@@ -86,7 +86,7 @@ class CategoryScreen extends StatelessWidget {
                 fontSize: 14,
                 fontWeight: FontWeight.w400,
                 textAlign: TextAlign.center,
-                color: green,
+                color: secondaryGreen,
               )),
         ),
       ],

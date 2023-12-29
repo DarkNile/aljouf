@@ -91,9 +91,9 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: _tabIndex > 0
-                            ? jadeGreen
+                            ? secondaryGreen
                             : _tabIndex == 0
-                                ? almostBlack
+                                ? black
                                 : Colors.white,
                         border: _tabIndex == 0 || _tabIndex > 0
                             ? null
@@ -118,9 +118,9 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: _tabIndex > 1
-                            ? jadeGreen
+                            ? secondaryGreen
                             : _tabIndex == 1
-                                ? almostBlack
+                                ? black
                                 : Colors.white,
                         border: _tabIndex == 1 || _tabIndex > 1
                             ? null
@@ -145,9 +145,9 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: _tabIndex > 2
-                            ? jadeGreen
+                            ? secondaryGreen
                             : _tabIndex == 2
-                                ? almostBlack
+                                ? black
                                 : Colors.white,
                         border: _tabIndex == 2 || _tabIndex > 2
                             ? null
@@ -172,9 +172,9 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: _tabIndex > 3
-                            ? jadeGreen
+                            ? secondaryGreen
                             : _tabIndex == 3
-                                ? almostBlack
+                                ? black
                                 : Colors.white,
                         border: _tabIndex == 3 || _tabIndex > 3
                             ? null

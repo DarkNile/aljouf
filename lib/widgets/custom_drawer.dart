@@ -132,7 +132,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               leadingIcon: 'category_drawer',
               trailing: Icon(
                 showCategories ? Icons.arrow_drop_down : Icons.arrow_right,
-                color: Colors.black,
+                color: secondaryGreen,
                 size: 28,
               ),
             ),
@@ -210,33 +210,33 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   icon: const Icon(
                     Icons.arrow_right,
                     size: 28,
-                    color: Colors.black,
+                    color: secondaryGreen,
                   ),
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.language),
-                    prefixIconColor: Colors.black,
+                    prefixIconColor: secondaryGreen,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4)),
                       borderSide: BorderSide(
-                        color: Colors.grey,
+                        color: secondaryGreen,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4)),
                       borderSide: BorderSide(
-                        color: Colors.grey,
+                        color: secondaryGreen,
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4)),
                       borderSide: BorderSide(
-                        color: Colors.grey,
+                        color: secondaryGreen,
                       ),
                     ),
                     disabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4)),
                       borderSide: BorderSide(
-                        color: Colors.grey,
+                        color: secondaryGreen,
                       ),
                     ),
                   ),

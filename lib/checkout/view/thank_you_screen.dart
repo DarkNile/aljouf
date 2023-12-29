@@ -124,7 +124,7 @@ class _ThankYouScreenState extends State<ThankYouScreen> {
                   },
                   icon: const Icon(
                     Icons.close,
-                    color: Colors.black,
+                    color: black,
                   ),
                 )
               ],

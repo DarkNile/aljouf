@@ -38,7 +38,7 @@ class CustomButton extends StatelessWidget {
             height ?? 48,
           ),
         ),
-        backgroundColor: MaterialStateProperty.all(color ?? green),
+        backgroundColor: MaterialStateProperty.all(color ?? secondaryGreen),
         foregroundColor: MaterialStateProperty.all(Colors.white),
       ),
       child: CustomText(

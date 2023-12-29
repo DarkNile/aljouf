@@ -70,14 +70,14 @@ class CustomCartItem extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
-                        color: almostBlack,
+                        color: black,
                       ),
                     ),
                     TextSpan(
                       text: ' ${'riyal'.tr}',
                       style: const TextStyle(
                         fontSize: 12,
-                        color: black51,
+                        color: black,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -104,7 +104,7 @@ class CustomCartItem extends StatelessWidget {
                             ),
                             child: const CustomText(
                               text: '+',
-                              color: black51,
+                              color: black,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -122,7 +122,7 @@ class CustomCartItem extends StatelessWidget {
                           ),
                           child: CustomText(
                             text: product.quantity,
-                            color: Colors.black,
+                            color: black,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
@@ -139,7 +139,7 @@ class CustomCartItem extends StatelessWidget {
                             ),
                             child: const CustomText(
                               text: '-',
-                              color: black51,
+                              color: black,
                               fontWeight: FontWeight.w400,
                             ),
                           ),

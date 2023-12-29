@@ -44,7 +44,7 @@ class ProfileScreen extends StatelessWidget {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 95,
-                  color: greenAccent,
+                  color: lightGreen,
                 ),
                 Positioned(
                     top: 16,
@@ -74,7 +74,7 @@ class ProfileScreen extends StatelessWidget {
                                   CustomText(
                                     text:
                                         '${profileController.user.value.firstName!} ${profileController.user.value.lastName!}',
-                                    color: Colors.black,
+                                    color: black,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -93,7 +93,7 @@ class ProfileScreen extends StatelessWidget {
                                   CustomText(
                                     text: profileController.user.value.phone!,
                                     textDirection: TextDirection.ltr,
-                                    color: Colors.black,
+                                    color: black,
                                     fontWeight: FontWeight.w600,
                                     fontSize: 12,
                                   ),
@@ -112,7 +112,7 @@ class ProfileScreen extends StatelessWidget {
                                       horizontal: 16,
                                     ),
                                     decoration: const BoxDecoration(
-                                        color: yellow,
+                                        color: secondaryGreen,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(4))),
                                     child: CustomText(
@@ -256,7 +256,7 @@ class ProfileScreen extends StatelessWidget {
               icon: 'delete',
               leading: const Icon(
                 Icons.person_off_outlined,
-                color: Colors.black,
+                color: black,
               ),
             ),
           ],

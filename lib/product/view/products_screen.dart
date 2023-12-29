@@ -668,7 +668,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                             padding: EdgeInsets.all(8.0),
                             child: Icon(
                               Icons.close,
-                              color: Colors.black,
+                              color: black,
                             ),
                           ),
                         )
@@ -683,7 +683,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     height: 2,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(2222222),
-                      color: Colors.black12.withOpacity(.07),
+                      color: black.withOpacity(.07),
                     ),
                   ),
                   SizedBox(
@@ -744,7 +744,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       width: w * .9,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Theme.of(context).primaryColor),
+                          color: secondaryGreen),
                       alignment: Alignment.center,
                       child: CustomText(
                         text: 'apply'.tr,

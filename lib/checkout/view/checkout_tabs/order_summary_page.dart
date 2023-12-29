@@ -64,13 +64,20 @@ class OrderSummaryPage extends StatelessWidget {
                             onTap: onEditPurchasesTap,
                             child: Row(
                               children: [
-                                SvgPicture.asset('assets/icons/edit.svg'),
+                                SvgPicture.asset(
+                                  'assets/icons/edit.svg',
+                                  colorFilter: const ColorFilter.mode(
+                                    secondaryGreen,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
                                 const SizedBox(
                                   width: 8,
                                 ),
                                 CustomText(
                                   text: 'edit'.tr,
                                   fontSize: 10,
+                                  color: secondaryGreen,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ],
@@ -129,13 +136,20 @@ class OrderSummaryPage extends StatelessWidget {
                             onTap: onEditAddressTap,
                             child: Row(
                               children: [
-                                SvgPicture.asset('assets/icons/edit.svg'),
+                                SvgPicture.asset(
+                                  'assets/icons/edit.svg',
+                                  colorFilter: const ColorFilter.mode(
+                                    secondaryGreen,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
                                 const SizedBox(
                                   width: 8,
                                 ),
                                 CustomText(
                                   text: 'edit'.tr,
                                   fontSize: 10,
+                                  color: secondaryGreen,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ],
@@ -155,7 +169,7 @@ class OrderSummaryPage extends StatelessWidget {
                       ),
                       CustomText(
                         text: checkoutController.order!.shippingAddress!,
-                        color: almostBlack,
+                        color: black,
                       ),
                       const SizedBox(
                         height: 8,
@@ -163,7 +177,7 @@ class OrderSummaryPage extends StatelessWidget {
                       CustomText(
                         text:
                             '${checkoutController.order!.shippingCity!} - ${checkoutController.order!.shippingZone!} - ${checkoutController.order!.shippingCountry!.tr}',
-                        color: almostBlack,
+                        color: black,
                         fontWeight: FontWeight.w500,
                       ),
                       const SizedBox(
@@ -172,14 +186,14 @@ class OrderSummaryPage extends StatelessWidget {
                       CustomText(
                         text:
                             '${checkoutController.order!.shippingFirstName!} ${checkoutController.order!.shippingLastName!}',
-                        color: almostBlack,
+                        color: black,
                       ),
                       const SizedBox(
                         height: 8,
                       ),
                       CustomText(
                         text: checkoutController.order!.phone!,
-                        color: almostBlack,
+                        color: black,
                         fontWeight: FontWeight.w600,
                       ),
                     ],
@@ -208,13 +222,20 @@ class OrderSummaryPage extends StatelessWidget {
                             onTap: onEditShippingTap,
                             child: Row(
                               children: [
-                                SvgPicture.asset('assets/icons/edit.svg'),
+                                SvgPicture.asset(
+                                  'assets/icons/edit.svg',
+                                  colorFilter: const ColorFilter.mode(
+                                    secondaryGreen,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
                                 const SizedBox(
                                   width: 8,
                                 ),
                                 CustomText(
                                   text: 'edit'.tr,
                                   fontSize: 10,
+                                  color: secondaryGreen,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ],
@@ -241,7 +262,7 @@ class OrderSummaryPage extends StatelessWidget {
                                 ? 'shippingThroughAramex'.tr
                                 // : checkoutController.order!.shippingCode!,
                                 : 'freeShipping'.tr,
-                            color: almostBlack,
+                            color: black,
                             fontWeight: FontWeight.w500,
                           ),
                           if (checkoutController.order!.shippingCode ==
@@ -278,13 +299,20 @@ class OrderSummaryPage extends StatelessWidget {
                             onTap: onEditPaymentTap,
                             child: Row(
                               children: [
-                                SvgPicture.asset('assets/icons/edit.svg'),
+                                SvgPicture.asset(
+                                  'assets/icons/edit.svg',
+                                  colorFilter: const ColorFilter.mode(
+                                    secondaryGreen,
+                                    BlendMode.srcIn,
+                                  ),
+                                ),
                                 const SizedBox(
                                   width: 8,
                                 ),
                                 CustomText(
                                   text: 'edit'.tr,
                                   fontSize: 10,
+                                  color: secondaryGreen,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ],
@@ -396,7 +424,7 @@ class OrderSummaryPage extends StatelessWidget {
                                       backgroundColor: MaterialStateProperty.all(
                                           checkoutController.isCouponAdded.value
                                               ? vermillion
-                                              : almostBlack),
+                                              : secondaryGreen),
                                       foregroundColor:
                                           MaterialStateProperty.all(
                                               Colors.white),

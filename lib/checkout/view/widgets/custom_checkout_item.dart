@@ -54,7 +54,7 @@ class CustomCheckoutItem extends StatelessWidget {
                 text: product.price,
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
-                color: Colors.black,
+                color: black,
               ),
               Row(
                 children: [

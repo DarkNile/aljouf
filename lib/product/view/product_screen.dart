@@ -157,7 +157,8 @@ class _ProductScreenState extends State<ProductScreen>
                                   onPressed: () {
                                     Get.back();
                                   },
-                                  icon: const Icon(Icons.arrow_back),
+                                  icon: const Icon(Icons.arrow_back,
+                                      color: secondaryGreen),
                                 ),
                                 IconButton(
                                   onPressed: () {
@@ -169,7 +170,7 @@ class _ProductScreenState extends State<ProductScreen>
                                     children: [
                                       const Icon(
                                         Icons.shopping_cart_outlined,
-                                        color: Colors.black,
+                                        color: secondaryGreen,
                                         size: 24,
                                       ),
                                       Positioned.directional(
@@ -233,13 +234,12 @@ class _ProductScreenState extends State<ProductScreen>
                                         }
                                       },
                                       child: Icon(
-                                        widget.product.fav!
-                                            ? Icons.favorite
-                                            : Icons.favorite_border,
-                                        color: widget.product.fav!
-                                            ? vermillion
-                                            : Colors.black,
-                                      ),
+                                          widget.product.fav!
+                                              ? Icons.favorite
+                                              : Icons.favorite_border,
+                                          color: widget.product.fav!
+                                              ? vermillion
+                                              : secondaryGreen),
                                     ),
                                     IconButton(
                                       onPressed: () async {
@@ -251,6 +251,7 @@ class _ProductScreenState extends State<ProductScreen>
                                       },
                                       icon: const Icon(
                                         Icons.share,
+                                        color: secondaryGreen,
                                       ),
                                     ),
                                   ],
@@ -322,7 +323,7 @@ class _ProductScreenState extends State<ProductScreen>
                                                     widget.product.special != 0
                                                 ? FontWeight.w400
                                                 : FontWeight.w600,
-                                            color: Colors.black,
+                                            color: black,
                                             decoration: widget
                                                             .product.special !=
                                                         null &&
@@ -339,7 +340,7 @@ class _ProductScreenState extends State<ProductScreen>
                                                     widget.product.special != 0
                                                 ? 12
                                                 : 14,
-                                            color: Colors.black,
+                                            color: black,
                                             fontWeight: FontWeight.w400,
                                           ),
                                         ),
@@ -541,6 +542,7 @@ class _ProductScreenState extends State<ProductScreen>
                   TabBar(
                     indicatorSize: TabBarIndicatorSize.tab,
                     indicatorWeight: 2,
+                    // indicatorColor: secondaryGreen,
                     labelPadding: const EdgeInsets.only(bottom: 18),
                     indicatorPadding:
                         const EdgeInsets.symmetric(horizontal: 16),
@@ -557,14 +559,14 @@ class _ProductScreenState extends State<ProductScreen>
                         fontSize: 12,
                         fontWeight:
                             _tabIndex == 0 ? FontWeight.w500 : FontWeight.w400,
-                        color: _tabIndex == 0 ? Colors.black : brownishGrey,
+                        color: _tabIndex == 0 ? black : brownishGrey,
                       ),
                       CustomText(
                         text: 'reviewsAndRatings'.tr,
                         fontSize: 12,
                         fontWeight:
                             _tabIndex == 1 ? FontWeight.w500 : FontWeight.w400,
-                        color: _tabIndex == 1 ? Colors.black : brownishGrey,
+                        color: _tabIndex == 1 ? black : brownishGrey,
                       ),
                     ],
                   ),
@@ -761,7 +763,7 @@ class _ProductScreenState extends State<ProductScreen>
                                                 Container(
                                                   color: Colors.grey,
                                                   height: 1,
-                                                  width: 99,
+                                                  width: 60, //99
                                                 ),
                                                 CustomText(
                                                   text: 'loginThrough'.tr,
@@ -772,7 +774,7 @@ class _ProductScreenState extends State<ProductScreen>
                                                 Container(
                                                   color: Colors.grey,
                                                   height: 1,
-                                                  width: 99,
+                                                  width: 60, //99
                                                 ),
                                               ],
                                             ),
@@ -922,6 +924,7 @@ class _ProductScreenState extends State<ProductScreen>
                                                   ),
                                                   CustomText(
                                                     text: 'joinUs'.tr,
+                                                    color: secondaryGreen,
                                                     fontWeight: FontWeight.w500,
                                                   ),
                                                 ],

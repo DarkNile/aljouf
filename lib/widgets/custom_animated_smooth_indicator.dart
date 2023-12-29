@@ -23,7 +23,7 @@ class CustomAnimatedSmoothIndicator extends StatelessWidget {
           spacing: 8,
           dotDecoration: DotDecoration(
             color: isBlack
-                ? Colors.black.withOpacity(0.2)
+                ? black.withOpacity(0.2)
                 : Colors.white.withOpacity(0.5),
             width: 8,
             height: 8,

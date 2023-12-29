@@ -22,9 +22,9 @@ class CustomPaymentMethodCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: isChecked ? jadeGreen.withOpacity(0.06) : Colors.white,
+          color: isChecked ? secondaryGreen.withOpacity(0.06) : Colors.white,
           borderRadius: const BorderRadius.all(Radius.circular(4)),
-          border: Border.all(color: isChecked ? jadeGreen : darkGrey),
+          border: Border.all(color: isChecked ? secondaryGreen : darkGrey),
         ),
         padding: const EdgeInsets.all(18),
         child: Row(
@@ -34,7 +34,7 @@ class CustomPaymentMethodCard extends StatelessWidget {
             Transform.scale(
               scale: 1.2,
               child: Checkbox(
-                fillColor: MaterialStateProperty.all(jadeGreen),
+                fillColor: MaterialStateProperty.all(secondaryGreen),
                 checkColor: Colors.white,
                 value: isChecked,
                 shape: const CircleBorder(),

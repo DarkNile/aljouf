@@ -1,3 +1,4 @@
+import 'package:aljouf/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -63,8 +64,20 @@ class _ContactUsPageState extends State<ContactUsPage> {
                         Get.back();
                       },
                       child: AppUtil.rtlDirection(context)
-                          ? SvgPicture.asset('assets/icons/left_arrow.svg')
-                          : SvgPicture.asset('assets/icons/right_arrow.svg'),
+                          ? SvgPicture.asset(
+                              'assets/icons/left_arrow.svg',
+                              colorFilter: const ColorFilter.mode(
+                                secondaryGreen,
+                                BlendMode.srcIn,
+                              ),
+                            )
+                          : SvgPicture.asset(
+                              'assets/icons/right_arrow.svg',
+                              colorFilter: const ColorFilter.mode(
+                                secondaryGreen,
+                                BlendMode.srcIn,
+                              ),
+                            ),
                     ),
                   ],
                 ),

@@ -1,4 +1,5 @@
 import 'package:aljouf/auth/controllers/auth_controller.dart';
+import 'package:aljouf/constants/colors.dart';
 import 'package:aljouf/home/view/home_page.dart';
 import 'package:aljouf/utils/app_util.dart';
 import 'package:aljouf/widgets/custom_button.dart';
@@ -56,8 +57,20 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                         Get.back();
                       },
                       child: AppUtil.rtlDirection(context)
-                          ? SvgPicture.asset('assets/icons/left_arrow.svg')
-                          : SvgPicture.asset('assets/icons/right_arrow.svg'),
+                          ? SvgPicture.asset(
+                              'assets/icons/left_arrow.svg',
+                              colorFilter: const ColorFilter.mode(
+                                secondaryGreen,
+                                BlendMode.srcIn,
+                              ),
+                            )
+                          : SvgPicture.asset(
+                              'assets/icons/right_arrow.svg',
+                              colorFilter: const ColorFilter.mode(
+                                secondaryGreen,
+                                BlendMode.srcIn,
+                              ),
+                            ),
                     ),
                   ],
                 ),

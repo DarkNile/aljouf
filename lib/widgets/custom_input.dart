@@ -1,3 +1,4 @@
+import 'package:aljouf/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aljouf/utils/app_util.dart';
@@ -114,7 +115,7 @@ class CustomInput extends StatelessWidget {
                 topLeft: Radius.circular(radius),
                 bottomLeft: Radius.circular(radius),
                 bottomRight: Radius.circular(radius)),
-            borderSide: BorderSide(color: borderColor ?? Colors.black)),
+            borderSide: BorderSide(color: borderColor ?? black)),
       ),
     );
   }

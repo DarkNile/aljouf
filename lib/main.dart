@@ -1,3 +1,4 @@
+import 'package:aljouf/constants/colors.dart' as constants;
 import 'package:aljouf/firebase_options.dart';
 import 'package:aljouf/home/services/apps_flyer_service.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -79,10 +80,11 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Al Jouf',
       theme: ThemeData(
-        useMaterial3: false,
-        fontFamily: 'ReadexPro',
-        primarySwatch: primaryGreen,
-      ),
+          useMaterial3: false,
+          fontFamily: 'ReadexPro',
+          primarySwatch: primaryGreen,
+          progressIndicatorTheme: const ProgressIndicatorThemeData(
+              color: constants.secondaryGreen)),
       home: const SplashScreen(),
     );
   }

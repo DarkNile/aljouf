@@ -1,4 +1,5 @@
 import 'package:aljouf/checkout/controllers/checkout_controller.dart';
+import 'package:aljouf/constants/colors.dart';
 import 'package:aljouf/profile/controllers/profile_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -61,8 +62,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         Get.back();
                       },
                       child: AppUtil.rtlDirection(context)
-                          ? SvgPicture.asset('assets/icons/left_arrow.svg')
-                          : SvgPicture.asset('assets/icons/right_arrow.svg'),
+                          ? SvgPicture.asset(
+                              'assets/icons/left_arrow.svg',
+                              colorFilter: const ColorFilter.mode(
+                                secondaryGreen,
+                                BlendMode.srcIn,
+                              ),
+                            )
+                          : SvgPicture.asset(
+                              'assets/icons/right_arrow.svg',
+                              colorFilter: const ColorFilter.mode(
+                                secondaryGreen,
+                                BlendMode.srcIn,
+                              ),
+                            ),
                     ),
                   ],
                 ),
@@ -276,6 +289,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   title: 'signUp'.tr,
                 );
               }),
+              const SizedBox(
+                height: 14,
+              ),
             ],
           ),
         ),

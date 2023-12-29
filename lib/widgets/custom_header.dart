@@ -1,3 +1,4 @@
+import 'package:aljouf/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aljouf/widgets/custom_text.dart';
@@ -34,7 +35,7 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
         },
         icon: const Icon(
           Icons.arrow_back_outlined,
-          color: Colors.black,
+          color: secondaryGreen, // black,
           size: 24,
         ),
       ),

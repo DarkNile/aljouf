@@ -69,7 +69,7 @@ class LocationsPage extends StatelessWidget {
                 ),
                 trailing: const Icon(
                   Icons.location_on,
-                  color: Colors.black,
+                  color: black,
                 ),
               );
             });
