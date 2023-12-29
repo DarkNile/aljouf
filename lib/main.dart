@@ -79,6 +79,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Al Jouf',
       theme: ThemeData(
+        useMaterial3: false,
         fontFamily: 'ReadexPro',
         primarySwatch: primaryGreen,
       ),

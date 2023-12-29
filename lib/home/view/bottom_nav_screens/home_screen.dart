@@ -100,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             .name,
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
-                        color: greenAccent,
+                        color: primaryGreen,
                       ),
                       InkWell(
                         onTap: () {
@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: CustomText(
                           text: 'viewAll'.tr,
                           fontWeight: FontWeight.w500,
-                          color: greenAccent,
+                          color: primaryGreen,
                         ),
                       ),
                     ],
@@ -203,7 +203,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         text: 'organic'.tr,
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
-                        color: greenAccent,
+                        color: primaryGreen,
                       ),
                       InkWell(
                         onTap: () {
@@ -217,7 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: CustomText(
                           text: 'viewAll'.tr,
                           fontWeight: FontWeight.w500,
-                          color: greenAccent,
+                          color: primaryGreen,
                         ),
                       ),
                     ],
@@ -271,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         text: 'golden'.tr,
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
-                        color: greenAccent,
+                        color: primaryGreen,
                       ),
                       InkWell(
                         onTap: () {
@@ -285,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: CustomText(
                           text: 'viewAll'.tr,
                           fontWeight: FontWeight.w500,
-                          color: greenAccent,
+                          color: primaryGreen,
                         ),
                       ),
                     ],
@@ -339,7 +339,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         text: 'jofolia'.tr,
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
-                        color: greenAccent,
+                        color: primaryGreen,
                       ),
                       InkWell(
                         onTap: () {
@@ -353,7 +353,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: CustomText(
                           text: 'viewAll'.tr,
                           fontWeight: FontWeight.w500,
-                          color: greenAccent,
+                          color: primaryGreen,
                         ),
                       ),
                     ],
@@ -521,7 +521,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             .name,
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
-                        color: greenAccent,
+                        color: primaryGreen,
                       ),
                       InkWell(
                         onTap: () {
@@ -538,7 +538,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: CustomText(
                           text: 'viewAll'.tr,
                           fontWeight: FontWeight.w500,
-                          color: greenAccent,
+                          color: primaryGreen,
                         ),
                       ),
                     ],
@@ -624,7 +624,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             .name,
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
-                        color: greenAccent,
+                        color: primaryGreen,
                       ),
                       InkWell(
                         onTap: () {
@@ -641,7 +641,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: CustomText(
                           text: 'viewAll'.tr,
                           fontWeight: FontWeight.w500,
-                          color: greenAccent,
+                          color: primaryGreen,
                         ),
                       ),
                     ],

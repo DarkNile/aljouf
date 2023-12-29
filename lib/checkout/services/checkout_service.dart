@@ -11,6 +11,33 @@ import 'package:aljouf/constants/urls.dart';
 import 'package:aljouf/utils/app_util.dart';
 
 class CheckoutService {
+  static Future<int?> getShippingRate() async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final String? lang = getStorage.read('lang');
+    print(lang);
+    final response = await http.get(
+      Uri.parse(
+          '$baseUrl route=rest/shipping_address/getShippingRate&language=$lang'),
+      headers: {
+        "Accept": "application/json",
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
+        // 'Authorization': 'Bearer $token'
+      },
+    );
+    print('response status code: ${response.statusCode}');
+    if (jsonDecode(response.body)['success'] == 1) {
+      var data = jsonDecode(response.body)['data'];
+      print('data: $data');
+      print('Shipping Rate: ${data['shipping_rate']}');
+      return data['shipping_rate'];
+    } else {
+      return null;
+    }
+  }
+
   static Future<Cart?> getCartItems() async {
     final getStorage = GetStorage();
     final String? token = getStorage.read('token');

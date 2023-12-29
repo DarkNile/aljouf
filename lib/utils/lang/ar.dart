@@ -132,7 +132,7 @@ const Map<String, String> ar = {
   'next': 'التالي',
   'sameShippingPaymentAddress': 'عنوان الشحن و عنوان الدفع الخاص بي متطابق',
   'shippingMethod': 'طريقة الشحن',
-  'chooseShippingMethod': 'إختر إحدى طرق الشحن التالية',
+  'chooseShippingMethod': 'إختر طريقة الشحن',
   'paymentMethod': 'طريقة الدفع',
   'choosePaymentMethod': 'إختر إحدى طرق الدفع التالية',
   'orderSummary': 'ملخص الطلب',
@@ -150,7 +150,7 @@ const Map<String, String> ar = {
   'noDescription': 'لا يوجد مواصفات',
   'productAvailable': 'المنتج متوفر',
   'productNotAvailable': 'المنتج غير متوفر',
-  'shippingThroughAramex': 'شحن من خلال ارامكس',
+  'shippingThroughAramex': 'شحن من خلال',
   'noShippingMethod': 'الرجاء تحديد طريقة الشحن',
   'noPaymentMethod': 'الرجاء تحديد طريقة الدفع',
   'creditCards': 'بطاقات الائتمان',
@@ -201,4 +201,6 @@ const Map<String, String> ar = {
   'rating': 'قيم الآن',
   'emailMarketing':
       'يرجى التحقق من معلوماتك وكذلك بريدك الإلكتروني لإكمال طلبك',
+  'paymentFailed': 'فشل عملية الدفع!',
+  'warning': 'تنبيه',
 };

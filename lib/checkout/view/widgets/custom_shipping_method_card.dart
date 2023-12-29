@@ -73,7 +73,10 @@ class CustomShippingMethodCard extends StatelessWidget {
             ),
             const Spacer(),
             // if (shippingMethod.quote.first.code == 'aramex.aramex')
-            Image.asset('assets/images/aramex.png'),
+            Image.asset(
+              'assets/images/saee_aramex.png',
+              width: 100,
+            ),
           ],
         ),
       ),

@@ -1,4 +1,6 @@
 import 'package:aljouf/home/controllers/home_controller.dart';
+import 'package:aljouf/widgets/custom_loading_widget.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -244,7 +246,10 @@ class OrderSummaryPage extends StatelessWidget {
                           ),
                           if (checkoutController.order!.shippingCode ==
                               'aramex.aramex')
-                            Image.asset('assets/images/aramex.png'),
+                            Image.asset(
+                              'assets/images/saee_aramex.png',
+                              width: 100,
+                            ),
                         ],
                       ),
                     ],
@@ -432,9 +437,28 @@ class OrderSummaryPage extends StatelessWidget {
                             return Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                CustomText(
-                                    text: checkoutController
-                                        .order!.totals![index].title!),
+                                if (checkoutController
+                                    .order!.totals![index].title!
+                                    .startsWith('<'))
+                                  SizedBox(
+                                    width: 100,
+                                    child: CachedNetworkImage(
+                                      imageUrl: checkoutController
+                                          .order!.totals![index].title!
+                                          .split("<img src=")
+                                          .last
+                                          .split(" style")
+                                          .first
+                                          .replaceAll('"', ''),
+                                      placeholder: (context, url) {
+                                        return const CustomLoadingWidget();
+                                      },
+                                    ),
+                                  )
+                                else
+                                  CustomText(
+                                      text: checkoutController
+                                          .order!.totals![index].title!),
                                 CustomText(
                                   text: checkoutController
                                       .order!.totals![index].text!,

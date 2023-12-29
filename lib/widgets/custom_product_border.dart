@@ -22,7 +22,7 @@ class CustomProductBorder extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(16)),
           border: Border.all(
-            color: greenAccent.withOpacity(0.5),
+            color: secondaryGreen,
           ),
         ),
         child: child,
