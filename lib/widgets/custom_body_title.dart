@@ -25,7 +25,7 @@ class CustomBodyTitle extends StatelessWidget {
       ),
       width: MediaQuery.of(context).size.width,
       height: 40,
-      color: green,
+      color: secondaryGreen,
       child: CustomText(
         text: title,
         fontSize: fontSize ?? 14,

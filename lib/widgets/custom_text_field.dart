@@ -72,7 +72,7 @@ class CustomTextField extends StatelessWidget {
             }
           : null,
       autofocus: autofocus,
-      cursorColor: Colors.black,
+      cursorColor: black,
       decoration: InputDecoration(
         counterStyle: const TextStyle(fontSize: 0, height: 0),
         hintText: hintText,
@@ -93,7 +93,7 @@ class CustomTextField extends StatelessWidget {
             borderSide: BorderSide(color: Colors.grey, width: 1)),
         focusedBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(4)),
-            borderSide: BorderSide(color: Colors.black, width: 1)),
+            borderSide: BorderSide(color: black, width: 1)),
         errorBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(4)),
             borderSide: BorderSide(color: vermillion, width: 1)),

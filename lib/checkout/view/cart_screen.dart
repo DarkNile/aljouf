@@ -52,16 +52,15 @@ class _CartScreenState extends State<CartScreen> {
           text: 'shoppingCart'.tr,
           fontSize: 14,
           fontWeight: FontWeight.w500,
-          color: darkBlack,
+          color: black,
         ),
         leading: IconButton(
           onPressed: () {
             Get.back();
           },
-          icon: const Icon(
-            Icons.arrow_back_outlined,
-            color: darkBlack,
-          ),
+          icon: const Icon(Icons.arrow_back_outlined, color: secondaryGreen
+              // black,
+              ),
         ),
         actions: [
           InkWell(
@@ -81,13 +80,13 @@ class _CartScreenState extends State<CartScreen> {
               ),
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                border: Border.all(
-                  color: almostBlack,
-                ),
+                border: Border.all(color: secondaryGreen
+                    //  black,
+                    ),
               ),
               child: CustomText(
                 text: 'continueShopping'.tr,
-                color: almostBlack,
+                color: secondaryGreen,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -211,7 +210,7 @@ class _CartScreenState extends State<CartScreen> {
                 _checkoutController.cart!.products!.isNotEmpty)
               Container(
                 width: width,
-                height: height * 0.15,
+                height: height * 0.16,
                 alignment: Alignment.bottomCenter,
                 color: Colors.white,
                 padding: const EdgeInsets.all(16),
@@ -255,14 +254,14 @@ class _CartScreenState extends State<CartScreen> {
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
-                                  color: Colors.black,
+                                  color: black,
                                 ),
                               ),
                               TextSpan(
                                 text: 'riyal'.tr,
                                 style: const TextStyle(
                                   fontSize: 14,
-                                  color: Colors.black,
+                                  color: black,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -362,7 +361,7 @@ class _CartScreenState extends State<CartScreen> {
                                                   ),
                                                   Padding(
                                                     padding: const EdgeInsets
-                                                            .symmetric(
+                                                        .symmetric(
                                                         horizontal: 4),
                                                     child: Row(
                                                       mainAxisAlignment:

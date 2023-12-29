@@ -32,9 +32,9 @@ class CustomShippingAddressCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: isChecked ? jadeGreen.withOpacity(0.06) : Colors.white,
+          color: isChecked ? secondaryGreen.withOpacity(0.06) : Colors.white,
           borderRadius: const BorderRadius.all(Radius.circular(4)),
-          border: Border.all(color: isChecked ? jadeGreen : darkGrey),
+          border: Border.all(color: isChecked ? secondaryGreen : darkGrey),
         ),
         child: Column(
           children: [
@@ -60,14 +60,14 @@ class CustomShippingAddressCard extends StatelessWidget {
                     children: [
                       CustomText(
                         text: address.address,
-                        color: almostBlack,
+                        color: black,
                         fontWeight: FontWeight.w500,
                       ),
                       const SizedBox(
                         height: 8,
                       ),
                       SizedBox(
-                        width: width * 0.7,
+                        width: width * 0.67, //.7
                         child: CustomText(
                           text:
                               '${address.city} - ${address.zone} - ${address.country.tr}',
@@ -78,7 +78,7 @@ class CustomShippingAddressCard extends StatelessWidget {
                         height: 12,
                       ),
                       Container(
-                        width: width * 0.7,
+                        width: width * 0.67, //.7
                         height: 1,
                         color: lighGrey,
                       ),
@@ -94,7 +94,7 @@ class CustomShippingAddressCard extends StatelessWidget {
                       ),
                       CustomText(
                         text: phoneNumber,
-                        color: almostBlack,
+                        color: black,
                         fontWeight: FontWeight.w600,
                       ),
                     ],
@@ -121,7 +121,7 @@ class CustomShippingAddressCard extends StatelessWidget {
                           SvgPicture.asset(
                             'assets/icons/edit.svg',
                             colorFilter: const ColorFilter.mode(
-                              Colors.black,
+                              black,
                               BlendMode.srcIn,
                             ),
                           ),
@@ -152,7 +152,7 @@ class CustomShippingAddressCard extends StatelessWidget {
                           SvgPicture.asset(
                             'assets/icons/delete.svg',
                             colorFilter: const ColorFilter.mode(
-                              Colors.black,
+                              black,
                               BlendMode.srcIn,
                             ),
                           ),

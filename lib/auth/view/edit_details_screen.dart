@@ -90,8 +90,20 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
                           Get.back();
                         },
                         child: AppUtil.rtlDirection(context)
-                            ? SvgPicture.asset('assets/icons/left_arrow.svg')
-                            : SvgPicture.asset('assets/icons/right_arrow.svg'),
+                            ? SvgPicture.asset(
+                                'assets/icons/left_arrow.svg',
+                                colorFilter: const ColorFilter.mode(
+                                  secondaryGreen,
+                                  BlendMode.srcIn,
+                                ),
+                              )
+                            : SvgPicture.asset(
+                                'assets/icons/right_arrow.svg',
+                                colorFilter: const ColorFilter.mode(
+                                  secondaryGreen,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
                       ),
                   ],
                 ),

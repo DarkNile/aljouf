@@ -6,7 +6,7 @@ class CustomOutlinedButton extends StatelessWidget {
     super.key,
     required this.onPressed,
     required this.child,
-    this.backgroundColor = Colors.black,
+    this.backgroundColor = black,
     this.foregroundColor = Colors.white,
     this.radius = 4,
   });
@@ -38,7 +38,7 @@ class CustomOutlinedButton extends StatelessWidget {
         ),
         side: MaterialStateProperty.all(
           const BorderSide(
-            color: green,
+            color: secondaryGreen,
           ),
         ),
       ),

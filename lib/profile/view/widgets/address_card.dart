@@ -36,7 +36,7 @@ class AddressCard extends StatelessWidget {
                 const EdgeInsets.symmetric(horizontal: 18).copyWith(top: 18),
             child: CustomText(
               text: address.address,
-              color: almostBlack,
+              color: black,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -74,7 +74,7 @@ class AddressCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 18),
             child: CustomText(
               text: phoneNumber,
-              color: almostBlack,
+              color: black,
               fontWeight: FontWeight.w600,
             ),
           ),
@@ -100,7 +100,7 @@ class AddressCard extends StatelessWidget {
                         SvgPicture.asset(
                           'assets/icons/edit.svg',
                           colorFilter: const ColorFilter.mode(
-                            Colors.black,
+                            black,
                             BlendMode.srcIn,
                           ),
                         ),
@@ -131,7 +131,7 @@ class AddressCard extends StatelessWidget {
                         SvgPicture.asset(
                           'assets/icons/delete.svg',
                           colorFilter: const ColorFilter.mode(
-                            Colors.black,
+                            black,
                             BlendMode.srcIn,
                           ),
                         ),

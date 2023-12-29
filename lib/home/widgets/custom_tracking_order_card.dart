@@ -57,7 +57,7 @@ class CustomTrackingOrderCard extends StatelessWidget {
                         text: trackingOrder.orderId!,
                         style: const TextStyle(
                           fontSize: 12,
-                          color: Colors.black,
+                          color: black,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -80,7 +80,7 @@ class CustomTrackingOrderCard extends StatelessWidget {
                         text: trackingOrder.productTotal!.toString(),
                         style: const TextStyle(
                           fontSize: 12,
-                          color: Colors.black,
+                          color: black,
                           fontWeight: FontWeight.w600,
                         ),
                       ),

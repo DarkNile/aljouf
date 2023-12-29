@@ -17,7 +17,7 @@ class ProductDescriptionScreen extends StatelessWidget {
         children: [
           // CustomText(
           //   text: 'description'.tr,
-          //   color: Colors.black,
+          //   color: black,
           //   fontWeight: FontWeight.w500,
           // ),
           // const SizedBox(

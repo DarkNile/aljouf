@@ -51,7 +51,7 @@ class AppUtil {
                           },
                           child: const Icon(
                             Icons.close,
-                            color: Colors.black,
+                            color: black,
                           ),
                         ),
                       )
@@ -130,7 +130,7 @@ class AppUtil {
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
                                 height: 2,
-                                color: Colors.black,
+                                color: black,
                               ),
                             ],
                           ),

@@ -1,3 +1,4 @@
+import 'package:aljouf/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:aljouf/utils/app_util.dart';
 
@@ -8,7 +9,7 @@ class CustomText extends StatelessWidget {
     this.fontSize = 12,
     this.textAlign,
     this.fontWeight = FontWeight.w300,
-    this.color = Colors.black,
+    this.color = black,
     this.textDecoration,
     this.maxlines,
     this.textOverflow,

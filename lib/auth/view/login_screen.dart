@@ -63,8 +63,20 @@ class _LoginScreenState extends State<LoginScreen> {
                         Get.back();
                       },
                       child: AppUtil.rtlDirection(context)
-                          ? SvgPicture.asset('assets/icons/left_arrow.svg')
-                          : SvgPicture.asset('assets/icons/right_arrow.svg'),
+                          ? SvgPicture.asset(
+                              'assets/icons/left_arrow.svg',
+                              colorFilter: const ColorFilter.mode(
+                                secondaryGreen,
+                                BlendMode.srcIn,
+                              ),
+                            )
+                          : SvgPicture.asset(
+                              'assets/icons/right_arrow.svg',
+                              colorFilter: const ColorFilter.mode(
+                                secondaryGreen,
+                                BlendMode.srcIn,
+                              ),
+                            ),
                     ),
                   ],
                 ),
@@ -289,9 +301,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustomText(
                       text: 'joinUs'.tr,
                       fontWeight: FontWeight.w500,
+                      color: secondaryGreen,
                     ),
                   ],
                 ),
+              ),
+              const SizedBox(
+                height: 14,
               ),
             ],
           ),
