@@ -47,7 +47,7 @@ class CustomShippingAddressCard extends StatelessWidget {
                   Transform.scale(
                     scale: 1.2,
                     child: Checkbox(
-                      fillColor: MaterialStateProperty.all(jadeGreen),
+                      fillColor: MaterialStateProperty.all(secondaryGreen),
                       checkColor: Colors.white,
                       value: isChecked,
                       shape: const CircleBorder(),
@@ -105,7 +105,7 @@ class CustomShippingAddressCard extends StatelessWidget {
             Container(
               height: 41,
               decoration: BoxDecoration(
-                color: isChecked ? jadeGreen.withOpacity(0.06) : lighGrey,
+                color: isChecked ? primaryGreen.withOpacity(0.06) : lighGrey,
                 border: const Border(
                   top: BorderSide(color: darkGrey),
                 ),

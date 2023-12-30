@@ -76,7 +76,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
               Container(
                 width: width,
                 height: 1,
-                color: darkGrey,
+                color: lightGreen,
               ),
               IgnorePointer(
                 child: TabBar(
@@ -93,7 +93,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                         color: _tabIndex > 0
                             ? secondaryGreen
                             : _tabIndex == 0
-                                ? black
+                                ? primaryGreen
                                 : Colors.white,
                         border: _tabIndex == 0 || _tabIndex > 0
                             ? null
@@ -120,7 +120,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                         color: _tabIndex > 1
                             ? secondaryGreen
                             : _tabIndex == 1
-                                ? black
+                                ? primaryGreen
                                 : Colors.white,
                         border: _tabIndex == 1 || _tabIndex > 1
                             ? null
@@ -147,7 +147,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                         color: _tabIndex > 2
                             ? secondaryGreen
                             : _tabIndex == 2
-                                ? black
+                                ? primaryGreen
                                 : Colors.white,
                         border: _tabIndex == 2 || _tabIndex > 2
                             ? null
@@ -174,7 +174,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                         color: _tabIndex > 3
                             ? secondaryGreen
                             : _tabIndex == 3
-                                ? black
+                                ? primaryGreen
                                 : Colors.white,
                         border: _tabIndex == 3 || _tabIndex > 3
                             ? null

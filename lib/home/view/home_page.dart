@@ -9,8 +9,6 @@ import 'package:aljouf/home/view/bottom_nav_screens/home_screen.dart';
 import 'package:aljouf/home/view/bottom_nav_screens/order_screen.dart';
 import 'package:aljouf/home/view/bottom_nav_screens/profile_screen.dart';
 import 'package:aljouf/home/view/sub_category_screen.dart';
-import 'package:aljouf/utils/app_util.dart';
-import 'package:aljouf/widgets/custom_text.dart';
 // import 'package:android_id/android_id.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:device_info_plus/device_info_plus.dart';
@@ -26,7 +24,6 @@ import 'package:aljouf/widgets/custom_app_bar.dart';
 import 'package:aljouf/widgets/custom_bottom_navigation_bar.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:new_version_plus/new_version_plus.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, this.pageIndex});

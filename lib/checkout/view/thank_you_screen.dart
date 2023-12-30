@@ -95,7 +95,7 @@ class _ThankYouScreenState extends State<ThankYouScreen> {
                       backgroundColor: Colors.transparent,
                       child: Text(
                         'rating'.tr,
-                        style: const TextStyle(color: jadeGreen),
+                        style: const TextStyle(color: primaryGreen),
                       )),
                 ),
         ],

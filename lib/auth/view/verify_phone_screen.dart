@@ -51,6 +51,7 @@ class _VerifyPhoneScreenState extends State<VerifyPhoneScreen> {
                       text: 'verifyPhoneNumber'.tr,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
+                      color: secondaryGreen,
                     ),
                     InkWell(
                       onTap: () {

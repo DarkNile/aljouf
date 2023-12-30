@@ -52,7 +52,7 @@ class _CartScreenState extends State<CartScreen> {
           text: 'shoppingCart'.tr,
           fontSize: 14,
           fontWeight: FontWeight.w500,
-          color: black,
+          color: secondaryGreen,
         ),
         leading: IconButton(
           onPressed: () {
@@ -245,6 +245,7 @@ class _CartScreenState extends State<CartScreen> {
                             text: 'total'.tr,
                             fontSize: 14,
                             fontWeight: FontWeight.w400,
+                            color: primaryGreen,
                           ),
                           RichText(
                             text: TextSpan(children: [
@@ -254,14 +255,14 @@ class _CartScreenState extends State<CartScreen> {
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
-                                  color: black,
+                                  color: primaryGreen,
                                 ),
                               ),
                               TextSpan(
                                 text: 'riyal'.tr,
                                 style: const TextStyle(
                                   fontSize: 14,
-                                  color: black,
+                                  color: primaryGreen,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),

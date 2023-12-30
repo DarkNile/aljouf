@@ -83,6 +83,7 @@ class _EditDetailsScreenState extends State<EditDetailsScreen> {
                       text: 'editDetailsTitle'.tr,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
+                      color: secondaryGreen,
                     ),
                     if (!widget.isFromSocialLogin)
                       InkWell(

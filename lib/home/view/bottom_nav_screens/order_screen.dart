@@ -67,17 +67,17 @@ class _OrderScreenState extends State<OrderScreen>
             tabs: [
               CustomText(
                 text: 'all'.tr,
-                color: _tabIndex == 0 ? black : warmGrey,
+                color: _tabIndex == 0 ? primaryGreen : warmGrey,
                 fontWeight: _tabIndex == 0 ? FontWeight.w400 : FontWeight.w300,
               ),
               CustomText(
                 text: 'shipped'.tr,
-                color: _tabIndex == 1 ? black : warmGrey,
+                color: _tabIndex == 1 ? primaryGreen : warmGrey,
                 fontWeight: _tabIndex == 1 ? FontWeight.w400 : FontWeight.w300,
               ),
               CustomText(
                 text: 'completed'.tr,
-                color: _tabIndex == 2 ? black : warmGrey,
+                color: _tabIndex == 2 ? primaryGreen : warmGrey,
                 fontWeight: _tabIndex == 2 ? FontWeight.w400 : FontWeight.w300,
               ),
               // CustomText(

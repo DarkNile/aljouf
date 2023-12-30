@@ -519,6 +519,7 @@ class OrderSummaryPage extends StatelessWidget {
                                     .toStringAsFixed(2),
                                 fontSize: 20,
                                 fontWeight: FontWeight.w700,
+                                color: primaryGreen,
                               ),
                             ],
                           ),

@@ -59,6 +59,7 @@ class _OTPScreenState extends State<OTPScreen> {
                       text: 'verifyEmailAddress'.tr,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
+                      color: secondaryGreen,
                     ),
                     InkWell(
                       onTap: () {

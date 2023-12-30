@@ -184,7 +184,7 @@ class _ProductScreenState extends State<ProductScreen>
                                           alignment: Alignment.center,
                                           decoration: const BoxDecoration(
                                             shape: BoxShape.circle,
-                                            color: yellow,
+                                            color: secondaryGreen,
                                           ),
                                           child: Obx(() {
                                             return CustomText(
@@ -323,7 +323,7 @@ class _ProductScreenState extends State<ProductScreen>
                                                     widget.product.special != 0
                                                 ? FontWeight.w400
                                                 : FontWeight.w600,
-                                            color: black,
+                                            color: primaryGreen,
                                             decoration: widget
                                                             .product.special !=
                                                         null &&
@@ -340,7 +340,7 @@ class _ProductScreenState extends State<ProductScreen>
                                                     widget.product.special != 0
                                                 ? 12
                                                 : 14,
-                                            color: black,
+                                            color: primaryGreen,
                                             fontWeight: FontWeight.w400,
                                           ),
                                         ),
@@ -438,7 +438,7 @@ class _ProductScreenState extends State<ProductScreen>
                                               )
                                             : const Icon(
                                                 Icons.check,
-                                                color: jadeGreen,
+                                                color: primaryGreen,
                                                 size: 18,
                                               ),
                                         const SizedBox(
@@ -456,7 +456,7 @@ class _ProductScreenState extends State<ProductScreen>
                                                       .toString()) <
                                                   1
                                               ? vermillion
-                                              : jadeGreen,
+                                              : primaryGreen,
                                           fontWeight: FontWeight.w400,
                                           fontSize: 10,
                                         ),
@@ -504,7 +504,7 @@ class _ProductScreenState extends State<ProductScreen>
                                           padding: const EdgeInsets.all(8),
                                           alignment: Alignment.center,
                                           decoration: const BoxDecoration(
-                                            color: yellow,
+                                            color: secondaryGreen,
                                             borderRadius: BorderRadius.all(
                                               Radius.circular(8),
                                             ),
@@ -559,14 +559,14 @@ class _ProductScreenState extends State<ProductScreen>
                         fontSize: 12,
                         fontWeight:
                             _tabIndex == 0 ? FontWeight.w500 : FontWeight.w400,
-                        color: _tabIndex == 0 ? black : brownishGrey,
+                        color: _tabIndex == 0 ? primaryGreen : brownishGrey,
                       ),
                       CustomText(
                         text: 'reviewsAndRatings'.tr,
                         fontSize: 12,
                         fontWeight:
                             _tabIndex == 1 ? FontWeight.w500 : FontWeight.w400,
-                        color: _tabIndex == 1 ? black : brownishGrey,
+                        color: _tabIndex == 1 ? primaryGreen : brownishGrey,
                       ),
                     ],
                   ),
@@ -618,10 +618,12 @@ class _ProductScreenState extends State<ProductScreen>
                             text: 'related'.tr,
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
+                            color: primaryGreen,
                           ),
                           CustomText(
                             text: 'viewAll'.tr,
                             fontWeight: FontWeight.w500,
+                            color: primaryGreen,
                           ),
                         ],
                       ),

@@ -24,6 +24,7 @@ class CustomHeader extends StatelessWidget implements PreferredSizeWidget {
         fontSize: 14,
         fontWeight: FontWeight.w500,
         textAlign: TextAlign.center,
+        color: secondaryGreen,
       ),
       leading: IconButton(
         onPressed: () {
