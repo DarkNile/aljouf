@@ -4,7 +4,7 @@ import 'package:aljouf/utils/app_util.dart';
 
 class CustomText extends StatelessWidget {
   const CustomText({
-    Key? key,
+    super.key,
     required this.text,
     this.fontSize = 12,
     this.textAlign,
@@ -15,7 +15,7 @@ class CustomText extends StatelessWidget {
     this.textOverflow,
     this.textDirection,
     this.height,
-  }) : super(key: key);
+  });
 
   final String text;
   final double fontSize;

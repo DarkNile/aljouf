@@ -149,7 +149,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                         ),
                         CustomText(
                           text: 'layout'.tr,
-                          color: brownishGrey,
+                          color: black,
                         ),
                       ],
                     ),
@@ -157,7 +157,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   Container(
                     width: 1,
                     height: 15,
-                    color: lighGrey,
+                    color: lightGreen,
                   ),
                   InkWell(
                     onTap: () {
@@ -201,7 +201,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                   alignment: Alignment.center,
                                   child: RangeSlider(
                                     inactiveColor: lighGrey,
-                                    activeColor: vermillion,
+                                    activeColor: primaryGreen,
                                     values: currentRangeValues,
                                     max: maxPrice,
                                     min: minPrice,
@@ -226,13 +226,13 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                     CustomText(
                                       text:
                                           '${currentRangeValues.start.toStringAsFixed(2)} ${'riyal'.tr}',
-                                      color: warmGrey,
+                                      color: primaryGreen,
                                     ),
                                     const Spacer(),
                                     CustomText(
                                       text:
                                           '${currentRangeValues.end.toStringAsFixed(2)} ${'riyal'.tr}',
-                                      color: warmGrey,
+                                      color: primaryGreen,
                                     ),
                                   ],
                                 ),
@@ -364,7 +364,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                         ),
                         CustomText(
                           text: 'filter'.tr,
-                          color: brownishGrey,
+                          color: black,
                         ),
                       ],
                     ),
@@ -372,7 +372,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   Container(
                     width: 1,
                     height: 15,
-                    color: lighGrey,
+                    color: lightGreen,
                   ),
                   InkWell(
                     onTap: () {
@@ -400,7 +400,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                           child: Radio(
                                               value: 'priceH',
                                               groupValue: groupValue,
-                                              activeColor: vermillion,
+                                              activeColor: primaryGreen,
                                               onChanged: (String? v) {
                                                 setState(() {
                                                   groupValue = v!;
@@ -426,7 +426,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                           child: Radio(
                                               value: 'priceL',
                                               groupValue: groupValue,
-                                              activeColor: vermillion,
+                                              activeColor: primaryGreen,
                                               onChanged: (String? v) {
                                                 setState(() {
                                                   groupValue = v!;
@@ -452,7 +452,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                           child: Radio<String>(
                                               value: 'date',
                                               groupValue: groupValue,
-                                              activeColor: vermillion,
+                                              activeColor: primaryGreen,
                                               onChanged: (String? v) {
                                                 setState(() {
                                                   groupValue = v!;
@@ -547,7 +547,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                         ),
                         CustomText(
                           text: 'sort'.tr,
-                          color: brownishGrey,
+                          color: black,
                         ),
                       ],
                     ),
@@ -715,7 +715,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                   ),
                                   Radio(
                                       value: options[index],
-                                      activeColor: vermillion,
+                                      activeColor: primaryGreen,
                                       groupValue: categoryGroupValue,
                                       onChanged: (v) {
                                         setState(() {

@@ -70,14 +70,14 @@ class CustomCartItem extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w700,
-                        color: black,
+                        color: primaryGreen,
                       ),
                     ),
                     TextSpan(
                       text: ' ${'riyal'.tr}',
                       style: const TextStyle(
                         fontSize: 12,
-                        color: black,
+                        color: primaryGreen,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -148,7 +148,13 @@ class CustomCartItem extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: onDeleteTap,
-                      child: SvgPicture.asset('assets/icons/delete.svg'),
+                      child: SvgPicture.asset(
+                        'assets/icons/delete.svg',
+                        colorFilter: const ColorFilter.mode(
+                          vermillion,
+                          BlendMode.srcIn,
+                        ),
+                      ),
                     ),
                   ],
                 ),

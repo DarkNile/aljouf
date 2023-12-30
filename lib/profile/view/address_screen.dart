@@ -66,7 +66,7 @@ class _AddressScreenState extends State<AddressScreen> {
                             height: 40,
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
-                              color: darkGrey,
+                              color: lightGreen,
                             ),
                             alignment: Alignment.center,
                             child:
@@ -94,7 +94,7 @@ class _AddressScreenState extends State<AddressScreen> {
                           height: 54,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
-                            color: black,
+                            color: primaryGreen,
                           ),
                           alignment: Alignment.center,
                           child: const Icon(
@@ -164,7 +164,7 @@ class _AddressScreenState extends State<AddressScreen> {
                       height: 54,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: black,
+                        color: primaryGreen,
                       ),
                       alignment: Alignment.center,
                       child: const Icon(

@@ -57,6 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       text: 'signIn'.tr,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
+                      color: secondaryGreen,
                     ),
                     InkWell(
                       onTap: () {
@@ -82,13 +83,16 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(
-                height: 60,
+                height: 40,
               ),
               Center(
                 child: Image.asset(
                   'assets/images/logo.png',
                   height: 120,
                 ),
+              ),
+              Image.asset(
+                'assets/images/Brush-line.png',
               ),
               const SizedBox(
                 height: 40,

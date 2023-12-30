@@ -94,14 +94,14 @@ class CustomInput extends StatelessWidget {
                 bottomLeft: Radius.circular(radius),
                 bottomRight: Radius.circular(radius),
                 topRight: Radius.circular(radius)),
-            borderSide: BorderSide(color: borderColor ?? Colors.grey)),
+            borderSide: BorderSide(color: borderColor ?? secondaryGreen)),
         disabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(radius),
                 bottomLeft: Radius.circular(radius),
                 bottomRight: Radius.circular(radius),
                 topRight: Radius.circular(radius)),
-            borderSide: BorderSide(color: borderColor ?? Colors.grey)),
+            borderSide: BorderSide(color: borderColor ?? secondaryGreen)),
         enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(radius),
@@ -109,13 +109,13 @@ class CustomInput extends StatelessWidget {
                 bottomRight: Radius.circular(radius),
                 topRight: Radius.circular(radius)),
             borderSide:
-                BorderSide(color: borderColor ?? Colors.grey, width: 0.5)),
+                BorderSide(color: borderColor ?? secondaryGreen, width: 0.5)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(radius),
                 bottomLeft: Radius.circular(radius),
                 bottomRight: Radius.circular(radius)),
-            borderSide: BorderSide(color: borderColor ?? black)),
+            borderSide: BorderSide(color: borderColor ?? secondaryGreen)),
       ),
     );
   }

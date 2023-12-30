@@ -58,7 +58,7 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
             height: 40,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(4)),
-              color: lighGrey,
+              color: lightGreen,
             ),
             margin: const EdgeInsets.symmetric(horizontal: 4),
             alignment: Alignment.center,
@@ -71,7 +71,7 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
                   height: 16,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: black,
+                    color: primaryGreen,
                   ),
                   child: const Icon(
                     Icons.add,
@@ -84,7 +84,7 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
                 ),
                 CustomText(
                   text: 'addNewAddress'.tr,
-                  color: black,
+                  color: primaryGreen,
                   fontWeight: FontWeight.w400,
                 )
               ],
@@ -102,7 +102,9 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                CustomText(text: 'shippedTo'.tr),
+                CustomText(
+                  text: 'shippedTo'.tr,
+                ),
                 InkWell(
                   onTap: () {
                     Get.to(
@@ -114,7 +116,7 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
                     height: 40,
                     decoration: const BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(4)),
-                      color: lighGrey,
+                      color: lightGreen,
                     ),
                     alignment: Alignment.center,
                     child: Row(
@@ -126,7 +128,7 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
                           height: 16,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
-                            color: black,
+                            color: primaryGreen,
                           ),
                           child: const Icon(
                             Icons.add,
@@ -139,7 +141,7 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
                         ),
                         CustomText(
                           text: 'addNewAddress'.tr,
-                          color: black,
+                          color: primaryGreen,
                           fontWeight: FontWeight.w400,
                         )
                       ],

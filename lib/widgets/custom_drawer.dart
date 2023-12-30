@@ -77,7 +77,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 return ListTile(
                   dense: true,
                   onTap: widget.onProfileTileTap,
-                  tileColor: lighGrey,
+                  tileColor: lightGreen,
                   shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(4))),
                   title: CustomText(

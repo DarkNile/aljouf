@@ -25,13 +25,14 @@ class CustomDrawerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      splashColor: lightGreen,
       dense: true,
       onTap: onTap,
-      splashColor: lighGrey,
       title: CustomText(
         text: title.tr,
         fontSize: 13,
         fontWeight: FontWeight.w400,
+        color: black,
       ),
       leading: leading ??
           SizedBox(

@@ -41,10 +41,15 @@ class ProfileScreen extends StatelessWidget {
             Stack(
               clipBehavior: Clip.none,
               children: [
-                Container(
+                // Container(
+                //   width: MediaQuery.of(context).size.width,
+                //   height: 95,
+                //   color: lightGreen,
+                // ),
+                Image.asset(
+                  'assets/images/light-green-pattern-1.png',
                   width: MediaQuery.of(context).size.width,
-                  height: 95,
-                  color: lightGreen,
+                  height: 90,
                 ),
                 Positioned(
                     top: 16,
@@ -128,7 +133,8 @@ class ProfileScreen extends StatelessWidget {
                                   height: 24,
                                 ),
                                 SvgPicture.asset(
-                                    'assets/icons/person_icon.svg'),
+                                  'assets/icons/person_icon.svg',
+                                ),
                               ],
                             ),
                           ],

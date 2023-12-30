@@ -92,7 +92,7 @@ class _WalletScreenState extends State<WalletScreen> {
                         text: _profileController.wallet.value.balance ?? '0.00',
                         color: _profileController.wallet.value.balance == null
                             ? vermillion
-                            : jadeGreen,
+                            : primaryGreen,
                         fontSize: 36,
                         fontWeight: FontWeight.w700,
                       ),

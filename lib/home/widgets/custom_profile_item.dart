@@ -23,6 +23,7 @@ class CustomProfileItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      splashColor: lightGreen,
       onTap: onTap,
       title: CustomText(
         text: title.tr,
@@ -38,7 +39,7 @@ class CustomProfileItem extends StatelessWidget {
         alignment: Alignment.center,
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
-          color: darkGrey,
+          color: lightGreen,
         ),
         child: leading ??
             SvgPicture.asset(

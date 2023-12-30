@@ -106,7 +106,7 @@ class CustomTrackingOrderCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.all(Radius.circular(2)),
                   color: trackingOrder.status! == 'مكتمل'
-                      ? jadeGreen
+                      ? primaryGreen
                       : trackingOrder.status! == 'إسترجاع'
                           ? brownishGrey
                           : trackingOrder.status! == 'تم شحن الطلب'

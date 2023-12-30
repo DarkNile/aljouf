@@ -51,6 +51,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
                       text: 'resetPassword'.tr,
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
+                      color: secondaryGreen,
                     ),
                     InkWell(
                       onTap: () {

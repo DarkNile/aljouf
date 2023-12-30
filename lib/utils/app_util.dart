@@ -222,8 +222,8 @@ class AppUtil {
       duration: const Duration(seconds: 3),
       flushbarPosition: FlushbarPosition.TOP,
       barBlur: .1,
-      backgroundColor: jadeGreen,
-      borderColor: jadeGreen,
+      backgroundColor: primaryGreen,
+      borderColor: primaryGreen,
       margin: const EdgeInsets.all(8),
       borderRadius: BorderRadius.circular(10),
     ).show(context);
