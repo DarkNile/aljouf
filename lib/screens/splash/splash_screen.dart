@@ -1,3 +1,4 @@
+import 'package:aljouf/constants/colors.dart';
 import 'package:aljouf/home/view/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
     });
     Future.delayed(
         const Duration(
-          seconds: 3,
+          milliseconds: 3500,
         ), () {
       Navigator.push(
         context,
@@ -57,13 +58,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Image.asset(
-        'assets/images/splash.gif',
-        width: width,
-        fit: BoxFit.fitWidth,
+      body: Center(
+        child: Image.asset(
+          'assets/images/splash.gif',
+        ),
       ),
     );
   }
