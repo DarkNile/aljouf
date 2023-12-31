@@ -70,19 +70,16 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                 ),
               ),
               const SizedBox(
-                height: 40,
+                height: 24,
               ),
               Center(
                 child: Image.asset(
                   'assets/images/logo.png',
-                  height: 120,
+                  height: 200,
                 ),
               ),
-              Image.asset(
-                'assets/images/Brush-line.png',
-              ),
               const SizedBox(
-                height: 40,
+                height: 24,
               ),
               CustomText(
                 text: 'emailAddress'.tr,
