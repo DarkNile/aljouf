@@ -1,4 +1,3 @@
-import 'package:aljouf/constants/colors.dart';
 import 'package:aljouf/home/view/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

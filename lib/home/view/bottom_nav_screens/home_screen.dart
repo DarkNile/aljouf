@@ -148,10 +148,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             );
           }),
-          if (widget.homeController.offers.isNotEmpty)
-            const SizedBox(
-              height: 24,
-            ),
+          // if (widget.homeController.offers.isNotEmpty)
+          const SizedBox(
+            height: 24,
+          ),
           Obx(() {
             if (widget.homeController.isBannersLoading.value) {
               return const SizedBox(
@@ -162,20 +162,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 widget.homeController.jofoliaOliveOil.isEmpty) {
               return Container();
             }
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(12)),
-                child: CachedNetworkImage(
-                  imageUrl: widget.homeController.oliveOilBanner.first['image'],
-                  width: width,
-                  fit: BoxFit.cover,
-                  height: 190,
-                  placeholder: (context, url) {
-                    return const CustomLoadingWidget();
-                  },
+            return Stack(
+              alignment: AlignmentDirectional.topCenter,
+              clipBehavior: Clip.none,
+              children: [
+                Positioned(
+                  top: -20,
+                  child: Image.asset(
+                    'assets/images/light-green-pattern-2.png',
+                    width: MediaQuery.of(context).size.width,
+                  ),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          widget.homeController.oliveOilBanner.first['image'],
+                      width: width,
+                      fit: BoxFit.cover,
+                      height: 190,
+                      placeholder: (context, url) {
+                        return const CustomLoadingWidget();
+                      },
+                    ),
+                  ),
+                ),
+              ],
             );
           }),
           if (widget.homeController.organicOliveOil.isNotEmpty ||
@@ -384,10 +398,10 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             );
           }),
-          if (widget.homeController.jofoliaOliveOil.isNotEmpty)
-            const SizedBox(
-              height: 24,
-            ),
+          // if (widget.homeController.jofoliaOliveOil.isNotEmpty)
+          const SizedBox(
+            height: 24,
+          ),
           // Obx(() {
           //   if (widget.homeController.isCategoriesLoading.value ||
           //       widget.homeController.isCategoryProductsLoading.value ||
@@ -479,20 +493,34 @@ class _HomeScreenState extends State<HomeScreen> {
             } else if (widget.homeController.olive.isEmpty) {
               return Container();
             }
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(12)),
-                child: CachedNetworkImage(
-                  imageUrl: widget.homeController.oliveBanner.first['image'],
-                  width: width,
-                  height: 190,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) {
-                    return const CustomLoadingWidget();
-                  },
+            return Stack(
+              alignment: AlignmentDirectional.topCenter,
+              clipBehavior: Clip.none,
+              children: [
+                Positioned(
+                  top: -20,
+                  child: Image.asset(
+                    'assets/images/light-green-pattern-2.png',
+                    width: MediaQuery.of(context).size.width,
+                  ),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          widget.homeController.oliveBanner.first['image'],
+                      width: width,
+                      height: 190,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) {
+                        return const CustomLoadingWidget();
+                      },
+                    ),
+                  ),
+                ),
+              ],
             );
           }),
           if (widget.homeController.olive.isNotEmpty)
@@ -573,6 +601,9 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 24,
             ),
+          const SizedBox(
+            height: 24,
+          ),
           Obx(() {
             if (widget.homeController.isBannersLoading.value) {
               return const SizedBox(
@@ -581,20 +612,34 @@ class _HomeScreenState extends State<HomeScreen> {
             } else if (widget.homeController.honey.isEmpty) {
               return Container();
             }
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(12)),
-                child: CachedNetworkImage(
-                  imageUrl: widget.homeController.honeyBanner.first['image'],
-                  width: width,
-                  height: 190,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) {
-                    return const CustomLoadingWidget();
-                  },
+            return Stack(
+              alignment: AlignmentDirectional.topCenter,
+              clipBehavior: Clip.none,
+              children: [
+                Positioned(
+                  top: -20,
+                  child: Image.asset(
+                    'assets/images/light-green-pattern-2.png',
+                    width: MediaQuery.of(context).size.width,
+                  ),
                 ),
-              ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          widget.homeController.honeyBanner.first['image'],
+                      width: width,
+                      height: 190,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) {
+                        return const CustomLoadingWidget();
+                      },
+                    ),
+                  ),
+                ),
+              ],
             );
           }),
           if (widget.homeController.honey.isNotEmpty)
@@ -672,10 +717,14 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             );
           }),
-          if (widget.homeController.honey.isNotEmpty)
-            const SizedBox(
-              height: 24,
-            ),
+          // if (widget.homeController.honey.isNotEmpty)
+          const SizedBox(
+            height: 24,
+          ),
+          Image.asset(
+            'assets/images/Brush-line.png',
+            width: MediaQuery.of(context).size.width,
+          ),
           // Container(
           //   width: width,
           //   height: 300,

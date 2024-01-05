@@ -54,16 +54,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
         child: Column(
           children: [
             const SizedBox(
-              height: 60,
+              height: 20,
             ),
             Center(
               child: Image.asset(
                 'assets/images/logo.png',
-                height: 120,
+                height: 180,
               ),
-            ),
-            const SizedBox(
-              height: 40,
             ),
             if (customerId != null &&
                 customerId!.isNotEmpty &&
@@ -167,7 +164,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 Get.to(() => LocationsPage(homeController: _homeController));
               },
               title: 'exhibitionBranches',
-              leadingIcon: 'location',
+              leadingIcon: 'Location (1)',
             ),
             const SizedBox(
               height: 4,
