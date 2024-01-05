@@ -58,7 +58,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             children: [
               const Icon(
                 Icons.shopping_cart_outlined,
-                color: secondaryGreen,
+                color: primaryGreen,
                 size: 24,
               ),
               Positioned.directional(
@@ -71,7 +71,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   alignment: Alignment.center,
                   decoration: const BoxDecoration(
                     shape: BoxShape.circle,
-                    color: secondaryGreen,
+                    color: primaryGreen,
                   ),
                   child: Obx(() {
                     return CustomText(
@@ -163,7 +163,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             },
             icon: const Icon(
               Icons.search_outlined,
-              color: secondaryGreen,
+              color: primaryGreen,
               size: 24,
             )),
         if (widget.showBackIcon)
@@ -173,7 +173,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
             },
             icon: const Icon(
               Icons.arrow_forward_outlined,
-              color: secondaryGreen,
+              color: primaryGreen,
               size: 24,
             ),
           ),
@@ -184,7 +184,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
         },
         icon: const Icon(
           Icons.menu,
-          color: secondaryGreen,
+          color: primaryGreen,
           size: 24,
         ),
       ),

@@ -28,6 +28,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double height = MediaQuery.of(context).size.height;
     return Obx(() {
       if (profileController.isProfileLoading.value) {
         return const Center(
@@ -46,11 +47,19 @@ class ProfileScreen extends StatelessWidget {
                 //   height: 95,
                 //   color: lightGreen,
                 // ),
+                // Column(
+                //   children: [
                 Image.asset(
-                  'assets/images/light-green-pattern-1.png',
+                  'assets/images/light-green-pattern-2.png',
                   width: MediaQuery.of(context).size.width,
-                  height: 90,
                 ),
+                //     Image.asset(
+                //       'assets/images/light-green-pattern-1.png',
+                //       width: MediaQuery.of(context).size.width,
+                //       height: 90,
+                //     ),
+                //   ],
+                // ),
                 Positioned(
                     top: 16,
                     left: 16,
@@ -152,7 +161,7 @@ class ProfileScreen extends StatelessWidget {
               },
               title: 'SaveMyAddressTitle',
               subtitle: 'SaveMyAddressSubtitle',
-              icon: 'location',
+              icon: 'Location (1)',
             ),
             CustomProfileItem(
               onTap: () {
@@ -164,7 +173,7 @@ class ProfileScreen extends StatelessWidget {
               },
               title: 'registerPurchaseOrderTitle',
               subtitle: 'registerPurchaseOrderSubtitle',
-              icon: 'bag',
+              icon: 'Basket',
             ),
             // CustomProfileItem(
             //   onTap: () {
@@ -196,7 +205,7 @@ class ProfileScreen extends StatelessWidget {
               },
               title: 'editDetailsTitle',
               subtitle: 'editDetailsSubtitle',
-              icon: 'edit',
+              icon: 'Adjustment',
             ),
             CustomProfileItem(
               onTap: () {
@@ -208,7 +217,7 @@ class ProfileScreen extends StatelessWidget {
               },
               title: 'changePassword',
               subtitle: 'changeOwnPassword',
-              icon: 'lock',
+              icon: 'Lock (1)',
             ),
             CustomProfileItem(
               onTap: () {
@@ -259,10 +268,17 @@ class ProfileScreen extends StatelessWidget {
               },
               title: 'deleteMyAccount',
               subtitle: 'deleteMyOwnAccount',
-              icon: 'delete',
-              leading: const Icon(
-                Icons.person_off_outlined,
-                color: black,
+              icon: 'Cancel Account',
+              // leading: const Icon(
+              //   Icons.person_off_outlined,
+              //   color: black,
+              // ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: height * 0.11),
+              child: Image.asset(
+                'assets/images/Brush-line.png',
+                width: MediaQuery.of(context).size.width,
               ),
             ),
           ],

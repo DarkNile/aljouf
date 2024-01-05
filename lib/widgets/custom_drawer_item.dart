@@ -37,7 +37,6 @@ class CustomDrawerTile extends StatelessWidget {
       leading: leading ??
           SizedBox(
             width: 24,
-            // height: 20,
             child: SvgPicture.asset(
               'assets/icons/$leadingIcon.svg',
               colorFilter: const ColorFilter.mode(

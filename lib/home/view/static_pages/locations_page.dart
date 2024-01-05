@@ -56,17 +56,16 @@ class LocationsPage extends StatelessWidget {
                   fontSize: 12,
                   color: brownishGrey,
                 ),
-                leading: CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  child: homeController.locations[index].image != null
-                      ? CachedNetworkImage(
-                          imageUrl: homeController.locations[index].image!,
-                          placeholder: (context, url) {
-                            return const CustomLoadingWidget();
-                          },
-                        )
-                      : const Icon(Icons.home),
-                ),
+                leading: homeController.locations[index].image != null
+                    ? CachedNetworkImage(
+                        imageUrl: homeController.locations[index].image!,
+                        width: 80,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) {
+                          return const CustomLoadingWidget();
+                        },
+                      )
+                    : const Icon(Icons.home),
                 trailing: const Icon(
                   Icons.location_on,
                   color: black,

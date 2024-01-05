@@ -44,6 +44,12 @@ class CustomProfileItem extends StatelessWidget {
         child: leading ??
             SvgPicture.asset(
               'assets/icons/$icon.svg',
+              width: 28,
+              height: 28,
+              colorFilter: const ColorFilter.mode(
+                secondaryGreen,
+                BlendMode.srcIn,
+              ),
             ),
       ),
       // trailing: const Icon(
