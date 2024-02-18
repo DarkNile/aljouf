@@ -9,6 +9,7 @@ import 'package:aljouf/checkout/models/payment_method.dart';
 import 'package:aljouf/checkout/models/shipping_method.dart';
 import 'package:aljouf/constants/urls.dart';
 import 'package:aljouf/utils/app_util.dart';
+import 'package:new_version_plus/new_version_plus.dart';
 
 class CheckoutService {
   static Future<int?> getShippingRate() async {
@@ -501,8 +502,12 @@ class CheckoutService {
     print(token);
     final String? lang = getStorage.read('lang');
     print(lang);
+    final newVersionPlus = NewVersionPlus();
+    final status = await newVersionPlus.getVersionStatus();
+    print('version: ${status!.localVersion}');
     final response = await http.post(
-      Uri.parse('$baseUrl route=rest/confirm/confirm&language=$lang'),
+      Uri.parse(
+          '$baseUrl route=rest/confirm/confirm&language=$lang&app_version=${status!.localVersion}'),
       headers: {
         'Accept': 'application/json',
         // 'Authorization': 'Bearer $token',
@@ -510,7 +515,8 @@ class CheckoutService {
             "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
       },
     );
-
+    print(
+        '$baseUrl route=rest/confirm/confirm&language=$lang&app_version=${status!.localVersion}');
     print('response status code: ${response.statusCode}');
     if (jsonDecode(response.body)['success'] == 1) {
       var data = jsonDecode(response.body)['data'];

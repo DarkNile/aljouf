@@ -144,6 +144,7 @@ const Map<String, String> ar = {
   'paymentInfo': 'معلومات الدفع',
   'totalInvoice': 'إجمالي الفاتورة',
   'couponCode': 'رمز قسيمة التخفيض',
+  'coupon': 'قسيمة التخفيض',
   'remove': 'إزالة',
   'quantity': 'الكمية',
   'noReviews': 'لا يوجد تقييمات',
@@ -203,4 +204,8 @@ const Map<String, String> ar = {
       'يرجى التحقق من معلوماتك وكذلك بريدك الإلكتروني لإكمال طلبك',
   'paymentFailed': 'فشل عملية الدفع!',
   'warning': 'تنبيه',
+  'subtotal': 'إجمالي المنتجات قبل الضريبة',
+  'shippingFees': 'رسوم الشحن',
+  'valueAddedTax': 'ضريبة القيمة المضافة (15%)',
+  'totalAmount': 'المجموع الكلي',
 };

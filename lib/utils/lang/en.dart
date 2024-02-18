@@ -207,4 +207,9 @@ const Map<String, String> en = {
       'Please check your info as well as your email in order to complete your order',
   'paymentFailed': 'Payment Failed!',
   'warning': 'Warning',
+  'subtotal': 'Total Products Before Tax',
+  'shippingFees': 'Shipping Fees',
+  'valueAddedTax': 'Value Added Tax (15%)',
+  'totalAmount': 'Total Amount',
+  'coupon': 'Coupon',
 };
