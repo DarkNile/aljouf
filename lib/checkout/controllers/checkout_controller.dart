@@ -31,6 +31,7 @@ class CheckoutController extends GetxController {
   var couponController = TextEditingController().obs;
   var isShippingRateLoading = false.obs;
   var shippingRate = 0.obs;
+  var shippingCode = ''.obs;
 
   Future<int?> getShippingRate() async {
     try {

@@ -261,7 +261,7 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                   return ShippingMethodPage(
                     checkoutController: _checkoutController,
                     onNextTap: (checkedIndex) async {
-                      String shippingRate = '';
+                      // String shippingRate = '';
                       // if (_checkoutController.shippingMethods[checkedIndex]
                       //     .quote.first.code.isNotEmpty) {
                       //   shippingRate = _checkoutController
@@ -269,19 +269,24 @@ class _CheckoutScreenState extends State<CheckoutScreen>
                       // } else {
                       if (_checkoutController.total.value >=
                           _checkoutController.shippingRate.value.toDouble()) {
-                        shippingRate = 'free.free';
+                        // shippingRate = 'free.free';
+                        _checkoutController.shippingCode('free.free');
                       } else {
-                        shippingRate = 'aramex.aramex';
+                        // shippingRate = 'aramex.aramex';
+                        _checkoutController.shippingCode('aramex.aramex');
                       }
                       //   }
                       print('Checkout Total ${_checkoutController.total}');
                       print(
                           'Max Shipping Cost: ${_checkoutController.shippingRate.value.toDouble()}');
-                      print('Checkout Shipping Rate: $shippingRate');
+                      print(
+                          'Checkout Shipping Rate: ${_checkoutController.shippingCode}');
                       final isSuccess =
                           await _checkoutController.addShippingMethod(
                         context: context,
-                        shippingMethodCode: shippingRate,
+                        // shippingMethodCode: shippingRate,
+                        shippingMethodCode:
+                            _checkoutController.shippingCode.value,
                       );
                       if (isSuccess) {
                         if (context.mounted) {

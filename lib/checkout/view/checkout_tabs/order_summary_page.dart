@@ -33,6 +33,8 @@ class OrderSummaryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(checkoutController.order!.shippingCode);
+    print(checkoutController.order!.totals!.length);
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -257,15 +259,20 @@ class OrderSummaryPage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomText(
-                            text: checkoutController.order!.shippingCode ==
-                                    'aramex.aramex'
-                                ? 'shippingThroughAramex'.tr
-                                // : checkoutController.order!.shippingCode!,
-                                : 'freeShipping'.tr,
+                            text:
+                                // checkoutController.order!.shippingCode ==
+                                //         'aramex.aramex'
+                                //     ?
+                                checkoutController.shippingCode.value ==
+                                        'aramex.aramex'
+                                    ? 'shippingThroughAramex'.tr
+                                    : 'freeShipping'.tr,
                             color: black,
                             fontWeight: FontWeight.w500,
                           ),
-                          if (checkoutController.order!.shippingCode ==
+                          // if (checkoutController.order!.shippingCode ==
+                          //     'aramex.aramex')
+                          if (checkoutController.shippingCode.value ==
                               'aramex.aramex')
                             Image.asset(
                               'assets/images/saee_aramex.png',
@@ -452,98 +459,214 @@ class OrderSummaryPage extends StatelessWidget {
                       const SizedBox(
                         height: 28,
                       ),
-                      ListView.separated(
+                      if (checkoutController.order!.totals!.length >= 4)
+                        ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: checkoutController.order!.totals!.length,
+                            separatorBuilder: (context, index) {
+                              return const SizedBox(
+                                height: 20,
+                              );
+                            },
+                            itemBuilder: (context, index) {
+                              print(checkoutController.order!.totals!.length);
+                              return Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  if (checkoutController
+                                      .order!.totals![index].title!
+                                      .startsWith('<'))
+                                    SizedBox(
+                                      width: 100,
+                                      child: CachedNetworkImage(
+                                        imageUrl: checkoutController
+                                            .order!.totals![index].title!
+                                            .split("<img src=")
+                                            .last
+                                            .split(" style")
+                                            .first
+                                            .replaceAll('"', ''),
+                                        placeholder: (context, url) {
+                                          return const CustomLoadingWidget();
+                                        },
+                                      ),
+                                    )
+                                  else
+                                    CustomText(
+                                        text: checkoutController
+                                            .order!.totals![index].title!),
+                                  CustomText(
+                                    text: checkoutController
+                                        .order!.totals![index].text!,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ],
+                              );
+                            })
+                      else
+                        ListView(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: checkoutController.order!.totals!.length,
-                          separatorBuilder: (context, index) {
-                            return const SizedBox(
-                              height: 20,
-                            );
-                          },
-                          itemBuilder: (context, index) {
-                            return Row(
+                          children: [
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                if (checkoutController
-                                    .order!.totals![index].title!
-                                    .startsWith('<'))
-                                  SizedBox(
-                                    width: 100,
-                                    child: CachedNetworkImage(
-                                      imageUrl: checkoutController
-                                          .order!.totals![index].title!
-                                          .split("<img src=")
-                                          .last
-                                          .split(" style")
-                                          .first
-                                          .replaceAll('"', ''),
-                                      placeholder: (context, url) {
-                                        return const CustomLoadingWidget();
-                                      },
-                                    ),
-                                  )
-                                else
-                                  CustomText(
-                                      text: checkoutController
-                                          .order!.totals![index].title!),
                                 CustomText(
-                                  text: checkoutController
-                                      .order!.totals![index].text!,
+                                  text: 'subtotal'.tr,
+                                ),
+                                CustomText(
+                                  text: checkoutController.shippingCode.value ==
+                                          'aramex.aramex'
+                                      ? 'S.R${((checkoutController.order!.total / 1.15) - 32).toStringAsFixed(2)}'
+                                      : 'S.R${((checkoutController.order!.total / 1.15) - 0).toStringAsFixed(2)}',
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ],
-                            );
-                          }),
-                      const SizedBox(
-                        height: 34,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomText(
-                                text: 'total'.tr,
-                                color: brownishGrey,
-                                fontWeight: FontWeight.w400,
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CustomText(
+                                  text: 'shippingFees'.tr,
+                                ),
+                                CustomText(
+                                  text: checkoutController.shippingCode.value ==
+                                          'aramex.aramex'
+                                      ? 'S.R32.00'
+                                      : 'S.R0.00',
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            if (checkoutController.isCouponAdded.value == true)
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  CustomText(
+                                    text: 'coupon'.tr,
+                                  ),
+                                  CustomText(
+                                    text: checkoutController
+                                                .order!.totals!.length ==
+                                            3
+                                        ? checkoutController
+                                            .order!.totals![1].text!
+                                        : checkoutController
+                                            .order!.totals![2].text!,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ],
                               ),
+                            if (checkoutController.isCouponAdded.value == true)
                               const SizedBox(
-                                height: 4,
+                                height: 20,
                               ),
-                              CustomText(
-                                text: checkoutController.order!.total
-                                    .toStringAsFixed(2),
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                color: primaryGreen,
-                              ),
-                            ],
-                          ),
-                          Row(
-                            textDirection: TextDirection.ltr,
-                            children: [
-                              SvgPicture.asset(
-                                'assets/icons/barcode_1.svg',
-                                colorFilter: const ColorFilter.mode(
-                                  darkGrey,
-                                  BlendMode.srcIn,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CustomText(
+                                  text: 'valueAddedTax'.tr,
                                 ),
-                              ),
-                              SvgPicture.asset(
-                                'assets/icons/barcode_2.svg',
-                                colorFilter: const ColorFilter.mode(
-                                  darkGrey,
-                                  BlendMode.srcIn,
+                                CustomText(
+                                  text:
+                                      'S.R${(checkoutController.order!.total - (checkoutController.order!.total / 1.15)).toStringAsFixed(2)}',
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                CustomText(
+                                  text: 'totalAmount'.tr,
+                                ),
+                                CustomText(
+                                  text:
+                                      'S.R${checkoutController.order!.total.toStringAsFixed(2)}',
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      // const SizedBox(
+                      //   height: 34,
+                      // ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   crossAxisAlignment: CrossAxisAlignment.center,
+                      //   children: [
+                      //     Column(
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: [
+                      //         CustomText(
+                      //           text: 'total'.tr,
+                      //           color: brownishGrey,
+                      //           fontWeight: FontWeight.w400,
+                      //         ),
+                      //         const SizedBox(
+                      //           height: 4,
+                      //         ),
+                      //         CustomText(
+                      //           text: checkoutController.shippingCode.value ==
+                      //                   'aramex.aramex'
+                      //               ? (checkoutController.order!.total +
+                      //                       32 +
+                      //                       (0.15 *
+                      //                           (checkoutController
+                      //                                   .order!.total +
+                      //                               32)))
+                      //                   .toStringAsFixed(2)
+                      //               : (checkoutController.order!.total +
+                      //                       (0.15 *
+                      //                           checkoutController
+                      //                               .order!.total))
+                      //                   .toStringAsFixed(2),
+                      //           fontSize: 20,
+                      //           fontWeight: FontWeight.w700,
+                      //           color: primaryGreen,
+                      //         ),
+                      //       ],
+                      //     ),
+                      //     Row(
+                      //       textDirection: TextDirection.ltr,
+                      //       children: [
+                      //         SvgPicture.asset(
+                      //           'assets/icons/barcode_1.svg',
+                      //           colorFilter: const ColorFilter.mode(
+                      //             darkGrey,
+                      //             BlendMode.srcIn,
+                      //           ),
+                      //         ),
+                      //         SvgPicture.asset(
+                      //           'assets/icons/barcode_2.svg',
+                      //           colorFilter: const ColorFilter.mode(
+                      //             darkGrey,
+                      //             BlendMode.srcIn,
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),
