@@ -33,8 +33,9 @@ class OrderSummaryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(checkoutController.order!.shippingCode);
+    print('shipping code: ${checkoutController.order!.shippingCode}');
     print(checkoutController.order!.totals!.length);
+    print('order id: ${checkoutController.order!.orderId}');
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -459,154 +460,156 @@ class OrderSummaryPage extends StatelessWidget {
                       const SizedBox(
                         height: 28,
                       ),
-                      if (checkoutController.order!.totals!.length >= 4)
-                        ListView.separated(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: checkoutController.order!.totals!.length,
-                            separatorBuilder: (context, index) {
-                              return const SizedBox(
-                                height: 20,
-                              );
-                            },
-                            itemBuilder: (context, index) {
-                              print(checkoutController.order!.totals!.length);
-                              return Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  if (checkoutController
-                                      .order!.totals![index].title!
-                                      .startsWith('<'))
-                                    SizedBox(
-                                      width: 100,
-                                      child: CachedNetworkImage(
-                                        imageUrl: checkoutController
-                                            .order!.totals![index].title!
-                                            .split("<img src=")
-                                            .last
-                                            .split(" style")
-                                            .first
-                                            .replaceAll('"', ''),
-                                        placeholder: (context, url) {
-                                          return const CustomLoadingWidget();
-                                        },
-                                      ),
-                                    )
-                                  else
-                                    CustomText(
-                                        text: checkoutController
-                                            .order!.totals![index].title!),
-                                  CustomText(
-                                    text: checkoutController
-                                        .order!.totals![index].text!,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ],
-                              );
-                            })
-                      else
-                        ListView(
+                      // if (checkoutController.order!.totals!.length >= 4)
+                      ListView.separated(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          children: [
-                            Row(
+                          itemCount: checkoutController.order!.totals!.length,
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              height: 20,
+                            );
+                          },
+                          itemBuilder: (context, index) {
+                            print(checkoutController.order!.totals!.length);
+                            return Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                CustomText(
-                                  text: 'subtotal'.tr,
-                                ),
-                                CustomText(
-                                  text: checkoutController.shippingCode.value ==
-                                          'aramex.aramex'
-                                      ? 'S.R${((checkoutController.order!.total / 1.15) - 32).toStringAsFixed(2)}'
-                                      : 'S.R${((checkoutController.order!.total / 1.15) - 0).toStringAsFixed(2)}',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CustomText(
-                                  text: 'shippingFees'.tr,
-                                ),
-                                CustomText(
-                                  text: checkoutController.shippingCode.value ==
-                                          'aramex.aramex'
-                                      ? 'S.R32.00'
-                                      : 'S.R0.00',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            if (checkoutController.isCouponAdded.value == true)
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
+                                if (checkoutController
+                                    .order!.totals![index].title!
+                                    .startsWith('<'))
+                                  SizedBox(
+                                    width: 100,
+                                    child: CachedNetworkImage(
+                                      imageUrl: checkoutController
+                                          .order!.totals![index].title!
+                                          .split("<img src=")
+                                          .last
+                                          .split(" style")
+                                          .first
+                                          .replaceAll('"', ''),
+                                      placeholder: (context, url) {
+                                        return const CustomLoadingWidget();
+                                      },
+                                    ),
+                                  )
+                                else
                                   CustomText(
-                                    text: 'coupon'.tr,
-                                  ),
-                                  CustomText(
-                                    text: checkoutController
-                                                .order!.totals!.length ==
-                                            3
-                                        ? checkoutController
-                                            .order!.totals![1].text!
-                                        : checkoutController
-                                            .order!.totals![2].text!,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ],
-                              ),
-                            if (checkoutController.isCouponAdded.value == true)
-                              const SizedBox(
-                                height: 20,
-                              ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
+                                      text: checkoutController
+                                          .order!.totals![index].title!),
                                 CustomText(
-                                  text: 'valueAddedTax'.tr,
-                                ),
-                                CustomText(
-                                  text:
-                                      'S.R${(checkoutController.order!.total - (checkoutController.order!.total / 1.15)).toStringAsFixed(2)}',
+                                  text: checkoutController
+                                      .order!.totals![index].text!,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
                                 ),
                               ],
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CustomText(
-                                  text: 'totalAmount'.tr,
-                                ),
-                                CustomText(
-                                  text:
-                                      'S.R${checkoutController.order!.total.toStringAsFixed(2)}',
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                            );
+                          })
+                      // else
+                      //   ListView(
+                      //     shrinkWrap: true,
+                      //     physics: const NeverScrollableScrollPhysics(),
+                      //     children: [
+                      //       Row(
+                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //         children: [
+                      //           CustomText(
+                      //             text: 'subtotal'.tr,
+                      //           ),
+                      //           CustomText(
+                      //             text: checkoutController.shippingCode.value ==
+                      //                     'aramex.aramex'
+                      //                 ? 'S.R${((checkoutController.order!.total / 1.15) - 32).toStringAsFixed(2)}'
+                      //                 : 'S.R${((checkoutController.order!.total / 1.15) - 0).toStringAsFixed(2)}',
+                      //             fontSize: 16,
+                      //             fontWeight: FontWeight.w600,
+                      //           ),
+                      //         ],
+                      //       ),
+                      //       const SizedBox(
+                      //         height: 20,
+                      //       ),
+                      //       Row(
+                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //         children: [
+                      //           CustomText(
+                      //             text: 'shippingFees'.tr,
+                      //           ),
+                      //           CustomText(
+                      //             text: checkoutController.shippingCode.value ==
+                      //                     'aramex.aramex'
+                      //                 ? 'S.R32.00'
+                      //                 : 'S.R0.00',
+                      //             fontSize: 16,
+                      //             fontWeight: FontWeight.w600,
+                      //           ),
+                      //         ],
+                      //       ),
+                      //       const SizedBox(
+                      //         height: 20,
+                      //       ),
+                      //       if (checkoutController.isCouponAdded.value == true)
+                      //         Row(
+                      //           mainAxisAlignment:
+                      //               MainAxisAlignment.spaceBetween,
+                      //           children: [
+                      //             CustomText(
+                      //               text: 'coupon'.tr,
+                      //             ),
+                      //             CustomText(
+                      //               text: checkoutController
+                      //                           .order!.totals!.length ==
+                      //                       3
+                      //                   ? checkoutController
+                      //                       .order!.totals![1].text!
+                      //                   : checkoutController
+                      //                       .order!.totals![2].text!,
+                      //               fontSize: 16,
+                      //               fontWeight: FontWeight.w600,
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       if (checkoutController.isCouponAdded.value == true)
+                      //         const SizedBox(
+                      //           height: 20,
+                      //         ),
+                      //       Row(
+                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //         children: [
+                      //           CustomText(
+                      //             text: 'valueAddedTax'.tr,
+                      //           ),
+                      //           CustomText(
+                      //             text:
+                      //                 'S.R${(checkoutController.order!.total - (checkoutController.order!.total / 1.15)).toStringAsFixed(2)}',
+                      //             fontSize: 16,
+                      //             fontWeight: FontWeight.w600,
+                      //           ),
+                      //         ],
+                      //       ),
+                      //       const SizedBox(
+                      //         height: 20,
+                      //       ),
+                      //       Row(
+                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //         children: [
+                      //           CustomText(
+                      //             text: 'totalAmount'.tr,
+                      //           ),
+                      //           CustomText(
+                      //             text:
+                      //                 'S.R${checkoutController.order!.total.toStringAsFixed(2)}',
+                      //             fontSize: 16,
+                      //             fontWeight: FontWeight.w600,
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ],
+                      //   ),
+                      //
+                      //
+                      //
                       // const SizedBox(
                       //   height: 34,
                       // ),

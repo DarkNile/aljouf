@@ -309,7 +309,9 @@ class _ProductScreenState extends State<ProductScreen>
                                           //     '${double.parse(widget.isFromCart ? widget.product.originPrice.toString() : widget.product.price.toString()).toStringAsFixed(2)} ',
                                           text: double.parse(widget
                                                   .product.price
-                                                  .toString())
+                                                  .toString()
+                                                  .split(',')
+                                                  .join())
                                               .toStringAsFixed(2),
                                           style: TextStyle(
                                             fontSize: widget.product.special !=
@@ -707,8 +709,14 @@ class _ProductScreenState extends State<ProductScreen>
                           id: widget.product.id.toString(),
                           name: widget.product.name!,
                           price: double.parse(widget.isFromCart
-                              ? widget.product.originPrice.toString()
-                              : widget.product.price.toString()),
+                              ? widget.product.originPrice
+                                  .toString()
+                                  .split(',')
+                                  .join()
+                              : widget.product.price
+                                  .toString()
+                                  .split(',')
+                                  .join()),
                           currency: 'SAR',
                           quantity: 1,
                         );

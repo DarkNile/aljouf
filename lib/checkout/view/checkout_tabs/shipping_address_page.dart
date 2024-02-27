@@ -33,13 +33,13 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
   @override
   void initState() {
     super.initState();
-    if (widget.profileController.addresses.length == 1) {
-      checkedIndex = 0;
-      isChecked = true;
-    } else {
-      checkedIndex = null;
-      isChecked = false;
-    }
+    // if (widget.profileController.addresses.length == 1) {
+    //   checkedIndex = 0;
+    //   isChecked = true;
+    // } else {
+    checkedIndex = null;
+    isChecked = false;
+    // }
   }
 
   @override
@@ -172,9 +172,11 @@ class _ShippingAddressPageState extends State<ShippingAddressPage> {
                         });
                       },
                       address: widget.profileController.addresses[index],
-                      isChecked: widget.profileController.addresses.length == 1
-                          ? true
-                          : isChecked && checkedIndex == index,
+                      isChecked:
+                          // widget.profileController.addresses.length == 1
+                          //     ? true
+                          //     :
+                          isChecked && checkedIndex == index,
                       onChanged: (value) {
                         setState(() {
                           checkedIndex = index;
