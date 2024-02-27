@@ -174,8 +174,10 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                   AppsFlyerService.logAddToCart(
                                     id: widget.product.id.toString(),
                                     name: widget.product.name!,
-                                    price: double.parse(
-                                        widget.product.price.toString()),
+                                    price: double.parse(widget.product.price
+                                        .toString()
+                                        .split(',')
+                                        .join()),
                                     currency: 'SAR',
                                     quantity: 1,
                                   );
@@ -496,7 +498,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                         text: TextSpan(children: [
                           TextSpan(
                             text:
-                                '${double.parse(widget.product.price.toString()).toStringAsFixed(2)} ',
+                                '${double.parse(widget.product.price.toString().split(',').join()).toStringAsFixed(2)} ',
                             style: TextStyle(
                               fontSize: widget.product.special != null &&
                                       widget.product.special != 0
@@ -667,7 +669,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                 text: TextSpan(children: [
                                   TextSpan(
                                     text:
-                                        '${double.parse(widget.product.price.toString()).toStringAsFixed(2)} ',
+                                        '${double.parse(widget.product.price.toString().split(',').join()).toStringAsFixed(2)} ',
                                     style: TextStyle(
                                       fontSize:
                                           widget.product.special != null &&
@@ -752,8 +754,10 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                     AppsFlyerService.logAddToCart(
                                       id: widget.product.id.toString(),
                                       name: widget.product.name!,
-                                      price: double.parse(
-                                          widget.product.price.toString()),
+                                      price: double.parse(widget.product.price
+                                          .toString()
+                                          .split(',')
+                                          .join()),
                                       currency: 'SAR',
                                       quantity: 1,
                                     );

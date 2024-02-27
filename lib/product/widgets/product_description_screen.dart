@@ -27,6 +27,7 @@ class ProductDescriptionScreen extends StatelessWidget {
             text: product.description!.split('&nbsp;').join(),
             color: brownishGrey,
             height: 1.5,
+            maxlines: 10,
           ),
         ],
       ),

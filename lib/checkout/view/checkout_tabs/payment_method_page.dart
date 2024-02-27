@@ -29,14 +29,14 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
   @override
   void initState() {
     super.initState();
-    if (widget.checkoutController.paymentMethods.length == 1 ||
-        Platform.isAndroid) {
-      checkedIndex = 0;
-      isChecked = true;
-    } else {
-      checkedIndex = null;
-      isChecked = false;
-    }
+    // if (widget.checkoutController.paymentMethods.length == 1 ||
+    //     Platform.isAndroid) {
+    //   checkedIndex = 0;
+    //   isChecked = true;
+    // } else {
+    checkedIndex = null;
+    isChecked = false;
+    // }
   }
 
   @override
@@ -75,9 +75,10 @@ class _PaymentMethodPageState extends State<PaymentMethodPage> {
                     paymentMethod:
                         widget.checkoutController.paymentMethods[index],
                     isChecked:
-                        widget.checkoutController.paymentMethods.length == 1
-                            ? true
-                            : isChecked && checkedIndex == index,
+                        // widget.checkoutController.paymentMethods.length == 1
+                        //     ? true
+                        //     :
+                        isChecked && checkedIndex == index,
                     onChanged: (value) {
                       setState(() {
                         checkedIndex = index;

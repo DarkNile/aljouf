@@ -28,13 +28,13 @@ class _ShippingMethodPageState extends State<ShippingMethodPage> {
   @override
   void initState() {
     super.initState();
-    if (widget.checkoutController.shippingMethods.length == 1) {
-      checkedIndex = 0;
-      isChecked = true;
-    } else {
-      checkedIndex = null;
-      isChecked = false;
-    }
+    // if (widget.checkoutController.shippingMethods.length == 1) {
+    //   checkedIndex = 0;
+    //   isChecked = true;
+    // } else {
+    checkedIndex = null;
+    isChecked = false;
+    // }
   }
 
   @override
@@ -68,9 +68,10 @@ class _ShippingMethodPageState extends State<ShippingMethodPage> {
                     shippingMethod:
                         widget.checkoutController.shippingMethods[index],
                     isChecked:
-                        widget.checkoutController.shippingMethods.length == 1
-                            ? true
-                            : isChecked && checkedIndex == index,
+                        // widget.checkoutController.shippingMethods.length == 1
+                        //     ? true
+                        //     :
+                        isChecked && checkedIndex == index,
                     onChanged: (value) {
                       setState(() {
                         checkedIndex = index;
