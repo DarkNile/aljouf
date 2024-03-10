@@ -58,6 +58,7 @@ class CheckoutService {
     if (jsonDecode(response.body)['success'] == 1) {
       var data = jsonDecode(response.body)['data'];
       print('data: $data');
+      print('cartItems: $data');
       if (data is List) {
         return null;
       }
