@@ -32,6 +32,7 @@ class CheckoutController extends GetxController {
   var isShippingRateLoading = false.obs;
   var shippingRate = 0.obs;
   var shippingCode = ''.obs;
+  var isOutOfStock = false.obs;
 
   Future<int?> getShippingRate() async {
     try {

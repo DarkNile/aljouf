@@ -5,6 +5,7 @@ import 'package:aljouf/auth/view/edit_details_screen.dart';
 // import 'package:aljouf/home/controllers/home_controller.dart';
 import 'package:aljouf/product/view/product_screen.dart';
 import 'package:aljouf/profile/controllers/profile_controller.dart';
+import 'package:aljouf/utils/app_util.dart';
 import 'package:aljouf/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -282,7 +283,23 @@ class _CartScreenState extends State<CartScreen> {
                               customerId.isNotEmpty &&
                               customerId ==
                                   _profileController.user.value.id.toString()) {
-                            Get.to(() => const CheckoutScreen());
+                            final cart =
+                                await _checkoutController.getCartItems();
+                            for (int i = 0; i < cart!.products!.length; i++) {
+                              if (cart.products![i].qty == '0' ||
+                                  cart.products![i].qty == 0) {
+                                _checkoutController.isOutOfStock(true);
+                              } else {
+                                _checkoutController.isOutOfStock(false);
+                              }
+                            }
+                            if (_checkoutController.isOutOfStock.value ==
+                                    true &&
+                                context.mounted) {
+                              AppUtil.errorToast(context, 'outOfStock'.tr);
+                            } else {
+                              Get.to(() => const CheckoutScreen());
+                            }
                           } else {
                             await showDialog(
                                 context: context,
@@ -554,7 +571,12 @@ class _CartScreenState extends State<CartScreen> {
                                 });
                           }
                         },
-                        title: 'checkout'.tr,
+                        color: _checkoutController.isOutOfStock.value == true
+                            ? brownishGrey
+                            : secondaryGreen,
+                        title: _checkoutController.isOutOfStock.value == true
+                            ? 'outOfStock'.tr
+                            : 'checkout'.tr,
                         radius: 4,
                         fontSize: 14,
                         fontWeight: FontWeight.w400,

@@ -1,3 +1,4 @@
+import 'package:aljouf/utils/app_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,6 +8,7 @@ import 'package:aljouf/constants/colors.dart';
 import 'package:aljouf/product/models/product.dart';
 import 'package:aljouf/widgets/custom_loading_widget.dart';
 import 'package:aljouf/widgets/custom_text.dart';
+import 'dart:math' as math;
 
 class CustomCartItem extends StatelessWidget {
   const CustomCartItem({
@@ -36,11 +38,42 @@ class CustomCartItem extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            child: CachedNetworkImage(
-              imageUrl: product.originalImage!,
-              placeholder: (context, url) {
-                return const CustomLoadingWidget();
-              },
+            child: Stack(
+              clipBehavior: Clip.none,
+              children: [
+                CachedNetworkImage(
+                  imageUrl: product.originalImage!,
+                  placeholder: (context, url) {
+                    return const CustomLoadingWidget();
+                  },
+                ),
+                if (product.qty == '0' || product.qty == 0)
+                  Positioned.directional(
+                    textDirection: Directionality.of(context),
+                    top: AppUtil.rtlDirection(context) ? 4 : 10,
+                    start: AppUtil.rtlDirection(context) ? -8 : -10,
+                    child: Transform.rotate(
+                      angle: AppUtil.rtlDirection(context)
+                          ? math.pi / 5.0
+                          : math.pi / -5.0,
+                      alignment: Alignment.center,
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.all(4),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          color: vermillion,
+                        ),
+                        child: CustomText(
+                          text: 'notAvailable'.tr,
+                          color: Colors.white,
+                          fontSize: 10,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
             ),
           ),
           const SizedBox(
