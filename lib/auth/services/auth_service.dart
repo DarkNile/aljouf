@@ -146,7 +146,7 @@ class AuthService {
       {required String email, required BuildContext context}) async {
     final getStorage = GetStorage();
     final String? token = getStorage.read('token');
-    print(token);
+    print('token $token');
     final String? lang = getStorage.read('lang');
     print(lang);
     final response = await http.post(
@@ -154,7 +154,7 @@ class AuthService {
         headers: {
           'Accept': 'application/json',
           // 'Authorization': 'Bearer $token',
-          "Cookie": "OCSESSID=$token; currency=SAR;",
+          // "Cookie": "OCSESSID=$token; currency=SAR;",
         },
         body: json.encode({
           'email': email.trim(),
@@ -179,7 +179,7 @@ class AuthService {
   }) async {
     final getStorage = GetStorage();
     final String? token = getStorage.read('token');
-    print(token);
+    print('token $token');
     final response = await http.post(Uri.parse('$baseUrl route=rest/phoneotp'),
         headers: {
           'Accept': 'application/json',
@@ -252,7 +252,7 @@ class AuthService {
         headers: {
           'Accept': 'application/json',
           // 'Authorization': 'Bearer $token',
-          "Cookie": "OCSESSID=$token; currency=SAR;",
+          // "Cookie": "OCSESSID=$token; currency=SAR;",
         },
         body: jsonEncode({
           'email': email.trim(),
@@ -287,7 +287,7 @@ class AuthService {
         headers: {
           'Accept': 'application/json',
           // 'Authorization': 'Bearer $token',
-          "Cookie": "OCSESSID=$token; currency=SAR;",
+          // "Cookie": "OCSESSID=$token; currency=SAR;",
         },
         body: jsonEncode({
           'email': email.trim(),
