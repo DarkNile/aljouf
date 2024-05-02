@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:aljouf/auth/services/firebase_service.dart';
@@ -6,6 +7,8 @@ import 'package:aljouf/auth/view/edit_details_screen.dart';
 import 'package:aljouf/product/view/product_screen.dart';
 import 'package:aljouf/profile/controllers/profile_controller.dart';
 import 'package:aljouf/utils/app_util.dart';
+import 'package:aljouf/utils/cache_helper.dart';
+import 'package:aljouf/utils/debounce.dart';
 import 'package:aljouf/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -32,6 +35,8 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   final _checkoutController = Get.put(CheckoutController());
   final _profileController = Get.put(ProfileController());
+  final debounce = Debounce(const Duration(milliseconds: 500));
+
   // final _homeController = Get.put(HomeController());
 
   // @override
@@ -40,8 +45,21 @@ class _CartScreenState extends State<CartScreen> {
   //   _homeController.getCoupon();
   // }
 
+  bool isLogin = false;
+  @override
+  void initState() {
+    super.initState();
+    final getStorage = GetStorage();
+    final String? customerId = getStorage.read('customerId');
+    isLogin = (customerId != null &&
+        customerId.isNotEmpty &&
+        customerId == _profileController.user.value.id.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
+    log("CartScreen");
+
     final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -158,14 +176,38 @@ class _CartScreenState extends State<CartScreen> {
                                     1)
                                 .toString();
                           });
-                          _checkoutController.updateCartItemQuantity(
-                            productId: _checkoutController
-                                .cart!.products![index].id
-                                .toString(),
-                            quantity: _checkoutController
-                                .cart!.products![index].quantity
-                                .toString(),
-                          );
+
+                          log("SET");
+                          var productsID = _checkoutController
+                              .cart!.products![index].id
+                              .toString();
+                          log("productsID $productsID");
+                          var quantity = _checkoutController
+                              .cart!.products![index].quantity
+                              .toString()
+                              .toString();
+                          log("quantity $quantity");
+
+                          debounce.run(() {
+                            if (isLogin) {
+                              _checkoutController.updateCartItemQuantity(
+                                productId: _checkoutController
+                                    .cart!.products![index].id
+                                    .toString(),
+                                quantity: _checkoutController
+                                    .cart!.products![index].quantity
+                                    .toString(),
+                              );
+                            } else {
+                              CacheHelper.upDateCart(
+                                product:
+                                    _checkoutController.cart!.products![index],
+                                quantity: _checkoutController
+                                    .cart!.products![index].quantity
+                                    .toString(),
+                              );
+                            }
+                          });
                         }
                       },
                       onDecrementTap: () {
@@ -179,17 +221,34 @@ class _CartScreenState extends State<CartScreen> {
                                     1)
                                 .toString();
                           });
-                          _checkoutController.updateCartItemQuantity(
-                            productId: _checkoutController
-                                .cart!.products![index].id
-                                .toString(),
-                            quantity: _checkoutController
-                                .cart!.products![index].quantity
-                                .toString(),
-                          );
+                          log("SET");
+                          debounce.run(() {
+                            if (isLogin) {
+                              _checkoutController.updateCartItemQuantity(
+                                productId: _checkoutController
+                                    .cart!.products![index].id
+                                    .toString(),
+                                quantity: _checkoutController
+                                    .cart!.products![index].quantity
+                                    .toString(),
+                              );
+                            } else {
+                              CacheHelper.upDateCart(
+                                product:
+                                    _checkoutController.cart!.products![index],
+                                quantity: _checkoutController
+                                    .cart!.products![index].quantity
+                                    .toString(),
+                              );
+                            }
+                          });
                         }
                       },
-                      onDeleteTap: () {
+                      onDeleteTap: () async {
+                        log("DELETE");
+                        await CacheHelper.deleteFromCart(
+                            product:
+                                _checkoutController.cart!.products![index]);
                         _checkoutController.deleteCartItem(
                             productId: _checkoutController
                                 .cart!.products![index].id
@@ -359,13 +418,16 @@ class _CartScreenState extends State<CartScreen> {
                                                         height: 1,
                                                         width: 99,
                                                       ),
-                                                      CustomText(
-                                                        text: 'loginThrough'.tr,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: warmGrey,
-                                                        textAlign:
-                                                            TextAlign.center,
+                                                      Expanded(
+                                                        child: CustomText(
+                                                          text:
+                                                              'loginThrough'.tr,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          color: warmGrey,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                        ),
                                                       ),
                                                       Container(
                                                         color: Colors.grey,
