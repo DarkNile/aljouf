@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:aljouf/checkout/services/rating_service.dart';
 import 'package:aljouf/home/services/apps_flyer_service.dart';
+import 'package:aljouf/product/models/product.dart';
+import 'package:aljouf/utils/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aljouf/checkout/models/cart.dart';
@@ -66,19 +70,79 @@ class CheckoutController extends GetxController {
   }
 
   Future<Cart?> getCartItems() async {
+    log("Future<Cart?> getCartItems()");
     try {
       isCartLoading(true);
+
       final data = await CheckoutService.getCartItems();
       if (data != null) {
         cart = data;
         cartItems(cart!.totalProductCount);
+        log(" cartItems Start ${cartItems.value}");
         total(0.0);
         for (var element in cart!.products!) {
           total(total.value += element.totalRaw);
         }
+
+        log("API CART ${cart!.products!.length}");
+
+        CacheHelper.getMyListCart().forEach((prod) {
+          if (cart?.products != null || cart!.products!.isNotEmpty) {
+            for (int i = 0; i < cart!.products!.length; i++) {
+              if (cart!.products![i].id.toString() == prod.id.toString()) {
+                cart!.products![i].qty = prod.qty.toString();
+                cartItems(cartItems.value += 1);
+              }
+            }
+
+            // for (int i = 0; i < cart!.products!.length; i++) {
+            //   if (cart!.products![i].id.toString() == prod.id.toString()) {
+            //     cart!.products![i].qty = prod.qty.toString();
+            //     cartItems(cartItems.value += 1);
+            //   } else {
+            //     cartItems(cartItems.value += 1);
+            //     cart!.products!.add(prod);
+            //   }
+            // }
+
+            // cart!.products!.add(prod);
+            // cartItems(cartItems.value += 1);
+
+            String price = prod.priceRaw ?? "0.0";
+
+            log("Prod price ${prod.priceRaw}");
+            total(total.value += double.parse(price));
+          }
+        });
+        log("  cartItems Last ${cartItems.value}");
+
         return cart;
       } else {
-        return null;
+        log("Cart == null");
+        print("else");
+        List<Product>? products = [];
+        cartItems(0);
+        total(0);
+
+        CacheHelper.getMyListCart().forEach((prod) {
+          products.add(prod);
+
+          String price = prod.priceRaw ?? "0.0";
+
+          log("Prod price ${prod.priceRaw}");
+
+          total(total.value += double.parse(price));
+        });
+
+        cartItems(products.length);
+        log("cartItems $cartItems");
+        cart = Cart(
+          total: total.value.toStringAsFixed(2),
+          totalProductCount: cartItems.value,
+          totalRaw: total.value,
+          products: products,
+        );
+        return cart;
       }
     } catch (e) {
       print(e);

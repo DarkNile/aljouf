@@ -53,6 +53,7 @@ class _HomePageState extends State<HomePage> {
     customerId = getStorage.read('customerId');
     _pageController = PageController(initialPage: widget.pageIndex ?? 0);
     _currentIndex = widget.pageIndex ?? 0;
+    _checkoutController.getCartItems();
     // checkAppVersion();
     _checkAppVersion();
   }
