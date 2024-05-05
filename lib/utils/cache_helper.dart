@@ -73,6 +73,14 @@ class CacheHelper {
     //   return true;
     // }
     product.quantity = quantity;
+    log("Product Price Raw : ${product.priceRaw.toString()}");
+
+    log("Product price : ${product.price.toString()}");
+    log("Product dateAdded : ${product.dateAdded.toString()}");
+    log("Product dateModified : ${product.dateModified.toString()}");
+    log("Product description : ${product.description.toString()}");
+    log("Product discounts : ${product.discounts.toString()}");
+    log("Product name : ${product.name.toString()}");
 
     bool isSaved = false;
     List<Product> productsList = [];
@@ -141,6 +149,7 @@ class CacheHelper {
     for (var prod in productsList) {
       String prodID = prod.id.toString();
       String productID = product.id.toString();
+      log("Price Raw : ${prod.priceRaw.toString()}");
       if (prodID == productID) {
         isSaved = true;
         log("isSaved $isSaved");
@@ -269,21 +278,4 @@ class CacheHelper {
     log("My List Cart  getMyListCart ():${productsList.length.toString()}");
     return productsList;
   }
-}
-
-class ProductCacheModel {
-  final List<Product> myListCart;
-
-  ProductCacheModel({
-    required this.myListCart,
-  });
-
-  Map<String, dynamic> toJson() => {
-        'ListCart': jsonEncode(myListCart),
-      };
-
-  factory ProductCacheModel.fromJson(Map<String, dynamic> json) =>
-      ProductCacheModel(
-        myListCart: jsonDecode(json['ListCart']),
-      );
 }

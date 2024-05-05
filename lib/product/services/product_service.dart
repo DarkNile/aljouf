@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -26,6 +27,7 @@ class ProductService {
     print('response status code: ${response.statusCode}');
     if (jsonDecode(response.body)['success'] == 1) {
       List<dynamic> data = jsonDecode(response.body)['data'];
+      log("\ngetProductsByCategoryId()\n");
       print('data: $data');
       return data.map((product) => Product.fromJson(product)).toList();
     } else {
