@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -100,9 +101,13 @@ class HomeService {
         "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
       },
     );
+    log("getCategoryProducts()");
+    log("${baseUrl}route=feed/rest_api/products&category=$id&language=$lang");
+
     print('response status code: ${response.statusCode}');
     if (jsonDecode(response.body)['success'] == 1) {
       List<dynamic> data = jsonDecode(response.body)['data'];
+      log("\ngetCategoryProducts()\n");
       print('data: $data');
       return data.map((product) => Product.fromJson(product)).toList();
     } else {

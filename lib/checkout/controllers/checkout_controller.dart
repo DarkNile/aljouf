@@ -82,6 +82,14 @@ class CheckoutController extends GetxController {
         total(0.0);
         for (var element in cart!.products!) {
           total(total.value += element.totalRaw);
+          log("++++++++=========+++++++++==");
+          log("priceRaw ${element.priceRaw}");
+          log("price ${element.price}");
+          log("priceExcludingTax ${element.priceExcludingTax}");
+          log("originPrice ${element.originPrice}");
+          log("priceExcludingTaxFormated ${element.priceExcludingTaxFormated}");
+          log("priceFormated ${element.priceFormated}");
+          log("++++++++=========+++++++++==");
         }
 
         log("API CART ${cart!.products!.length}");
@@ -89,6 +97,7 @@ class CheckoutController extends GetxController {
         CacheHelper.getMyListCart().forEach((prod) {
           if (cart?.products != null || cart!.products!.isNotEmpty) {
             for (int i = 0; i < cart!.products!.length; i++) {
+              //    =======  IF PRODUCT IS ALREADY IN CART     =======
               if (cart!.products![i].id.toString() == prod.id.toString()) {
                 cart!.products![i].qty = prod.qty.toString();
                 cartItems(cartItems.value += 1);
