@@ -1,15 +1,8 @@
-import 'dart:io';
 import 'dart:math' as math;
-import 'package:aljouf/auth/services/firebase_service.dart';
-import 'package:aljouf/auth/view/edit_details_screen.dart';
-import 'package:aljouf/auth/view/login_screen.dart';
-import 'package:aljouf/auth/view/register_screen.dart';
 import 'package:aljouf/home/services/apps_flyer_service.dart';
-import 'package:aljouf/home/view/home_page.dart';
 import 'package:aljouf/product/controllers/product_controller.dart';
 import 'package:aljouf/profile/controllers/profile_controller.dart';
-import 'package:aljouf/widgets/custom_button.dart';
-import 'package:aljouf/widgets/custom_card.dart';
+import 'package:aljouf/utils/cache_helper.dart';
 import 'package:aljouf/widgets/custom_product_border.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +45,6 @@ class _CustomProductCardState extends State<CustomProductCard> {
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
     return InkWell(
       onTap: () {
         if (widget.isRelated) {
@@ -117,7 +109,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                           ),
                         ),
                       ),
-                      if (widget.product.quantity < 1)
+                      if (int.parse(widget.product.quantity.toString()) < 1)
                         Positioned.directional(
                           textDirection: Directionality.of(context),
                           top: AppUtil.rtlDirection(context) ? 4 : 10,
@@ -144,7 +136,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                             ),
                           ),
                         ),
-                      if (widget.product.quantity > 0)
+                      if (int.parse(widget.product.quantity.toString()) > 0)
                         Positioned.directional(
                           textDirection: Directionality.of(context),
                           bottom: 0,
@@ -183,284 +175,309 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                   );
                                 }
                               } else {
-                                await showDialog(
-                                    context: context,
-                                    barrierDismissible: true,
-                                    builder: (context) {
-                                      return StatefulBuilder(
-                                          builder: (context, setState) {
-                                        return SizedBox(
-                                          width: width,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              AlertDialog(
-                                                insetPadding:
-                                                    const EdgeInsets.all(16),
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(25),
-                                                ),
-                                                title: CustomText(
-                                                  text: 'signIn'.tr,
-                                                  textAlign: TextAlign.center,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: warmGrey,
-                                                ),
-                                                content: SingleChildScrollView(
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 20),
-                                                  child: ListBody(
-                                                    children: [
-                                                      const SizedBox(
-                                                        height: 16,
-                                                      ),
-                                                      CustomButton(
-                                                        onPressed: () {
-                                                          Get.to(() =>
-                                                              const LoginScreen());
-                                                        },
-                                                        title: 'signIn'.tr,
-                                                        radius: 4,
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 24,
-                                                      ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Container(
-                                                            color: Colors.grey,
-                                                            height: 1,
-                                                            width: 99,
-                                                          ),
-                                                          CustomText(
-                                                            text: 'loginThrough'
-                                                                .tr,
-                                                            fontWeight:
-                                                                FontWeight.w400,
-                                                            color: warmGrey,
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                          ),
-                                                          Container(
-                                                            color: Colors.grey,
-                                                            height: 1,
-                                                            width: 99,
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 32,
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .symmetric(
-                                                                horizontal: 4),
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          textDirection:
-                                                              TextDirection.ltr,
-                                                          children: [
-                                                            // Expanded(
-                                                            //   child: CustomCard(
-                                                            //     onTap: () {},
-                                                            //     icon:
-                                                            //         'facebook_icon',
-                                                            //   ),
-                                                            // ),
-                                                            // const SizedBox(
-                                                            //   width: 8,
-                                                            // ),
-                                                            if (Platform.isIOS)
-                                                              Expanded(
-                                                                child:
-                                                                    CustomCard(
-                                                                  onTap:
-                                                                      () async {
-                                                                    final user =
-                                                                        await FirebaseService().signInWithApple(
-                                                                            context:
-                                                                                context);
-                                                                    if (user !=
-                                                                        null) {
-                                                                      _profileController
-                                                                          .getAccount();
-                                                                      _checkoutController
-                                                                          .getCartItems();
-                                                                      if (user.phone !=
-                                                                              null &&
-                                                                          user.phone!
-                                                                              .isNotEmpty) {
-                                                                        Get.offAll(() =>
-                                                                            const HomePage());
-                                                                      } else {
-                                                                        Get.offAll(
-                                                                          () =>
-                                                                              EditDetailsScreen(
-                                                                            profileController:
-                                                                                _profileController,
-                                                                            isFromSocialLogin:
-                                                                                true,
-                                                                            firstName:
-                                                                                user.firstName,
-                                                                            lastName:
-                                                                                user.lastName,
-                                                                            email:
-                                                                                user.email,
-                                                                            phone:
-                                                                                user.phone,
-                                                                            customerId:
-                                                                                user.id.toString(),
-                                                                          ),
-                                                                        );
-                                                                      }
-                                                                    }
-                                                                  },
-                                                                  icon:
-                                                                      'apple_icon',
-                                                                ),
-                                                              ),
-                                                            if (Platform.isIOS)
-                                                              const SizedBox(
-                                                                width: 8,
-                                                              ),
-                                                            Expanded(
-                                                              child: CustomCard(
-                                                                onTap:
-                                                                    () async {
-                                                                  final user = await FirebaseService()
-                                                                      .signInWithGoogle(
-                                                                          context:
-                                                                              context);
-                                                                  if (user !=
-                                                                      null) {
-                                                                    _profileController
-                                                                        .getAccount();
-                                                                    _checkoutController
-                                                                        .getCartItems();
-                                                                    if (user.phone !=
-                                                                            null &&
-                                                                        user.phone!
-                                                                            .isNotEmpty) {
-                                                                      Get.offAll(
-                                                                          () =>
-                                                                              const HomePage());
-                                                                    } else {
-                                                                      Get.offAll(
-                                                                        () =>
-                                                                            EditDetailsScreen(
-                                                                          profileController:
-                                                                              _profileController,
-                                                                          isFromSocialLogin:
-                                                                              true,
-                                                                          firstName:
-                                                                              user.firstName,
-                                                                          lastName:
-                                                                              user.lastName,
-                                                                          email:
-                                                                              user.email,
-                                                                          phone:
-                                                                              user.phone,
-                                                                          customerId: user
-                                                                              .id
-                                                                              .toString(),
-                                                                        ),
-                                                                      );
-                                                                    }
-                                                                  }
-                                                                },
-                                                                icon:
-                                                                    'google_icon',
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 32,
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () {
-                                                          Get.to(() =>
-                                                              const RegisterScreen());
-                                                        },
-                                                        child: Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          children: [
-                                                            CustomText(
-                                                              text:
-                                                                  'dontHaveAccount'
-                                                                      .tr,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                              color: Colors
-                                                                  .grey[500]!,
-                                                            ),
-                                                            const SizedBox(
-                                                              width: 4,
-                                                            ),
-                                                            CustomText(
-                                                              text: 'joinUs'.tr,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                      const SizedBox(
-                                                        height: 40,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                              Material(
-                                                color: Colors.transparent,
-                                                child: InkWell(
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                  onTap: () {
-                                                    Get.back();
-                                                  },
-                                                  child: Container(
-                                                    height: 35,
-                                                    width: 35,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(20),
-                                                        color:
-                                                            Colors.transparent,
-                                                        border: Border.all(
-                                                            color:
-                                                                Colors.white)),
-                                                    child: const Icon(
-                                                      Icons.close,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      });
-                                    });
+                                // Here Cache Your Products
+                                bool isSaved = await CacheHelper.addToCart(
+                                  product: widget.product,
+                                  quantity: '1',
+                                );
+
+                                if (isSaved) {
+                                  await _checkoutController.getCartItems();
+                                  if (context.mounted) {
+                                    AppUtil.successToast(
+                                      context,
+                                      'productAddedToCart'.tr,
+                                    );
+                                  }
+                                  AppsFlyerService.logAddToCart(
+                                    id: widget.product.id.toString(),
+                                    name: widget.product.name!,
+                                    price: double.parse(widget.product.price
+                                        .toString()
+                                        .split(',')
+                                        .join()),
+                                    currency: 'SAR',
+                                    quantity: 1,
+                                  );
+                                }
+                                // await showDialog(
+                                //     context: context,
+                                //     barrierDismissible: true,
+                                //     builder: (context) {
+                                //       return StatefulBuilder(
+                                //           builder: (context, setState) {
+                                //         return SizedBox(
+                                //           width: width,
+                                //           child: Column(
+                                //             mainAxisAlignment:
+                                //                 MainAxisAlignment.center,
+                                //             crossAxisAlignment:
+                                //                 CrossAxisAlignment.center,
+                                //             children: [
+                                //               AlertDialog(
+                                //                 insetPadding:
+                                //                     const EdgeInsets.all(16),
+                                //                 shape: RoundedRectangleBorder(
+                                //                   borderRadius:
+                                //                       BorderRadius.circular(25),
+                                //                 ),
+                                //                 title: CustomText(
+                                //                   text: 'signIn'.tr,
+                                //                   textAlign: TextAlign.center,
+                                //                   fontSize: 14,
+                                //                   fontWeight: FontWeight.w600,
+                                //                   color: warmGrey,
+                                //                 ),
+                                //                 content: SingleChildScrollView(
+                                //                   padding: const EdgeInsets
+                                //                       .symmetric(
+                                //                       horizontal: 20),
+                                //                   child: ListBody(
+                                //                     children: [
+                                //                       const SizedBox(
+                                //                         height: 16,
+                                //                       ),
+                                //                       CustomButton(
+                                //                         onPressed: () {
+                                //                           Get.to(() =>
+                                //                               const LoginScreen());
+                                //                         },
+                                //                         title: 'signIn'.tr,
+                                //                         radius: 4,
+                                //                       ),
+                                //                       const SizedBox(
+                                //                         height: 24,
+                                //                       ),
+                                //                       Row(
+                                //                         mainAxisAlignment:
+                                //                             MainAxisAlignment
+                                //                                 .spaceBetween,
+                                //                         children: [
+                                //                           Container(
+                                //                             color: Colors.grey,
+                                //                             height: 1,
+                                //                             width: 99,
+                                //                           ),
+                                //                           CustomText(
+                                //                             text: 'loginThrough'
+                                //                                 .tr,
+                                //                             fontWeight:
+                                //                                 FontWeight.w400,
+                                //                             color: warmGrey,
+                                //                             textAlign: TextAlign
+                                //                                 .center,
+                                //                           ),
+                                //                           Container(
+                                //                             color: Colors.grey,
+                                //                             height: 1,
+                                //                             width: 99,
+                                //                           ),
+                                //                         ],
+                                //                       ),
+                                //                       const SizedBox(
+                                //                         height: 32,
+                                //                       ),
+                                //                       Padding(
+                                //                         padding:
+                                //                             const EdgeInsets
+                                //                                 .symmetric(
+                                //                                 horizontal: 4),
+                                //                         child: Row(
+                                //                           mainAxisAlignment:
+                                //                               MainAxisAlignment
+                                //                                   .spaceBetween,
+                                //                           textDirection:
+                                //                               TextDirection.ltr,
+                                //                           children: [
+                                //                             // Expanded(
+                                //                             //   child: CustomCard(
+                                //                             //     onTap: () {},
+                                //                             //     icon:
+                                //                             //         'facebook_icon',
+                                //                             //   ),
+                                //                             // ),
+                                //                             // const SizedBox(
+                                //                             //   width: 8,
+                                //                             // ),
+                                //                             if (Platform.isIOS)
+                                //                               Expanded(
+                                //                                 child:
+                                //                                     CustomCard(
+                                //                                   onTap:
+                                //                                       () async {
+                                //                                     final user =
+                                //                                         await FirebaseService().signInWithApple(
+                                //                                             context:
+                                //                                                 context);
+                                //                                     if (user !=
+                                //                                         null) {
+                                //                                       _profileController
+                                //                                           .getAccount();
+                                //                                       _checkoutController
+                                //                                           .getCartItems();
+                                //                                       if (user.phone !=
+                                //                                               null &&
+                                //                                           user.phone!
+                                //                                               .isNotEmpty) {
+                                //                                         Get.offAll(() =>
+                                //                                             const HomePage());
+                                //                                       } else {
+                                //                                         Get.offAll(
+                                //                                           () =>
+                                //                                               EditDetailsScreen(
+                                //                                             profileController:
+                                //                                                 _profileController,
+                                //                                             isFromSocialLogin:
+                                //                                                 true,
+                                //                                             firstName:
+                                //                                                 user.firstName,
+                                //                                             lastName:
+                                //                                                 user.lastName,
+                                //                                             email:
+                                //                                                 user.email,
+                                //                                             phone:
+                                //                                                 user.phone,
+                                //                                             customerId:
+                                //                                                 user.id.toString(),
+                                //                                           ),
+                                //                                         );
+                                //                                       }
+                                //                                     }
+                                //                                   },
+                                //                                   icon:
+                                //                                       'apple_icon',
+                                //                                 ),
+                                //                               ),
+                                //                             if (Platform.isIOS)
+                                //                               const SizedBox(
+                                //                                 width: 8,
+                                //                               ),
+                                //                             Expanded(
+                                //                               child: CustomCard(
+                                //                                 onTap:
+                                //                                     () async {
+                                //                                   final user = await FirebaseService()
+                                //                                       .signInWithGoogle(
+                                //                                           context:
+                                //                                               context);
+                                //                                   if (user !=
+                                //                                       null) {
+                                //                                     _profileController
+                                //                                         .getAccount();
+                                //                                     _checkoutController
+                                //                                         .getCartItems();
+                                //                                     if (user.phone !=
+                                //                                             null &&
+                                //                                         user.phone!
+                                //                                             .isNotEmpty) {
+                                //                                       Get.offAll(
+                                //                                           () =>
+                                //                                               const HomePage());
+                                //                                     } else {
+                                //                                       Get.offAll(
+                                //                                         () =>
+                                //                                             EditDetailsScreen(
+                                //                                           profileController:
+                                //                                               _profileController,
+                                //                                           isFromSocialLogin:
+                                //                                               true,
+                                //                                           firstName:
+                                //                                               user.firstName,
+                                //                                           lastName:
+                                //                                               user.lastName,
+                                //                                           email:
+                                //                                               user.email,
+                                //                                           phone:
+                                //                                               user.phone,
+                                //                                           customerId: user
+                                //                                               .id
+                                //                                               .toString(),
+                                //                                         ),
+                                //                                       );
+                                //                                     }
+                                //                                   }
+                                //                                 },
+                                //                                 icon:
+                                //                                     'google_icon',
+                                //                               ),
+                                //                             ),
+                                //                           ],
+                                //                         ),
+                                //                       ),
+                                //                       const SizedBox(
+                                //                         height: 32,
+                                //                       ),
+                                //                       InkWell(
+                                //                         onTap: () {
+                                //                           Get.to(() =>
+                                //                               const RegisterScreen());
+                                //                         },
+                                //                         child: Row(
+                                //                           mainAxisAlignment:
+                                //                               MainAxisAlignment
+                                //                                   .center,
+                                //                           children: [
+                                //                             CustomText(
+                                //                               text:
+                                //                                   'dontHaveAccount'
+                                //                                       .tr,
+                                //                               fontWeight:
+                                //                                   FontWeight
+                                //                                       .w400,
+                                //                               color: Colors
+                                //                                   .grey[500]!,
+                                //                             ),
+                                //                             const SizedBox(
+                                //                               width: 4,
+                                //                             ),
+                                //                             CustomText(
+                                //                               text: 'joinUs'.tr,
+                                //                               fontWeight:
+                                //                                   FontWeight
+                                //                                       .w500,
+                                //                             ),
+                                //                           ],
+                                //                         ),
+                                //                       ),
+                                //                       const SizedBox(
+                                //                         height: 40,
+                                //                       ),
+                                //                     ],
+                                //                   ),
+                                //                 ),
+                                //               ),
+                                //               Material(
+                                //                 color: Colors.transparent,
+                                //                 child: InkWell(
+                                //                   borderRadius:
+                                //                       BorderRadius.circular(20),
+                                //                   onTap: () {
+                                //                     Get.back();
+                                //                   },
+                                //                   child: Container(
+                                //                     height: 35,
+                                //                     width: 35,
+                                //                     decoration: BoxDecoration(
+                                //                         borderRadius:
+                                //                             BorderRadius
+                                //                                 .circular(20),
+                                //                         color:
+                                //                             Colors.transparent,
+                                //                         border: Border.all(
+                                //                             color:
+                                //                                 Colors.white)),
+                                //                     child: const Icon(
+                                //                       Icons.close,
+                                //                       color: Colors.white,
+                                //                     ),
+                                //                   ),
+                                //                 ),
+                                //               ),
+                                //             ],
+                                //           ),
+                                //         );
+                                //       });
+                                //     });
                               }
                             },
                             child: const Icon(
@@ -604,7 +621,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                               ),
                             ),
                           ),
-                          if (widget.product.quantity < 1)
+                          if (int.parse(widget.product.quantity.toString()) < 1)
                             Positioned.directional(
                               textDirection: Directionality.of(context),
                               top: AppUtil.rtlDirection(context) ? 4 : 10,
@@ -728,7 +745,7 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                 ),
                             ],
                           ),
-                          if (widget.product.quantity > 0)
+                          if (int.parse(widget.product.quantity.toString()) > 0)
                             InkWell(
                               onTap: () async {
                                 final getStorage = GetStorage();
@@ -763,287 +780,312 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                     );
                                   }
                                 } else {
-                                  await showDialog(
-                                      context: context,
-                                      barrierDismissible: true,
-                                      builder: (context) {
-                                        return StatefulBuilder(
-                                            builder: (context, setState) {
-                                          return SizedBox(
-                                            width: width,
-                                            child: Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                AlertDialog(
-                                                  insetPadding:
-                                                      const EdgeInsets.all(16),
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            25),
-                                                  ),
-                                                  title: CustomText(
-                                                    text: 'signIn'.tr,
-                                                    textAlign: TextAlign.center,
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w600,
-                                                    color: warmGrey,
-                                                  ),
-                                                  content:
-                                                      SingleChildScrollView(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 20),
-                                                    child: ListBody(
-                                                      children: [
-                                                        const SizedBox(
-                                                          height: 16,
-                                                        ),
-                                                        CustomButton(
-                                                          onPressed: () {
-                                                            Get.to(() =>
-                                                                const LoginScreen());
-                                                          },
-                                                          title: 'signIn'.tr,
-                                                          radius: 4,
-                                                        ),
-                                                        const SizedBox(
-                                                          height: 24,
-                                                        ),
-                                                        Row(
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Container(
-                                                              color:
-                                                                  Colors.grey,
-                                                              height: 1,
-                                                              width: 99,
-                                                            ),
-                                                            CustomText(
-                                                              text:
-                                                                  'loginThrough'
-                                                                      .tr,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                              color: warmGrey,
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .center,
-                                                            ),
-                                                            Container(
-                                                              color:
-                                                                  Colors.grey,
-                                                              height: 1,
-                                                              width: 99,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        const SizedBox(
-                                                          height: 32,
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .symmetric(
-                                                                  horizontal:
-                                                                      4),
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            textDirection:
-                                                                TextDirection
-                                                                    .ltr,
-                                                            children: [
-                                                              // Expanded(
-                                                              //   child: CustomCard(
-                                                              //     onTap: () {},
-                                                              //     icon:
-                                                              //         'facebook_icon',
-                                                              //   ),
-                                                              // ),
-                                                              // const SizedBox(
-                                                              //   width: 8,
-                                                              // ),
-                                                              if (Platform
-                                                                  .isIOS)
-                                                                Expanded(
-                                                                  child:
-                                                                      CustomCard(
-                                                                    onTap:
-                                                                        () async {
-                                                                      final user =
-                                                                          await FirebaseService()
-                                                                              .signInWithApple(context: context);
-                                                                      if (user !=
-                                                                          null) {
-                                                                        _profileController
-                                                                            .getAccount();
-                                                                        _checkoutController
-                                                                            .getCartItems();
-                                                                        if (user.phone !=
-                                                                                null &&
-                                                                            user.phone!.isNotEmpty) {
-                                                                          Get.offAll(() =>
-                                                                              const HomePage());
-                                                                        } else {
-                                                                          Get.offAll(
-                                                                            () =>
-                                                                                EditDetailsScreen(
-                                                                              profileController: _profileController,
-                                                                              isFromSocialLogin: true,
-                                                                              firstName: user.firstName,
-                                                                              lastName: user.lastName,
-                                                                              email: user.email,
-                                                                              phone: user.phone,
-                                                                              customerId: user.id.toString(),
-                                                                            ),
-                                                                          );
-                                                                        }
-                                                                      }
-                                                                    },
-                                                                    icon:
-                                                                        'apple_icon',
-                                                                  ),
-                                                                ),
-                                                              if (Platform
-                                                                  .isIOS)
-                                                                const SizedBox(
-                                                                  width: 8,
-                                                                ),
-                                                              Expanded(
-                                                                child:
-                                                                    CustomCard(
-                                                                  onTap:
-                                                                      () async {
-                                                                    final user =
-                                                                        await FirebaseService().signInWithGoogle(
-                                                                            context:
-                                                                                context);
-                                                                    if (user !=
-                                                                        null) {
-                                                                      _profileController
-                                                                          .getAccount();
-                                                                      _checkoutController
-                                                                          .getCartItems();
-                                                                      if (user.phone !=
-                                                                              null &&
-                                                                          user.phone!
-                                                                              .isNotEmpty) {
-                                                                        Get.offAll(() =>
-                                                                            const HomePage());
-                                                                      } else {
-                                                                        Get.offAll(
-                                                                          () =>
-                                                                              EditDetailsScreen(
-                                                                            profileController:
-                                                                                _profileController,
-                                                                            isFromSocialLogin:
-                                                                                true,
-                                                                            firstName:
-                                                                                user.firstName,
-                                                                            lastName:
-                                                                                user.lastName,
-                                                                            email:
-                                                                                user.email,
-                                                                            phone:
-                                                                                user.phone,
-                                                                            customerId:
-                                                                                user.id.toString(),
-                                                                          ),
-                                                                        );
-                                                                      }
-                                                                    }
-                                                                  },
-                                                                  icon:
-                                                                      'google_icon',
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                          height: 32,
-                                                        ),
-                                                        InkWell(
-                                                          onTap: () {
-                                                            Get.to(() =>
-                                                                const RegisterScreen());
-                                                          },
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              CustomText(
-                                                                text:
-                                                                    'dontHaveAccount'
-                                                                        .tr,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400,
-                                                                color: Colors
-                                                                    .grey[500]!,
-                                                              ),
-                                                              const SizedBox(
-                                                                width: 4,
-                                                              ),
-                                                              CustomText(
-                                                                text:
-                                                                    'joinUs'.tr,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        const SizedBox(
-                                                          height: 40,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                                Material(
-                                                  color: Colors.transparent,
-                                                  child: InkWell(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                    onTap: () {
-                                                      Get.back();
-                                                    },
-                                                    child: Container(
-                                                      height: 35,
-                                                      width: 35,
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(20),
-                                                          color: Colors
-                                                              .transparent,
-                                                          border: Border.all(
-                                                              color: Colors
-                                                                  .white)),
-                                                      child: const Icon(
-                                                        Icons.close,
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          );
-                                        });
-                                      });
+                                  // Here Cache Your Products
+                                  bool isSaved = await CacheHelper.addToCart(
+                                    product: widget.product,
+                                    quantity: '1',
+                                  );
+
+                                  if (isSaved) {
+                                    await _checkoutController.getCartItems();
+                                    if (context.mounted) {
+                                      AppUtil.successToast(
+                                        context,
+                                        'productAddedToCart'.tr,
+                                      );
+                                    }
+                                    AppsFlyerService.logAddToCart(
+                                      id: widget.product.id.toString(),
+                                      name: widget.product.name!,
+                                      price: double.parse(widget.product.price
+                                          .toString()
+                                          .split(',')
+                                          .join()),
+                                      currency: 'SAR',
+                                      quantity: 1,
+                                    );
+                                  }
+                                  // await showDialog(
+                                  //     context: context,
+                                  //     barrierDismissible: true,
+                                  //     builder: (context) {
+                                  //       return StatefulBuilder(
+                                  //           builder: (context, setState) {
+                                  //         return SizedBox(
+                                  //           width: width,
+                                  //           child: Column(
+                                  //             mainAxisAlignment:
+                                  //                 MainAxisAlignment.center,
+                                  //             crossAxisAlignment:
+                                  //                 CrossAxisAlignment.center,
+                                  //             children: [
+                                  //               AlertDialog(
+                                  //                 insetPadding:
+                                  //                     const EdgeInsets.all(16),
+                                  //                 shape: RoundedRectangleBorder(
+                                  //                   borderRadius:
+                                  //                       BorderRadius.circular(
+                                  //                           25),
+                                  //                 ),
+                                  //                 title: CustomText(
+                                  //                   text: 'signIn'.tr,
+                                  //                   textAlign: TextAlign.center,
+                                  //                   fontSize: 14,
+                                  //                   fontWeight: FontWeight.w600,
+                                  //                   color: warmGrey,
+                                  //                 ),
+                                  //                 content:
+                                  //                     SingleChildScrollView(
+                                  //                   padding: const EdgeInsets
+                                  //                       .symmetric(
+                                  //                       horizontal: 20),
+                                  //                   child: ListBody(
+                                  //                     children: [
+                                  //                       const SizedBox(
+                                  //                         height: 16,
+                                  //                       ),
+                                  //                       CustomButton(
+                                  //                         onPressed: () {
+                                  //                           Get.to(() =>
+                                  //                               const LoginScreen());
+                                  //                         },
+                                  //                         title: 'signIn'.tr,
+                                  //                         radius: 4,
+                                  //                       ),
+                                  //                       const SizedBox(
+                                  //                         height: 24,
+                                  //                       ),
+                                  //                       Row(
+                                  //                         mainAxisAlignment:
+                                  //                             MainAxisAlignment
+                                  //                                 .spaceBetween,
+                                  //                         children: [
+                                  //                           Container(
+                                  //                             color:
+                                  //                                 Colors.grey,
+                                  //                             height: 1,
+                                  //                             width: 99,
+                                  //                           ),
+                                  //                           CustomText(
+                                  //                             text:
+                                  //                                 'loginThrough'
+                                  //                                     .tr,
+                                  //                             fontWeight:
+                                  //                                 FontWeight
+                                  //                                     .w400,
+                                  //                             color: warmGrey,
+                                  //                             textAlign:
+                                  //                                 TextAlign
+                                  //                                     .center,
+                                  //                           ),
+                                  //                           Container(
+                                  //                             color:
+                                  //                                 Colors.grey,
+                                  //                             height: 1,
+                                  //                             width: 99,
+                                  //                           ),
+                                  //                         ],
+                                  //                       ),
+                                  //                       const SizedBox(
+                                  //                         height: 32,
+                                  //                       ),
+                                  //                       Padding(
+                                  //                         padding:
+                                  //                             const EdgeInsets
+                                  //                                 .symmetric(
+                                  //                                 horizontal:
+                                  //                                     4),
+                                  //                         child: Row(
+                                  //                           mainAxisAlignment:
+                                  //                               MainAxisAlignment
+                                  //                                   .spaceBetween,
+                                  //                           textDirection:
+                                  //                               TextDirection
+                                  //                                   .ltr,
+                                  //                           children: [
+                                  //                             // Expanded(
+                                  //                             //   child: CustomCard(
+                                  //                             //     onTap: () {},
+                                  //                             //     icon:
+                                  //                             //         'facebook_icon',
+                                  //                             //   ),
+                                  //                             // ),
+                                  //                             // const SizedBox(
+                                  //                             //   width: 8,
+                                  //                             // ),
+                                  //                             if (Platform
+                                  //                                 .isIOS)
+                                  //                               Expanded(
+                                  //                                 child:
+                                  //                                     CustomCard(
+                                  //                                   onTap:
+                                  //                                       () async {
+                                  //                                     final user =
+                                  //                                         await FirebaseService()
+                                  //                                             .signInWithApple(context: context);
+                                  //                                     if (user !=
+                                  //                                         null) {
+                                  //                                       _profileController
+                                  //                                           .getAccount();
+                                  //                                       _checkoutController
+                                  //                                           .getCartItems();
+                                  //                                       if (user.phone !=
+                                  //                                               null &&
+                                  //                                           user.phone!.isNotEmpty) {
+                                  //                                         Get.offAll(() =>
+                                  //                                             const HomePage());
+                                  //                                       } else {
+                                  //                                         Get.offAll(
+                                  //                                           () =>
+                                  //                                               EditDetailsScreen(
+                                  //                                             profileController: _profileController,
+                                  //                                             isFromSocialLogin: true,
+                                  //                                             firstName: user.firstName,
+                                  //                                             lastName: user.lastName,
+                                  //                                             email: user.email,
+                                  //                                             phone: user.phone,
+                                  //                                             customerId: user.id.toString(),
+                                  //                                           ),
+                                  //                                         );
+                                  //                                       }
+                                  //                                     }
+                                  //                                   },
+                                  //                                   icon:
+                                  //                                       'apple_icon',
+                                  //                                 ),
+                                  //                               ),
+                                  //                             if (Platform
+                                  //                                 .isIOS)
+                                  //                               const SizedBox(
+                                  //                                 width: 8,
+                                  //                               ),
+                                  //                             Expanded(
+                                  //                               child:
+                                  //                                   CustomCard(
+                                  //                                 onTap:
+                                  //                                     () async {
+                                  //                                   final user =
+                                  //                                       await FirebaseService().signInWithGoogle(
+                                  //                                           context:
+                                  //                                               context);
+                                  //                                   if (user !=
+                                  //                                       null) {
+                                  //                                     _profileController
+                                  //                                         .getAccount();
+                                  //                                     _checkoutController
+                                  //                                         .getCartItems();
+                                  //                                     if (user.phone !=
+                                  //                                             null &&
+                                  //                                         user.phone!
+                                  //                                             .isNotEmpty) {
+                                  //                                       Get.offAll(() =>
+                                  //                                           const HomePage());
+                                  //                                     } else {
+                                  //                                       Get.offAll(
+                                  //                                         () =>
+                                  //                                             EditDetailsScreen(
+                                  //                                           profileController:
+                                  //                                               _profileController,
+                                  //                                           isFromSocialLogin:
+                                  //                                               true,
+                                  //                                           firstName:
+                                  //                                               user.firstName,
+                                  //                                           lastName:
+                                  //                                               user.lastName,
+                                  //                                           email:
+                                  //                                               user.email,
+                                  //                                           phone:
+                                  //                                               user.phone,
+                                  //                                           customerId:
+                                  //                                               user.id.toString(),
+                                  //                                         ),
+                                  //                                       );
+                                  //                                     }
+                                  //                                   }
+                                  //                                 },
+                                  //                                 icon:
+                                  //                                     'google_icon',
+                                  //                               ),
+                                  //                             ),
+                                  //                           ],
+                                  //                         ),
+                                  //                       ),
+                                  //                       const SizedBox(
+                                  //                         height: 32,
+                                  //                       ),
+                                  //                       InkWell(
+                                  //                         onTap: () {
+                                  //                           Get.to(() =>
+                                  //                               const RegisterScreen());
+                                  //                         },
+                                  //                         child: Row(
+                                  //                           mainAxisAlignment:
+                                  //                               MainAxisAlignment
+                                  //                                   .center,
+                                  //                           children: [
+                                  //                             CustomText(
+                                  //                               text:
+                                  //                                   'dontHaveAccount'
+                                  //                                       .tr,
+                                  //                               fontWeight:
+                                  //                                   FontWeight
+                                  //                                       .w400,
+                                  //                               color: Colors
+                                  //                                   .grey[500]!,
+                                  //                             ),
+                                  //                             const SizedBox(
+                                  //                               width: 4,
+                                  //                             ),
+                                  //                             CustomText(
+                                  //                               text:
+                                  //                                   'joinUs'.tr,
+                                  //                               fontWeight:
+                                  //                                   FontWeight
+                                  //                                       .w500,
+                                  //                             ),
+                                  //                           ],
+                                  //                         ),
+                                  //                       ),
+                                  //                       const SizedBox(
+                                  //                         height: 40,
+                                  //                       ),
+                                  //                     ],
+                                  //                   ),
+                                  //                 ),
+                                  //               ),
+                                  //               Material(
+                                  //                 color: Colors.transparent,
+                                  //                 child: InkWell(
+                                  //                   borderRadius:
+                                  //                       BorderRadius.circular(
+                                  //                           20),
+                                  //                   onTap: () {
+                                  //                     Get.back();
+                                  //                   },
+                                  //                   child: Container(
+                                  //                     height: 35,
+                                  //                     width: 35,
+                                  //                     decoration: BoxDecoration(
+                                  //                         borderRadius:
+                                  //                             BorderRadius
+                                  //                                 .circular(20),
+                                  //                         color: Colors
+                                  //                             .transparent,
+                                  //                         border: Border.all(
+                                  //                             color: Colors
+                                  //                                 .white)),
+                                  //                     child: const Icon(
+                                  //                       Icons.close,
+                                  //                       color: Colors.white,
+                                  //                     ),
+                                  //                   ),
+                                  //                 ),
+                                  //               ),
+                                  //             ],
+                                  //           ),
+                                  //         );
+                                  //       });
+                                  //     });
                                 }
                               },
                               child: const Icon(
