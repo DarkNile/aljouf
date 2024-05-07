@@ -56,6 +56,18 @@ class _CartScreenState extends State<CartScreen> {
         customerId == _profileController.user.value.id.toString());
   }
 
+  calculateTotalForCachedProducts() {
+    _checkoutController.cartItems(0);
+    _checkoutController.total(0.0);
+    for (var element in _checkoutController.cart!.products!) {
+      _checkoutController.cartItems(_checkoutController.cartItems.value +=
+          int.parse(element.quantity.toString()));
+      _checkoutController.total(_checkoutController.total.value +=
+          double.parse(element.priceRaw) *
+              int.parse(element.quantity.toString()));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     log("CartScreen");
@@ -206,6 +218,7 @@ class _CartScreenState extends State<CartScreen> {
                                     .cart!.products![index].quantity
                                     .toString(),
                               );
+                              calculateTotalForCachedProducts();
                             }
                           });
                         }
@@ -240,23 +253,32 @@ class _CartScreenState extends State<CartScreen> {
                                     .cart!.products![index].quantity
                                     .toString(),
                               );
+                              calculateTotalForCachedProducts();
                             }
                           });
                         }
                       },
                       onDeleteTap: () async {
                         log("DELETE");
-                        await CacheHelper.deleteFromCart(
-                            product:
+                        if (isLogin) {
+                          _checkoutController.deleteCartItem(
+                              productId: _checkoutController
+                                  .cart!.products![index].id
+                                  .toString());
+                          setState(() {
+                            _checkoutController.cart!.products!.remove(
                                 _checkoutController.cart!.products![index]);
-                        _checkoutController.deleteCartItem(
-                            productId: _checkoutController
-                                .cart!.products![index].id
-                                .toString());
-                        setState(() {
-                          _checkoutController.cart!.products!.remove(
-                              _checkoutController.cart!.products![index]);
-                        });
+                          });
+                        } else {
+                          CacheHelper.deleteFromCart(
+                              product:
+                                  _checkoutController.cart!.products![index]);
+                          setState(() {
+                            _checkoutController.cart!.products!.remove(
+                                _checkoutController.cart!.products![index]);
+                          });
+                          calculateTotalForCachedProducts();
+                        }
                       },
                     ),
                   );
