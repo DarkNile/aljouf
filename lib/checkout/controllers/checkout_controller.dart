@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:aljouf/checkout/services/rating_service.dart';
 import 'package:aljouf/home/services/apps_flyer_service.dart';
-import 'package:aljouf/product/models/product.dart';
 import 'package:aljouf/utils/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -93,64 +92,45 @@ class CheckoutController extends GetxController {
         }
 
         log("API CART ${cart!.products!.length}");
-
-        CacheHelper.getMyListCart().forEach((prod) {
-          if (cart?.products != null || cart!.products!.isNotEmpty) {
-            for (int i = 0; i < cart!.products!.length; i++) {
-              //    =======  IF PRODUCT IS ALREADY IN CART     =======
-              if (cart!.products![i].id.toString() == prod.id.toString()) {
-                cart!.products![i].qty = prod.qty.toString();
-                cartItems(cartItems.value += 1);
-              }
-            }
-
-            // for (int i = 0; i < cart!.products!.length; i++) {
-            //   if (cart!.products![i].id.toString() == prod.id.toString()) {
-            //     cart!.products![i].qty = prod.qty.toString();
-            //     cartItems(cartItems.value += 1);
-            //   } else {
-            //     cartItems(cartItems.value += 1);
-            //     cart!.products!.add(prod);
-            //   }
-            // }
-
-            // cart!.products!.add(prod);
-            // cartItems(cartItems.value += 1);
-
-            String price = prod.priceRaw ?? "0.0";
-
-            log("Prod price ${prod.priceRaw}");
-            total(total.value += double.parse(price));
-          }
-        });
         log("  cartItems Last ${cartItems.value}");
-
         return cart;
       } else {
-        log("Cart == null");
-        print("else");
-        List<Product>? products = [];
+        //      ===>>> IF Read From Cache ===>>>
         cartItems(0);
-        total(0);
+        total(0.0);
+        Cart myCart = Cart(products: []);
 
         CacheHelper.getMyListCart().forEach((prod) {
-          products.add(prod);
+          cartItems(cartItems.value += int.parse(prod.quantity.toString()));
 
-          String price = prod.priceRaw ?? "0.0";
+          if (prod.special != null && prod.special != 0) {
+            prod.priceRaw =
+                double.parse(prod.special.toString()).toStringAsFixed(2);
 
-          log("Prod price ${prod.priceRaw}");
+            log("myProduct.priceRaw special  ${prod.priceRaw}");
+          } else {
+            prod.priceRaw =
+                double.parse(prod.price.toString().split(',').join())
+                    .toStringAsFixed(2);
+            log("myProduct.priceRaw price  ${prod.priceRaw}");
+          }
 
-          total(total.value += double.parse(price));
+          double priceRaw;
+          if (prod.priceRaw == null) {
+            priceRaw = double.parse("0.0");
+          } else {
+            priceRaw = double.parse(prod.priceRaw.toString());
+          }
+          total(
+              total.value += (priceRaw * int.parse(prod.quantity.toString())));
+          myCart.products!.add(prod);
         });
 
-        cartItems(products.length);
-        log("cartItems $cartItems");
-        cart = Cart(
-          total: total.value.toStringAsFixed(2),
-          totalProductCount: cartItems.value,
-          totalRaw: total.value,
-          products: products,
-        );
+        for (var element in myCart.products!) {
+          log("element.priceRaw ${element.priceRaw}");
+        }
+
+        cart = myCart;
         return cart;
       }
     } catch (e) {
@@ -159,6 +139,7 @@ class CheckoutController extends GetxController {
     } finally {
       isCartLoading(false);
     }
+    // return null;
   }
 
   Future<bool> addToCart({

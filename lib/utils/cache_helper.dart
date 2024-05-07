@@ -27,115 +27,48 @@ class CacheHelper {
     await _box.erase();
   }
 
-  // this for checkout
-
-//   static Future<bool> addToCart({
-//     required String id,
-//     required String quantity,
-//   }) async {
-//     bool isSaved = false;
-//     List<ProductCacheModel> myListCart = read('ListCart') ?? [];
-//     log("My List Cart : ${myListCart.toString()}");
-
-//     for (var product in myListCart) {
-//       if (product.id != id) {
-//         myListCart.add(ProductCacheModel(
-//           id: id,
-//           quantity: quantity,
-//         ));
-//       }
-//     }
-//     await write('ListCart', jsonEncode(myListCart));
-//     List<ProductCacheModel> getMyListCart = read('ListCart') ?? [];
-//     log("My List Cart After Add : ${getMyListCart.toString()}");
-//     for (var prod in getMyListCart) {
-//       if (prod.id == id) {
-//         isSaved = true;
-//         log("isSaved $isSaved");
-//         break;
-//       } else {
-//         isSaved = false;
-//         log("isSaved $isSaved");
-//         break;
-//       }
-//     }
-
-//     return isSaved;
-//   }
-// }
+  //   ====   This For Checkout   ====
+  static const String _cartListName = 'ListCart';
 
   static Future<bool> addToCart({
     required Product product,
     required String quantity,
   }) async {
-    // if (true) {
-    //   clear();
-    //   return true;
-    // }
     product.quantity = quantity;
-    log("Product Price Raw : ${product.priceRaw.toString()}");
-
-    log("Product price : ${product.price.toString()}");
-    log("Product dateAdded : ${product.dateAdded.toString()}");
-    log("Product dateModified : ${product.dateModified.toString()}");
-    log("Product description : ${product.description.toString()}");
-    log("Product discounts : ${product.discounts.toString()}");
-    log("Product name : ${product.name.toString()}");
 
     bool isSaved = false;
     List<Product> productsList = [];
     List<Product> productsListTemp = [];
 
-    log(" product ID    ____+++____ ${product.id}");
-    log(" product productID    ____+++____ ${product.productId}");
-    productsList.clear();
-    productsListTemp.clear();
     getMyListCart().forEach((prod) {
       productsListTemp.add(prod);
       productsList.add(prod);
-
-      log("Prod ID: ${prod.id.toString()}");
     });
-    log("productsList: ${productsListTemp.length.toString()}");
 
     if (productsListTemp.isEmpty) {
       productsList.add(product);
 
       log("Start <=> Write");
-      await remove('ListCart');
-      await write('ListCart', jsonEncode(productsList));
+      await clearCartList();
+      await write(_cartListName, jsonEncode(productsList));
     } else {
-      // Product? prodTemp;
-      // for (var prod in productsListTemp) {
-      //   String prodID = prod.id.toString();
-      //   String productID = product.id.toString();
-      //   if (prodID == productID) {
-      //     prodTemp = null;
-      //     break;
-      //   }
-
-      //   prodTemp = prod;
-      // }
-      // if (prodTemp != null) {
-      //   log("if (prodTemp != null) {}");
-      //   productsList.add(prodTemp);
-      //   log("Start <=> Write");
-      //   await remove('ListCart');
-      //   await write('ListCart', jsonEncode(productsList));
-      // }
+      log(" else ");
       Product? prodTemp;
       var existingProduct = productsListTemp.firstWhere(
         (prod) => prod.id.toString() == product.id.toString(),
         orElse: () => Product(id: "-9999"),
       );
-      existingProduct.quantity = quantity;
+
       prodTemp = existingProduct;
+
+      existingProduct.quantity = quantity;
 
       if (prodTemp.id == "-9999") {
         productsList.add(product);
         log("Start <=> Write");
-        await remove('ListCart');
-        await write('ListCart', jsonEncode(productsList));
+
+        await clearCartList();
+        await write(_cartListName, jsonEncode(productsList));
       }
     }
 
@@ -149,16 +82,15 @@ class CacheHelper {
     for (var prod in productsList) {
       String prodID = prod.id.toString();
       String productID = product.id.toString();
-      log("Price Raw : ${prod.priceRaw.toString()}");
       if (prodID == productID) {
         isSaved = true;
-        log("isSaved $isSaved");
+        log("isSaved break");
         break;
       } else {
         isSaved = false;
-        log("isSaved $isSaved");
       }
     }
+    log("isSaved $isSaved");
     return isSaved;
   }
 
@@ -166,25 +98,15 @@ class CacheHelper {
     required Product product,
     required String quantity,
   }) async {
-    // if (true) {
-    //   clear();
-    //   return true;
-    // }
     product.quantity = quantity;
 
     bool isSaved = false;
     List<Product> productsList = [];
     List<Product> productsListTemp = [];
 
-    log(" product ID    ____+++____ ${product.id}");
-    log(" product productID    ____+++____ ${product.productId}");
-    productsList.clear();
-    productsListTemp.clear();
     getMyListCart().forEach((prod) {
       productsListTemp.add(prod);
       productsList.add(prod);
-
-      log("Prod ID: ${prod.id.toString()}");
     });
     log("productsList: ${productsListTemp.length.toString()}");
 
@@ -195,8 +117,8 @@ class CacheHelper {
       }
     }
     log("Start <=> Write");
-    await remove('ListCart');
-    await write('ListCart', jsonEncode(productsList));
+    await clearCartList();
+    await write(_cartListName, jsonEncode(productsList));
 
     productsList.clear();
     productsListTemp.clear();
@@ -210,13 +132,13 @@ class CacheHelper {
       String productID = product.id.toString();
       if (prodID == productID) {
         isSaved = true;
-        log("isSaved $isSaved");
+        log("isSaved break");
         break;
       } else {
         isSaved = false;
-        log("isSaved $isSaved");
       }
     }
+    log("isSaved $isSaved");
     return isSaved;
   }
 
@@ -241,8 +163,8 @@ class CacheHelper {
       productsList
           .removeWhere((prod) => prod.id.toString() == product.id.toString());
 
-      await remove('ListCart');
-      await write('ListCart', jsonEncode(productsList));
+      await clearCartList();
+      await write(_cartListName, jsonEncode(productsList));
 
       productsList.clear();
       productsListTemp.clear();
@@ -263,19 +185,26 @@ class CacheHelper {
 
     productsList.clear();
     temp.clear();
-    if (read('ListCart') != null) {
-      if (read('ListCart') is String) {
-        temp = jsonDecode(read('ListCart'));
+    if (read(_cartListName) != null) {
+      if (read(_cartListName) is String) {
+        temp = jsonDecode(read(_cartListName));
       } else {
-        temp = read('ListCart');
+        temp = read(_cartListName);
       }
 
       for (var prod in temp) {
         productsList.add(Product.fromJson(prod));
       }
     }
+    for (var element in productsList) {
+      log("My List Cart  getMyListCart () = >priceRaw :${element.priceRaw.toString()}");
+    }
 
     log("My List Cart  getMyListCart ():${productsList.length.toString()}");
     return productsList;
+  }
+
+  static Future<void> clearCartList() async {
+    await remove(_cartListName);
   }
 }
