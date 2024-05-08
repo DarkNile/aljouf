@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:aljouf/checkout/controllers/checkout_controller.dart';
+import 'package:aljouf/product/models/product.dart';
 import 'package:aljouf/utils/cache_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -62,7 +63,8 @@ class AuthService {
         return User.fromJson(user);
       } else {
         if (context.mounted) {
-          AppUtil.errorToast(context, 'حدث خطأ ما');
+          AppUtil.errorToast(
+              context, "Something went wrong please try again".tr);
         }
         return null;
       }
@@ -116,7 +118,8 @@ class AuthService {
         return User.fromJson(user);
       } else {
         if (context.mounted) {
-          AppUtil.errorToast(context, 'حدث خطأ ما');
+          AppUtil.errorToast(
+              context, "Something went wrong please try again".tr);
         }
         return null;
       }
@@ -407,19 +410,19 @@ class AuthService {
   // ======  This For Send Cached Products Data To Cart  ======
 
   static Future<bool> sendCachedProductsToCart() async {
-    int item = 0;
     final CheckoutController controller = Get.put(CheckoutController());
+    List<Product> products = CacheHelper.getMyListCart();
 
     try {
-      if (CacheHelper.getMyListCart().isNotEmpty) {
-        CacheHelper.getMyListCart().forEach((prod) async {
-          item += 1;
-          log("Send Item Item TO Cart :: $item");
-          await controller.addToCart(
-            productId: prod.id.toString(),
-            quantity: prod.quantity.toString(),
-          );
-        });
+      if (products.isNotEmpty) {
+        await Future.wait(
+          products.map(
+            (prod) async => await controller.addToCart(
+              productId: prod.id.toString(),
+              quantity: prod.quantity.toString(),
+            ),
+          ),
+        );
         await CacheHelper.clearCartList();
         log("Success Add To Cart");
         return true;
@@ -427,7 +430,7 @@ class AuthService {
       log("Empty ListCart");
       return false;
     } catch (e) {
-      log("Error adding item $item to cart: $e");
+      log("Error adding item to cart: $e");
       return false;
     }
   }

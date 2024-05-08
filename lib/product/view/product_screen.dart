@@ -724,7 +724,7 @@ class _ProductScreenState extends State<ProductScreen>
                       );
 
                       if (isSaved) {
-                        await _checkoutController.getCartItems();
+                        await _checkoutController.getCartItemsFromCache();
                         if (context.mounted) {
                           AppUtil.successToast(
                             context,
