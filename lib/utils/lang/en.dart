@@ -212,4 +212,6 @@ const Map<String, String> en = {
   'valueAddedTax': 'Value Added Tax (15%)',
   'totalAmount': 'Total Amount',
   'coupon': 'Coupon',
+  "Something went wrong please try again":
+      "Something went wrong please try again"
 };

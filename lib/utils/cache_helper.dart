@@ -148,10 +148,6 @@ class CacheHelper {
     List<Product> productsList = [];
     List<Product> productsListTemp = [];
     try {
-      log(" product ID    ____+++____ ${product.id}");
-      log(" product productID    ____+++____ ${product.productId}");
-      productsList.clear();
-      productsListTemp.clear();
       getMyListCart().forEach((prod) {
         productsListTemp.add(prod);
         productsList.add(prod);
@@ -195,9 +191,6 @@ class CacheHelper {
       for (var prod in temp) {
         productsList.add(Product.fromJson(prod));
       }
-    }
-    for (var element in productsList) {
-      log("My List Cart  getMyListCart () = >priceRaw :${element.priceRaw.toString()}");
     }
 
     log("My List Cart  getMyListCart ():${productsList.length.toString()}");

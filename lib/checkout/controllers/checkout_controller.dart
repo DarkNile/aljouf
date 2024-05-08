@@ -96,41 +96,7 @@ class CheckoutController extends GetxController {
         return cart;
       } else {
         //      ===>>> IF Read From Cache ===>>>
-        cartItems(0);
-        total(0.0);
-        Cart myCart = Cart(products: []);
-
-        CacheHelper.getMyListCart().forEach((prod) {
-          cartItems(cartItems.value += int.parse(prod.quantity.toString()));
-
-          if (prod.special != null && prod.special != 0) {
-            prod.priceRaw =
-                double.parse(prod.special.toString()).toStringAsFixed(2);
-
-            log("myProduct.priceRaw special  ${prod.priceRaw}");
-          } else {
-            prod.priceRaw =
-                double.parse(prod.price.toString().split(',').join())
-                    .toStringAsFixed(2);
-            log("myProduct.priceRaw price  ${prod.priceRaw}");
-          }
-
-          double priceRaw;
-          if (prod.priceRaw == null) {
-            priceRaw = double.parse("0.0");
-          } else {
-            priceRaw = double.parse(prod.priceRaw.toString());
-          }
-          total(
-              total.value += (priceRaw * int.parse(prod.quantity.toString())));
-          myCart.products!.add(prod);
-        });
-
-        for (var element in myCart.products!) {
-          log("element.priceRaw ${element.priceRaw}");
-        }
-
-        cart = myCart;
+        cart = getCartItemsFromCache();
         return cart;
       }
     } catch (e) {
@@ -140,6 +106,49 @@ class CheckoutController extends GetxController {
       isCartLoading(false);
     }
     // return null;
+  }
+
+// ==========   Get Cart Items From Cache   ==========
+  Cart? getCartItemsFromCache() {
+    log("Future<Cart?> getCartItemsFromCache()");
+    try {
+      isCartLoading(true);
+      cartItems(0);
+      total(0.0);
+      Cart myCart = Cart(products: []);
+      //      ===>>>  Read From Cache ===>>>
+      CacheHelper.getMyListCart().forEach((prod) {
+        cartItems(cartItems.value += int.parse(prod.quantity.toString()));
+
+        if (prod.special != null && prod.special != 0) {
+          prod.priceRaw =
+              double.parse(prod.special.toString()).toStringAsFixed(2);
+
+          log("myProduct.priceRaw special  ${prod.priceRaw}");
+        } else {
+          prod.priceRaw = double.parse(prod.price.toString().split(',').join())
+              .toStringAsFixed(2);
+          log("myProduct.priceRaw price  ${prod.priceRaw}");
+        }
+
+        double priceRaw;
+        if (prod.priceRaw == null) {
+          priceRaw = double.parse("0.0");
+        } else {
+          priceRaw = double.parse(prod.priceRaw.toString());
+        }
+        total(total.value += (priceRaw * int.parse(prod.quantity.toString())));
+        myCart.products!.add(prod);
+      });
+
+      cart = myCart;
+      return cart;
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isCartLoading(false);
+    }
   }
 
   Future<bool> addToCart({

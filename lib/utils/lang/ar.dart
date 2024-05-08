@@ -208,4 +208,6 @@ const Map<String, String> ar = {
   'shippingFees': 'رسوم الشحن',
   'valueAddedTax': 'ضريبة القيمة المضافة (15%)',
   'totalAmount': 'المجموع الكلي',
+  "Something went wrong please try again":
+      "حدث خطأ ما الرجاء المحاولة مرة أخرى",
 };
