@@ -11,6 +11,7 @@ import 'package:aljouf/utils/cache_helper.dart';
 import 'package:aljouf/utils/debounce.dart';
 import 'package:aljouf/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:aljouf/auth/view/login_screen.dart';
@@ -403,19 +404,34 @@ class _CartScreenState extends State<CartScreen> {
                                               borderRadius:
                                                   BorderRadius.circular(25),
                                             ),
-                                            title: CustomText(
-                                              text: 'signIn'.tr,
-                                              textAlign: TextAlign.center,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w600,
-                                              color: warmGrey,
-                                            ),
                                             content: SingleChildScrollView(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 20),
                                               child: ListBody(
                                                 children: [
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional
+                                                            .centerEnd,
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        Get.back();
+                                                      },
+                                                      child: const Icon(
+                                                        Icons.close,
+                                                        color: Colors.black,
+                                                        size: 25,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 16,
+                                                  ),
+                                                  CustomText(
+                                                    text: 'signIn'.tr,
+                                                    textAlign: TextAlign.center,
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w600,
+                                                    color: warmGrey,
+                                                  ),
                                                   const SizedBox(
                                                     height: 16,
                                                   ),
@@ -620,31 +636,6 @@ class _CartScreenState extends State<CartScreen> {
                                                     height: 40,
                                                   ),
                                                 ],
-                                              ),
-                                            ),
-                                          ),
-                                          Material(
-                                            color: Colors.transparent,
-                                            child: InkWell(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              onTap: () {
-                                                Get.back();
-                                              },
-                                              child: Container(
-                                                height: 35,
-                                                width: 35,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            20),
-                                                    color: Colors.transparent,
-                                                    border: Border.all(
-                                                        color: Colors.white)),
-                                                child: const Icon(
-                                                  Icons.close,
-                                                  color: Colors.white,
-                                                ),
                                               ),
                                             ),
                                           ),

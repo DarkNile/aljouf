@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:math' as math;
 import 'package:aljouf/home/services/apps_flyer_service.dart';
 import 'package:aljouf/product/controllers/product_controller.dart';
@@ -166,13 +167,32 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                   AppsFlyerService.logAddToCart(
                                     id: widget.product.id.toString(),
                                     name: widget.product.name!,
-                                    price: double.parse(widget.product.price
-                                        .toString()
-                                        .split(',')
-                                        .join()),
+                                    price: double.parse(
+                                        (widget.product.special != null &&
+                                                widget.product.special != 0)
+                                            ? widget.product.special
+                                                .toString()
+                                                .split(',')
+                                                .join()
+                                            : widget.product.price
+                                                .toString()
+                                                .split(',')
+                                                .join()),
                                     currency: 'SAR',
                                     quantity: 1,
                                   );
+                                  double price = double.parse(
+                                      (widget.product.special != null &&
+                                              widget.product.special != 0)
+                                          ? widget.product.special
+                                              .toString()
+                                              .split(',')
+                                              .join()
+                                          : widget.product.price
+                                              .toString()
+                                              .split(',')
+                                              .join());
+                                  log("AppsFlyerService.logAddToCart  $price");
                                 }
                               } else {
                                 // Here Cache Your Products
@@ -192,13 +212,32 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                   AppsFlyerService.logAddToCart(
                                     id: widget.product.id.toString(),
                                     name: widget.product.name!,
-                                    price: double.parse(widget.product.price
-                                        .toString()
-                                        .split(',')
-                                        .join()),
+                                    price: double.parse(
+                                        (widget.product.special != null &&
+                                                widget.product.special != 0)
+                                            ? widget.product.special
+                                                .toString()
+                                                .split(',')
+                                                .join()
+                                            : widget.product.price
+                                                .toString()
+                                                .split(',')
+                                                .join()),
                                     currency: 'SAR',
                                     quantity: 1,
                                   );
+                                  double price = double.parse(
+                                      (widget.product.special != null &&
+                                              widget.product.special != 0)
+                                          ? widget.product.special
+                                              .toString()
+                                              .split(',')
+                                              .join()
+                                          : widget.product.price
+                                              .toString()
+                                              .split(',')
+                                              .join());
+                                  log("AppsFlyerService.logAddToCart  $price");
                                 }
                                 // await showDialog(
                                 //     context: context,
@@ -771,13 +810,32 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                     AppsFlyerService.logAddToCart(
                                       id: widget.product.id.toString(),
                                       name: widget.product.name!,
-                                      price: double.parse(widget.product.price
-                                          .toString()
-                                          .split(',')
-                                          .join()),
+                                      price: double.parse(
+                                          (widget.product.special != null &&
+                                                  widget.product.special != 0)
+                                              ? widget.product.special
+                                                  .toString()
+                                                  .split(',')
+                                                  .join()
+                                              : widget.product.price
+                                                  .toString()
+                                                  .split(',')
+                                                  .join()),
                                       currency: 'SAR',
                                       quantity: 1,
                                     );
+                                    double price = double.parse(
+                                        (widget.product.special != null &&
+                                                widget.product.special != 0)
+                                            ? widget.product.special
+                                                .toString()
+                                                .split(',')
+                                                .join()
+                                            : widget.product.price
+                                                .toString()
+                                                .split(',')
+                                                .join());
+                                    log("AppsFlyerService.logAddToCart  $price");
                                   }
                                 } else {
                                   // Here Cache Your Products
@@ -797,13 +855,32 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                     AppsFlyerService.logAddToCart(
                                       id: widget.product.id.toString(),
                                       name: widget.product.name!,
-                                      price: double.parse(widget.product.price
-                                          .toString()
-                                          .split(',')
-                                          .join()),
+                                      price: double.parse(
+                                          (widget.product.special != null &&
+                                                  widget.product.special != 0)
+                                              ? widget.product.special
+                                                  .toString()
+                                                  .split(',')
+                                                  .join()
+                                              : widget.product.price
+                                                  .toString()
+                                                  .split(',')
+                                                  .join()),
                                       currency: 'SAR',
                                       quantity: 1,
                                     );
+                                    double price = double.parse(
+                                        (widget.product.special != null &&
+                                                widget.product.special != 0)
+                                            ? widget.product.special
+                                                .toString()
+                                                .split(',')
+                                                .join()
+                                            : widget.product.price
+                                                .toString()
+                                                .split(',')
+                                                .join());
+                                    log("AppsFlyerService.logAddToCart  $price");
                                   }
                                   // await showDialog(
                                   //     context: context,

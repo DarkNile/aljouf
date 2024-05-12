@@ -1,6 +1,7 @@
 import 'package:aljouf/constants/colors.dart' as constants;
 import 'package:aljouf/firebase_options.dart';
 import 'package:aljouf/home/services/apps_flyer_service.dart';
+import 'package:aljouf/utils/app_verstion.dart';
 import 'package:aljouf/utils/cache_helper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -52,6 +53,7 @@ void main() async {
   ));
   await GetStorage.init();
   await CacheHelper.init();
+  await AppVersion.getVersion();
   await AppsFlyerService.initAppsFlyer();
   runApp(Phoenix(child: const MyApp()));
 }

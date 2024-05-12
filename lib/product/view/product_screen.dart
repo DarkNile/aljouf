@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:math' as math;
 import 'package:aljouf/checkout/view/cart_screen.dart';
 import 'package:aljouf/home/services/apps_flyer_service.dart';
@@ -566,17 +567,19 @@ class _ProductScreenState extends State<ProductScreen>
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 250,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 24),
-                      child: TabBarView(
-                        physics: const NeverScrollableScrollPhysics(),
-                        controller: _tabController,
-                        children: [
-                          ProductDescriptionScreen(product: widget.product),
-                          RatingReviewScreen(product: widget.product),
-                        ],
+                  SingleChildScrollView(
+                    child: SizedBox(
+                      height: 250,
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 24),
+                        child: TabBarView(
+                          physics: const NeverScrollableScrollPhysics(),
+                          controller: _tabController,
+                          children: [
+                            ProductDescriptionScreen(product: widget.product),
+                            RatingReviewScreen(product: widget.product),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -703,8 +706,9 @@ class _ProductScreenState extends State<ProductScreen>
                         AppsFlyerService.logAddToCart(
                           id: widget.product.id.toString(),
                           name: widget.product.name!,
-                          price: double.parse(widget.isFromCart
-                              ? widget.product.originPrice
+                          price: double.parse((widget.product.special != null &&
+                                  widget.product.special != 0)
+                              ? widget.product.special
                                   .toString()
                                   .split(',')
                                   .join()
@@ -715,6 +719,18 @@ class _ProductScreenState extends State<ProductScreen>
                           currency: 'SAR',
                           quantity: 1,
                         );
+                        double price = double.parse(
+                            (widget.product.special != null &&
+                                    widget.product.special != 0)
+                                ? widget.product.special
+                                    .toString()
+                                    .split(',')
+                                    .join()
+                                : widget.product.price
+                                    .toString()
+                                    .split(',')
+                                    .join());
+                        log("AppsFlyerService.logAddToCart  $price");
                       }
                     } else {
                       // Here Cache Your Products
@@ -724,7 +740,7 @@ class _ProductScreenState extends State<ProductScreen>
                       );
 
                       if (isSaved) {
-                        await _checkoutController.getCartItemsFromCache();
+                        _checkoutController.getCartItemsFromCache();
                         if (context.mounted) {
                           AppUtil.successToast(
                             context,
@@ -734,8 +750,9 @@ class _ProductScreenState extends State<ProductScreen>
                         AppsFlyerService.logAddToCart(
                           id: widget.product.id.toString(),
                           name: widget.product.name!,
-                          price: double.parse(widget.isFromCart
-                              ? widget.product.originPrice
+                          price: double.parse((widget.product.special != null &&
+                                  widget.product.special != 0)
+                              ? widget.product.special
                                   .toString()
                                   .split(',')
                                   .join()
@@ -746,6 +763,18 @@ class _ProductScreenState extends State<ProductScreen>
                           currency: 'SAR',
                           quantity: 1,
                         );
+                        double price = double.parse(
+                            (widget.product.special != null &&
+                                    widget.product.special != 0)
+                                ? widget.product.special
+                                    .toString()
+                                    .split(',')
+                                    .join()
+                                : widget.product.price
+                                    .toString()
+                                    .split(',')
+                                    .join());
+                        log("AppsFlyerService.logAddToCart  $price");
                       }
                       // await showDialog(
                       //     context: context,

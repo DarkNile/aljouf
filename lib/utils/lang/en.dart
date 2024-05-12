@@ -213,5 +213,6 @@ const Map<String, String> en = {
   'totalAmount': 'Total Amount',
   'coupon': 'Coupon',
   "Something went wrong please try again":
-      "Something went wrong please try again"
+      "Something went wrong please try again",
+  "version": "version",
 };

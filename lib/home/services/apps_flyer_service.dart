@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:appsflyer_sdk/appsflyer_sdk.dart';
@@ -12,7 +13,7 @@ class AppsFlyerService {
       showDebug: true,
     );
     appsflyerSdk = AppsflyerSdk(options);
-    appsflyerSdk.initSdk();
+    await appsflyerSdk.initSdk();
   }
 
   static Future<void> logAddToCart({
@@ -22,7 +23,7 @@ class AppsFlyerService {
     required String currency,
     required int quantity,
   }) async {
-    appsflyerSdk.logEvent('af_add_to_cart', {
+    bool? logEvent = await appsflyerSdk.logEvent('af_add_to_cart', {
       'af_content_id': id,
       'af_content': name,
       'af_price': price,
@@ -30,6 +31,7 @@ class AppsFlyerService {
       'af_quantity': quantity,
       'af_revenue': price,
     });
+    log("logEvent $logEvent");
   }
 
   static Future<void> logPurchase({
@@ -38,12 +40,13 @@ class AppsFlyerService {
     required String currency,
     required int quantity,
   }) async {
-    appsflyerSdk.logEvent('af_purchase', {
+    bool? logEvent = await appsflyerSdk.logEvent('af_purchase', {
       'af_order_id': orderId,
       'af_price': price,
       'af_currency': currency,
       'af_quantity': quantity,
       'af_revenue': price,
     });
+    log("logEvent $logEvent");
   }
 }

@@ -1,3 +1,4 @@
+import 'package:aljouf/utils/app_verstion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -350,6 +351,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
               height: 24,
             ),
             SvgPicture.asset('assets/icons/payments.svg'),
+            const SizedBox(
+              height: 24,
+            ),
+            CustomText(
+              text: "${'version'.tr} ${AppVersion.version}",
+              fontWeight: FontWeight.w400,
+            ),
             const SizedBox(
               height: 40,
             ),
