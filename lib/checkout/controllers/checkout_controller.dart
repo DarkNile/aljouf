@@ -425,7 +425,8 @@ class CheckoutController extends GetxController {
           currency: 'SAR',
           quantity: order.products!.length,
         );
-        clearCart();
+        log("AppsFlyerService logPurchase price : ${double.parse(order.total.toString())}");
+        await clearCart();
       }
       return isSuccess;
     } catch (e) {
