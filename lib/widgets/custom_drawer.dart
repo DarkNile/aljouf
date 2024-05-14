@@ -357,6 +357,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
             CustomText(
               text: "${'version'.tr} ${AppVersion.version}",
               fontWeight: FontWeight.w400,
+              color: brownishGrey,
             ),
             const SizedBox(
               height: 40,
