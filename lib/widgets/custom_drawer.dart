@@ -289,6 +289,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
             const SizedBox(
               height: 24,
             ),
+            SvgPicture.asset('assets/icons/payments.svg'),
+            const SizedBox(
+              height: 24,
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -347,10 +351,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 ),
               ],
             ),
-            const SizedBox(
-              height: 24,
-            ),
-            SvgPicture.asset('assets/icons/payments.svg'),
             const SizedBox(
               height: 24,
             ),
