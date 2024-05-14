@@ -567,19 +567,17 @@ class _ProductScreenState extends State<ProductScreen>
                       ),
                     ],
                   ),
-                  SingleChildScrollView(
+                  Padding(
+                    padding: const EdgeInsets.only(top: 24),
                     child: SizedBox(
                       height: 250,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 24),
-                        child: TabBarView(
-                          physics: const NeverScrollableScrollPhysics(),
-                          controller: _tabController,
-                          children: [
-                            ProductDescriptionScreen(product: widget.product),
-                            RatingReviewScreen(product: widget.product),
-                          ],
-                        ),
+                      child: TabBarView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        controller: _tabController,
+                        children: [
+                          ProductDescriptionScreen(product: widget.product),
+                          RatingReviewScreen(product: widget.product),
+                        ],
                       ),
                     ),
                   ),
