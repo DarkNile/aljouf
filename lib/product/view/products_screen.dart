@@ -58,6 +58,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
       _productsController.filteredProducts.clear();
       _productsController.getFilteredProducts(
         categoryId: widget.categoryId,
+        categoryName: widget.categoryName,
         homeController: _homeController,
       );
       _scrollController.addListener(() {
@@ -66,6 +67,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
           _productsController.page.value++;
           _productsController.getFilteredProducts(
             categoryId: widget.categoryId,
+            categoryName: widget.categoryName,
             homeController: _homeController,
           );
         }
@@ -116,6 +118,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
             _productsController.filteredProducts.clear();
             _productsController.getFilteredProducts(
               categoryId: id,
+              categoryName: name,
               homeController: _homeController,
             );
           }
@@ -339,6 +342,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                             .clear();
                                         _productsController.getFilteredProducts(
                                           categoryId: widget.categoryId,
+                                          categoryName: widget.categoryName,
                                           homeController: _homeController,
                                         );
                                         Get.back();
@@ -480,6 +484,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                             _productsController
                                                 .getFilteredProducts(
                                               categoryId: widget.categoryId,
+                                              categoryName: widget.categoryName,
                                               order: 'desc',
                                               sort: 'date_added',
                                               homeController: _homeController,
@@ -488,6 +493,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                             _productsController
                                                 .getFilteredProducts(
                                               categoryId: widget.categoryId,
+                                              categoryName: widget.categoryName,
                                               order: 'asc',
                                               sort: 'price',
                                               homeController: _homeController,
@@ -496,6 +502,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                             _productsController
                                                 .getFilteredProducts(
                                               categoryId: widget.categoryId,
+                                              categoryName: widget.categoryName,
                                               order: 'desc',
                                               sort: 'price',
                                               homeController: _homeController,
@@ -521,6 +528,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                           _productsController
                                               .getFilteredProducts(
                                             categoryId: widget.categoryId,
+                                            categoryName: widget.categoryName,
                                             homeController: _homeController,
                                           );
                                           Get.back();

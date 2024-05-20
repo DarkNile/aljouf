@@ -508,7 +508,7 @@ class CheckoutService {
     print('version: ${status!.localVersion}');
     final response = await http.post(
       Uri.parse(
-          '$baseUrl route=rest/confirm/confirm&language=$lang&app_version=${status!.localVersion}'),
+          '$baseUrl route=rest/confirm/confirm&language=$lang&app_version=${status.localVersion}'),
       headers: {
         'Accept': 'application/json',
         // 'Authorization': 'Bearer $token',
@@ -517,7 +517,7 @@ class CheckoutService {
       },
     );
     print(
-        '$baseUrl route=rest/confirm/confirm&language=$lang&app_version=${status!.localVersion}');
+        '$baseUrl route=rest/confirm/confirm&language=$lang&app_version=${status.localVersion}');
     print('response status code: ${response.statusCode}');
     if (jsonDecode(response.body)['success'] == 1) {
       var data = jsonDecode(response.body)['data'];
