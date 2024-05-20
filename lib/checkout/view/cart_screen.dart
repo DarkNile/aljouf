@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:aljouf/auth/services/firebase_service.dart';
 import 'package:aljouf/auth/view/edit_details_screen.dart';
+import 'package:aljouf/home/services/apps_flyer_service.dart';
 // import 'package:aljouf/home/controllers/home_controller.dart';
 import 'package:aljouf/product/view/product_screen.dart';
 import 'package:aljouf/profile/controllers/profile_controller.dart';
@@ -167,6 +168,31 @@ class _CartScreenState extends State<CartScreen> {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
+                      AppsFlyerService.appsflyerSdk.logEvent(
+                        'af_content_view',
+                        {
+                          'af_content_id': _checkoutController
+                              .cart!.products![index].id
+                              .toString(),
+                          'af_content_type':
+                              _checkoutController.cart!.products![index].name!,
+                          'af_price': double.parse((_checkoutController
+                                          .cart!.products![index].special !=
+                                      null &&
+                                  _checkoutController
+                                          .cart!.products![index].special !=
+                                      0)
+                              ? _checkoutController
+                                  .cart!.products![index].special
+                                  .toString()
+                                  .split(',')
+                                  .join()
+                              : _checkoutController.cart!.products![index].price
+                                  .toString()
+                                  .split(',')
+                                  .join()),
+                        },
+                      );
                       Get.to(
                         () => ProductScreen(
                           product: _checkoutController.cart!.products![index],
