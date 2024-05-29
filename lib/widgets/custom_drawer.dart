@@ -289,6 +289,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
             const SizedBox(
               height: 24,
             ),
+            SvgPicture.asset('assets/icons/payments.svg'),
+            const SizedBox(
+              height: 24,
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -350,16 +354,42 @@ class _CustomDrawerState extends State<CustomDrawer> {
             const SizedBox(
               height: 24,
             ),
-            SvgPicture.asset('assets/icons/payments.svg'),
+            const Center(
+              child: CustomText(
+                text: '©️ شركة الجوف للتنمية الزراعية',
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomText(
+                  text: 'سجل تجاري 3400004730',
+                  fontSize: 10,
+                  fontWeight: FontWeight.w400,
+                ),
+                CustomText(
+                  text: 'رقم ضريبي 300000621600003',
+                  fontSize: 10,
+                  fontWeight: FontWeight.w400,
+                ),
+              ],
+            ),
             const SizedBox(
               height: 24,
             ),
             CustomText(
               text: "${'version'.tr} ${AppVersion.version}",
               fontWeight: FontWeight.w400,
+              color: brownishGrey,
             ),
             const SizedBox(
-              height: 40,
+              height: 24,
             ),
           ],
         ),

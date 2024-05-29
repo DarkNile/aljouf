@@ -10,27 +10,26 @@ class ProductDescriptionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return ListView(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // CustomText(
-          //   text: 'description'.tr,
-          //   color: black,
-          //   fontWeight: FontWeight.w500,
-          // ),
-          // const SizedBox(
-          //   height: 8,
-          // ),
-          CustomText(
-            text: product.description!.split('&nbsp;').join(),
-            color: brownishGrey,
-            height: 1.5,
-            maxlines: 10,
-          ),
-        ],
-      ),
+      shrinkWrap: true,
+      // crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // CustomText(
+        //   text: 'description'.tr,
+        //   color: black,
+        //   fontWeight: FontWeight.w500,
+        // ),
+        // const SizedBox(
+        //   height: 8,
+        // ),
+        CustomText(
+          text: product.description!.split('&nbsp;').join(),
+          color: brownishGrey,
+          height: 1.5,
+          // maxlines: 10,
+        ),
+      ],
     );
   }
 }

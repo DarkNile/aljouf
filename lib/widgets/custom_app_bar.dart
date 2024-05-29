@@ -116,6 +116,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                                   _productsController.getFilteredProducts(
                                     search: _searchController.text,
                                     categoryId: '',
+                                    categoryName: '',
                                     homeController: _homeController,
                                   );
                                   Get.back();
@@ -135,6 +136,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                                   _productsController.filteredProducts.clear();
                                   _productsController.getFilteredProducts(
                                     categoryId: '',
+                                    categoryName: '',
                                     homeController: _homeController,
                                   );
                                   Get.back();

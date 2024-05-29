@@ -1,4 +1,5 @@
 import 'package:aljouf/home/controllers/home_controller.dart';
+import 'package:aljouf/home/services/apps_flyer_service.dart';
 import 'package:get/get.dart';
 import 'package:aljouf/product/models/product.dart';
 import 'package:aljouf/product/services/product_service.dart';
@@ -33,13 +34,17 @@ class ProductController extends GetxController {
     }
   }
 
+  List<String> productIds = [];
+
   Future<List<Product>?> getFilteredProducts({
     required String categoryId,
+    required String categoryName,
     String search = '',
     String order = '',
     String sort = '',
     required HomeController homeController,
   }) async {
+    productIds.clear();
     try {
       isFilteredProductsLoading(true);
       print(page.value.toString());
@@ -53,6 +58,16 @@ class ProductController extends GetxController {
       if (data != null) {
         filteredProducts.addAll(data);
         homeController.manageFavProducts(filteredProducts);
+        for (var product in filteredProducts) {
+          productIds.add(product.id.toString());
+        }
+        AppsFlyerService.appsflyerSdk.logEvent(
+          'af_list_view',
+          {
+            'af_content_type': categoryName,
+            'af_content_list': productIds,
+          },
+        );
         return filteredProducts;
       } else {
         return null;

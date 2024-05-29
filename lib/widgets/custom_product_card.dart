@@ -49,6 +49,17 @@ class _CustomProductCardState extends State<CustomProductCard> {
     return InkWell(
       onTap: () {
         if (widget.isRelated) {
+          AppsFlyerService.appsflyerSdk.logEvent(
+            'af_content_view',
+            {
+              'af_content_id': widget.product.id.toString(),
+              'af_content_type': widget.product.name!,
+              'af_price': double.parse((widget.product.special != null &&
+                      widget.product.special != 0)
+                  ? widget.product.special.toString().split(',').join()
+                  : widget.product.price.toString().split(',').join()),
+            },
+          );
           Get.back();
           Get.to(
             () => ProductScreen(
@@ -57,6 +68,17 @@ class _CustomProductCardState extends State<CustomProductCard> {
             ),
           );
         } else {
+          AppsFlyerService.appsflyerSdk.logEvent(
+            'af_content_view',
+            {
+              'af_content_id': widget.product.id.toString(),
+              'af_content_type': widget.product.name!,
+              'af_price': double.parse((widget.product.special != null &&
+                      widget.product.special != 0)
+                  ? widget.product.special.toString().split(',').join()
+                  : widget.product.price.toString().split(',').join()),
+            },
+          );
           Get.to(
             () => ProductScreen(
               product: widget.product,
