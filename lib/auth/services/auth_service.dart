@@ -426,9 +426,10 @@ class AuthService {
         await CacheHelper.clearCartList();
         log("Success Add To Cart");
         return true;
+      } else {
+        log("Empty ListCart");
+        return true;
       }
-      log("Empty ListCart");
-      return false;
     } catch (e) {
       log("Error adding item to cart: $e");
       return false;
