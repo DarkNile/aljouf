@@ -109,7 +109,7 @@ const Map<String, String> ar = {
   'addNewAddress': 'إضافة عنوان جديد',
   'addShippingAddress': 'إضافة عنوان الشحن',
   'addPaymentAddress': 'إضافة عنوان الدفع',
-  'noShippingAddress': 'الرجاء تحديد عنوان الشحن',
+  'noShippingAddress': 'ارجو اختيار العنوان المسجل',
   'country': 'الدولة',
   'zone': 'المنطقة / المحافظة',
   'city': 'المدينة',

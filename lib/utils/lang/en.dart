@@ -110,7 +110,7 @@ const Map<String, String> en = {
   'addNewAddress': 'Add New Address',
   'addShippingAddress': 'Add Shipping Address',
   'addPaymentAddress': 'Add Payment Address',
-  'noShippingAddress': 'Please select a shipping address',
+  'noShippingAddress': 'Please select the recorded address',
   'country': 'Country',
   'zone': 'Region / Province',
   'city': 'City',

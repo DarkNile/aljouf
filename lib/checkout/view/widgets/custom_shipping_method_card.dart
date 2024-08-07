@@ -36,7 +36,9 @@ class CustomShippingMethodCard extends StatelessWidget {
             Transform.scale(
               scale: 1.2,
               child: Checkbox(
-                fillColor: MaterialStateProperty.all(secondaryGreen),
+                // fillColor: MaterialStateProperty.all(secondaryGreen),
+                fillColor: MaterialStateProperty.all(
+                    isChecked ? secondaryGreen : Colors.white),
                 checkColor: Colors.white,
                 value: isChecked,
                 shape: const CircleBorder(),
