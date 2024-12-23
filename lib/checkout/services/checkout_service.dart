@@ -107,6 +107,49 @@ class CheckoutService {
     }
   }
 
+  static Future<bool> notifyMe({
+    required String name,
+    required String email,
+    required String comment,
+    required String productId,
+  }) async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final response = await http.post(
+      Uri.parse('$baseUrl route=feed/rest_api/NotifyWhenAvailable'),
+      headers: {
+        "Accept": "application/json",
+        "Cookie":
+            "OCSESSID=${token != null && token.isNotEmpty ? token : '8d87b6a83c38ea74f58b36afc3'}; currency=SAR;",
+        // 'Authorization': 'Bearer $token'
+      },
+      body: json.encode({
+        'NWAYourName': name,
+        'NWAYourEmail': email,
+        'NWAYourComment': comment,
+        'NWAProductID': productId,
+      }),
+    );
+
+    print('response status code: ${response.statusCode}');
+    print(json.encode({
+      'NWAYourName': name,
+      'NWAYourEmail': email,
+      'NWAYourComment': comment,
+      'NWAProductID': productId,
+    }));
+
+    if (json.decode(response.body)['success'] == 1) {
+      final data = jsonDecode(response.body)['data'];
+      print('data: $data');
+      return true;
+    } else {
+      print(json.decode(response.body)['error']);
+      return false;
+    }
+  }
+
   static Future<void> updateCartItemQuantity({
     required String productId,
     required String quantity,

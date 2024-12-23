@@ -9,6 +9,7 @@ import 'package:aljouf/checkout/models/cart.dart';
 import 'package:aljouf/checkout/models/order.dart';
 import 'package:aljouf/checkout/models/payment_method.dart';
 import 'package:aljouf/checkout/services/checkout_service.dart';
+import 'package:gtm/gtm.dart';
 
 import '../models/shipping_method.dart';
 
@@ -36,6 +37,7 @@ class CheckoutController extends GetxController {
   var shippingRate = 0.obs;
   var shippingCode = ''.obs;
   var isOutOfStock = false.obs;
+  final gtm = Gtm.instance;
 
   Future<int?> getShippingRate() async {
     try {
@@ -162,6 +164,29 @@ class CheckoutController extends GetxController {
       );
       if (isSuccess) {
         getCartItems();
+      }
+      return isSuccess;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  Future<bool> notifyMe({
+    required String name,
+    required String email,
+    required String comment,
+    required String productId,
+  }) async {
+    try {
+      final isSuccess = await CheckoutService.notifyMe(
+        name: name,
+        email: email,
+        comment: comment,
+        productId: productId,
+      );
+      if (isSuccess) {
+        print('success');
       }
       return isSuccess;
     } catch (e) {
@@ -419,6 +444,27 @@ class CheckoutController extends GetxController {
       isSavingOrderLoading(true);
       final isSuccess = await CheckoutService.saveOrderToDatabase();
       if (isSuccess) {
+        //
+        final gtmResult = await gtm.push(
+          'purchase',
+          parameters: {
+            'transaction_id': order.orderId.toString(),
+            'value': double.tryParse(order.total.toString()),
+            'currency': 'SAR',
+            // 'items': order.products!
+            //     .map((e) => {
+            //           'item_id': e.id.toString(),
+            //           'item_name': e.name!,
+            //           'price': double.tryParse(
+            //               e.priceRaw * int.tryParse(e.quantity)),
+            //           'currency': 'SAR',
+            //           'quantity': int.tryParse(e.quantity.toString()),
+            //         })
+            //     .toList(),
+          },
+        );
+        print(gtmResult);
+        //
         AppsFlyerService.logPurchase(
           orderId: order.orderId.toString(),
           price: double.parse(order.total.toString()),

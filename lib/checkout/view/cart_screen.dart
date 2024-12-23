@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 import 'dart:io';
 
@@ -12,7 +14,6 @@ import 'package:aljouf/utils/cache_helper.dart';
 import 'package:aljouf/utils/debounce.dart';
 import 'package:aljouf/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:aljouf/auth/view/login_screen.dart';
@@ -25,6 +26,7 @@ import 'package:aljouf/checkout/view/widgets/custom_cart_item.dart';
 import 'package:aljouf/widgets/custom_body_title.dart';
 import 'package:aljouf/widgets/custom_button.dart';
 import 'package:aljouf/widgets/custom_text.dart';
+import 'package:gtm/gtm.dart';
 import 'package:lottie/lottie.dart';
 
 class CartScreen extends StatefulWidget {
@@ -38,6 +40,7 @@ class _CartScreenState extends State<CartScreen> {
   final _checkoutController = Get.put(CheckoutController());
   final _profileController = Get.put(ProfileController());
   final debounce = Debounce(const Duration(milliseconds: 500));
+  final gtm = Gtm.instance;
 
   // final _homeController = Get.put(HomeController());
 
@@ -167,7 +170,36 @@ class _CartScreenState extends State<CartScreen> {
                 },
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: () {
+                    onTap: () async {
+                      await gtm.push(
+                        'view_item',
+                        parameters: {
+                          'item_id': _checkoutController
+                              .cart!.products![index].id
+                              .toString(),
+                          'item_name': _checkoutController
+                              .cart!.products![index].name!
+                              .split('-')
+                              .join()
+                              .replaceAll('"', ''),
+                          'price': double.tryParse((_checkoutController
+                                          .cart!.products![index].special !=
+                                      null &&
+                                  _checkoutController
+                                          .cart!.products![index].special !=
+                                      0)
+                              ? _checkoutController
+                                  .cart!.products![index].special
+                                  .toString()
+                                  .split(',')
+                                  .join()
+                              : _checkoutController.cart!.products![index].price
+                                  .toString()
+                                  .split(',')
+                                  .join()),
+                        },
+                      );
+                      //
                       AppsFlyerService.appsflyerSdk.logEvent(
                         'af_content_view',
                         {
@@ -384,6 +416,49 @@ class _CartScreenState extends State<CartScreen> {
                       padding: const EdgeInsets.only(bottom: 16),
                       child: CustomButton(
                         onPressed: () async {
+                          Map<String, dynamic> payload = {};
+                          for (int i = 0;
+                              i < _checkoutController.cart!.products!.length;
+                              i++) {
+                            final product =
+                                _checkoutController.cart!.products![i];
+                            final price = double.tryParse(
+                                    product.priceRaw?.toString() ?? '0') ??
+                                0.0;
+                            final quantity = int.tryParse(
+                                    product.quantity?.toString() ?? '1') ??
+                                1;
+                            int index = i + 1; // Start index from 1
+                            payload['item_id_$index'] =
+                                product.id?.toString() ?? 'Unknown ID';
+                            payload['item_name_$index'] = product.name!
+                                .split('-')
+                                .join()
+                                .replaceAll('"', '');
+                            payload['price_$index'] = price;
+                            payload['quantity_$index'] = quantity;
+                          }
+                          print('payload $payload');
+                          //
+                          final value = double.tryParse(
+                                  _checkoutController.total.value.toString()) ??
+                              0.0;
+                          final gtmResult = await gtm.push(
+                            'purchase',
+                            parameters: {
+                              'transaction_id': '999999',
+                              'value': value,
+                              'currency': 'SAR',
+                              ...payload, // Spread the items payload here
+                            },
+                          );
+                          print('GTM Result: $gtmResult');
+                          // 'ecommerce': {
+                          //   'items': [payload]
+                          // }
+                          // 'ecommerce': {
+                          //   'ecommerce.items': payload,
+                          // }
                           final getStorage = GetStorage();
                           final String? customerId =
                               getStorage.read('customerId');

@@ -23,6 +23,7 @@ class AuthService {
     required String confirm,
     required String telephone,
     required BuildContext context,
+    required int agree,
   }) async {
     final getStorage = GetStorage();
     final String? token = getStorage.read('token');
@@ -43,6 +44,7 @@ class AuthService {
           'password': password.trim(),
           'confirm': confirm.trim(),
           'telephone': telephone.trim(),
+          'agree': agree, //1
         }));
 
     print("response.statusCode");
@@ -202,6 +204,9 @@ class AuthService {
     final getStorage = GetStorage();
     final String? token = getStorage.read('token');
     print('token $token');
+    print(customerId);
+    print(phone.trim());
+
     final response = await http.post(Uri.parse('$baseUrl route=rest/phoneotp'),
         headers: {
           'Accept': 'application/json',

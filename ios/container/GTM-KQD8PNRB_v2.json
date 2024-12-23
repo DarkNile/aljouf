@@ -1,0 +1,115 @@
+{
+    "exportFormatVersion": 2,
+    "exportTime": "2024-09-18 15:49:06",
+    "containerVersion": {
+        "path": "accounts/6209402564/containers/195530902/versions/2",
+        "accountId": "6209402564",
+        "containerId": "195530902",
+        "containerVersionId": "2",
+        "name": "ios 1.0",
+        "description": "ios 1.0",
+        "container": {
+            "path": "accounts/6209402564/containers/195530902",
+            "accountId": "6209402564",
+            "containerId": "195530902",
+            "name": "aljouf-IOS",
+            "publicId": "GTM-KQD8PNRB",
+            "usageContext": [
+                "IOS_SDK_5"
+            ],
+            "fingerprint": "1726645274235",
+            "tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/6209402564/containers/195530902/workspaces?apiLink=container",
+            "features": {
+                "supportUserPermissions": true,
+                "supportEnvironments": true,
+                "supportWorkspaces": true,
+                "supportGtagConfigs": false,
+                "supportBuiltInVariables": true,
+                "supportClients": false,
+                "supportFolders": true,
+                "supportTags": true,
+                "supportTemplates": true,
+                "supportTriggers": true,
+                "supportVariables": true,
+                "supportVersions": true,
+                "supportZones": true,
+                "supportTransformations": false
+            },
+            "tagIds": [
+                "GTM-KQD8PNRB"
+            ]
+        },
+        "tag": [
+            {
+                "accountId": "6209402564",
+                "containerId": "195530902",
+                "tagId": "4",
+                "name": "Google Analytics (Firebase)",
+                "type": "fm",
+                "parameter": [
+                    {
+                        "type": "BOOLEAN",
+                        "key": "mergeEventParameters",
+                        "value": "false"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "action",
+                        "value": "measure"
+                    },
+                    {
+                        "type": "TEMPLATE",
+                        "key": "eventName",
+                        "value": "{{Event Name}}"
+                    }
+                ],
+                "fingerprint": "1726672141342",
+                "firingTriggerId": [
+                    "3"
+                ],
+                "tagFiringOption": "ONCE_PER_EVENT",
+                "consentSettings": {
+                    "consentStatus": "NOT_SET"
+                }
+            }
+        ],
+        "trigger": [
+            {
+                "accountId": "6209402564",
+                "containerId": "195530902",
+                "triggerId": "3",
+                "name": "First Open",
+                "type": "FIREBASE_FIRST_OPEN",
+                "fingerprint": "1726672130798"
+            }
+        ],
+        "builtInVariable": [
+            {
+                "accountId": "6209402564",
+                "containerId": "195530902",
+                "type": "APP_ID",
+                "name": "App ID"
+            },
+            {
+                "accountId": "6209402564",
+                "containerId": "195530902",
+                "type": "APP_NAME",
+                "name": "App Name"
+            },
+            {
+                "accountId": "6209402564",
+                "containerId": "195530902",
+                "type": "APP_VERSION_CODE",
+                "name": "App Version Code"
+            },
+            {
+                "accountId": "6209402564",
+                "containerId": "195530902",
+                "type": "EVENT_NAME",
+                "name": "Event Name"
+            }
+        ],
+        "fingerprint": "1726672162575",
+        "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/6209402564/containers/195530902/versions/2?apiLink=version"
+    }
+}

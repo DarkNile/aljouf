@@ -1,6 +1,7 @@
 import 'package:aljouf/checkout/controllers/checkout_controller.dart';
 import 'package:aljouf/constants/colors.dart';
 import 'package:aljouf/profile/controllers/profile_controller.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -11,6 +12,7 @@ import 'package:aljouf/widgets/custom_button.dart';
 import 'package:aljouf/widgets/custom_text.dart';
 import 'package:aljouf/widgets/custom_text_field.dart';
 import 'package:country_code_picker/country_code_picker.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -32,6 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _passwordConfirmationController = TextEditingController();
   bool _isPasswordHidden = true;
   bool _isPasswordConfirmationHidden = true;
+  bool _isChecked = true;
 
   @override
   Widget build(BuildContext context) {
@@ -242,6 +245,86 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
               ),
               const SizedBox(
+                height: 12,
+              ),
+              Directionality(
+                textDirection: AppUtil.rtlDirection(context)
+                    ? TextDirection.ltr
+                    : TextDirection.rtl,
+                child: CheckboxListTile(
+                    contentPadding: EdgeInsets.zero,
+                    title: RichText(
+                      textAlign: (AppUtil.rtlDirection(context)
+                          ? TextAlign.right
+                          : TextAlign.left),
+                      textDirection: (AppUtil.rtlDirection(context)
+                          ? TextDirection.rtl
+                          : TextDirection.ltr),
+                      text: TextSpan(
+                        text: '${'agree'.tr} ',
+                        style: const TextStyle(
+                          color: black,
+                        ),
+                        children: [
+                          TextSpan(
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () async {
+                                final url = AppUtil.rtlDirection(context)
+                                    ? Uri.parse(
+                                        'https://aljouf.com/الشروط-و-الأحكام')
+                                    : Uri.parse(
+                                        'https://aljouf.com/Terms-Conditions');
+                                if (await canLaunchUrl(url)) {
+                                  launchUrl(url);
+                                }
+                              },
+                            text: '${'termsAndConditions'.tr} ',
+                            style: const TextStyle(
+                              color: black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '${'and'.tr} ',
+                            style: const TextStyle(
+                              color: black,
+                            ),
+                          ),
+                          TextSpan(
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () async {
+                                final url = AppUtil.rtlDirection(context)
+                                    ? Uri.parse(
+                                        'https://aljouf.com/سياسة-الخصوصية')
+                                    : Uri.parse(
+                                        'https://aljouf.com/Privacy-Policy');
+                                if (await canLaunchUrl(url)) {
+                                  launchUrl(url);
+                                }
+                              },
+                            text: '${'privacyPolicy'.tr} ',
+                            style: const TextStyle(
+                              color: black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          TextSpan(
+                            text: '${'forApp'.tr}.',
+                            style: const TextStyle(
+                              color: black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    value: _isChecked,
+                    onChanged: (value) {
+                      setState(() {
+                        _isChecked = value!;
+                      });
+                    }),
+              ),
+              const SizedBox(
                 height: 40,
               ),
               Obx(() {
@@ -279,6 +362,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         password: _passwordController.text,
                         confirm: _passwordConfirmationController.text,
                         context: context,
+                        agree: _isChecked ? 1 : 0,
                       );
                       if (user != null) {
                         _profileController.getAccount();

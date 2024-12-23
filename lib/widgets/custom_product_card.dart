@@ -17,6 +17,7 @@ import 'package:aljouf/utils/app_util.dart';
 import 'package:aljouf/widgets/custom_loading_widget.dart';
 import 'package:aljouf/widgets/custom_text.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:gtm/gtm.dart';
 
 class CustomProductCard extends StatefulWidget {
   const CustomProductCard({
@@ -43,12 +44,26 @@ class _CustomProductCardState extends State<CustomProductCard> {
   final _checkoutController = Get.put(CheckoutController());
   final _productController = Get.put(ProductController());
   final _profileController = Get.put(ProfileController());
+  final gtm = Gtm.instance;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
+      onTap: () async {
         if (widget.isRelated) {
+          final gtmResult = await gtm.push(
+            'view_item',
+            parameters: {
+              'item_id': widget.product.id.toString(),
+              'item_name':
+                  widget.product.name!.split('-').join().replaceAll('"', ''),
+              'price': double.tryParse((widget.product.special != null &&
+                      widget.product.special != 0)
+                  ? widget.product.special.toString().split(',').join()
+                  : widget.product.price.toString().split(',').join()),
+            },
+          );
+          print(gtmResult);
           AppsFlyerService.appsflyerSdk.logEvent(
             'af_content_view',
             {
@@ -68,6 +83,19 @@ class _CustomProductCardState extends State<CustomProductCard> {
             ),
           );
         } else {
+          final gtmResult = await gtm.push(
+            'view_item',
+            parameters: {
+              'item_id': widget.product.id.toString(),
+              'item_name':
+                  widget.product.name!.split('-').join().replaceAll('"', ''),
+              'price': double.tryParse((widget.product.special != null &&
+                      widget.product.special != 0)
+                  ? widget.product.special.toString().split(',').join()
+                  : widget.product.price.toString().split(',').join()),
+            },
+          );
+          print(gtmResult);
           AppsFlyerService.appsflyerSdk.logEvent(
             'af_content_view',
             {
@@ -186,6 +214,30 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                       'productAddedToCart'.tr,
                                     );
                                   }
+                                  final gtmResult = await gtm.push(
+                                    'add_to_cart',
+                                    parameters: {
+                                      'item_id': widget.product.id.toString(),
+                                      'item_name': widget.product.name!
+                                          .split('-')
+                                          .join()
+                                          .replaceAll('"', ''),
+                                      'price': double.tryParse(
+                                          (widget.product.special != null &&
+                                                  widget.product.special != 0)
+                                              ? widget.product.special
+                                                  .toString()
+                                                  .split(',')
+                                                  .join()
+                                              : widget.product.price
+                                                  .toString()
+                                                  .split(',')
+                                                  .join()),
+                                      'currency': 'SAR',
+                                      'quantity': 1,
+                                    },
+                                  );
+                                  print(gtmResult);
                                   AppsFlyerService.logAddToCart(
                                     id: widget.product.id.toString(),
                                     name: widget.product.name!,
@@ -231,6 +283,30 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                       'productAddedToCart'.tr,
                                     );
                                   }
+                                  final gtmResult = await gtm.push(
+                                    'add_to_cart',
+                                    parameters: {
+                                      'item_id': widget.product.id.toString(),
+                                      'item_name': widget.product.name!
+                                          .split('-')
+                                          .join()
+                                          .replaceAll('"', ''),
+                                      'price': double.tryParse(
+                                          (widget.product.special != null &&
+                                                  widget.product.special != 0)
+                                              ? widget.product.special
+                                                  .toString()
+                                                  .split(',')
+                                                  .join()
+                                              : widget.product.price
+                                                  .toString()
+                                                  .split(',')
+                                                  .join()),
+                                      'currency': 'SAR',
+                                      'quantity': 1,
+                                    },
+                                  );
+                                  print(gtmResult);
                                   AppsFlyerService.logAddToCart(
                                     id: widget.product.id.toString(),
                                     name: widget.product.name!,
@@ -829,6 +905,30 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                         'productAddedToCart'.tr,
                                       );
                                     }
+                                    final gtmResult = await gtm.push(
+                                      'add_to_cart',
+                                      parameters: {
+                                        'item_id': widget.product.id.toString(),
+                                        'item_name': widget.product.name!
+                                            .split('-')
+                                            .join()
+                                            .replaceAll('"', ''),
+                                        'price': double.tryParse(
+                                            (widget.product.special != null &&
+                                                    widget.product.special != 0)
+                                                ? widget.product.special
+                                                    .toString()
+                                                    .split(',')
+                                                    .join()
+                                                : widget.product.price
+                                                    .toString()
+                                                    .split(',')
+                                                    .join()),
+                                        'currency': 'SAR',
+                                        'quantity': 1,
+                                      },
+                                    );
+                                    print(gtmResult);
                                     AppsFlyerService.logAddToCart(
                                       id: widget.product.id.toString(),
                                       name: widget.product.name!,
@@ -874,6 +974,30 @@ class _CustomProductCardState extends State<CustomProductCard> {
                                         'productAddedToCart'.tr,
                                       );
                                     }
+                                    final gtmResult = await gtm.push(
+                                      'add_to_cart',
+                                      parameters: {
+                                        'item_id': widget.product.id.toString(),
+                                        'item_name': widget.product.name!
+                                            .split('-')
+                                            .join()
+                                            .replaceAll('"', ''),
+                                        'price': double.tryParse(
+                                            (widget.product.special != null &&
+                                                    widget.product.special != 0)
+                                                ? widget.product.special
+                                                    .toString()
+                                                    .split(',')
+                                                    .join()
+                                                : widget.product.price
+                                                    .toString()
+                                                    .split(',')
+                                                    .join()),
+                                        'currency': 'SAR',
+                                        'quantity': 1,
+                                      },
+                                    );
+                                    print(gtmResult);
                                     AppsFlyerService.logAddToCart(
                                       id: widget.product.id.toString(),
                                       name: widget.product.name!,

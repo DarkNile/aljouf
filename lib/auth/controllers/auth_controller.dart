@@ -23,6 +23,7 @@ class AuthController extends GetxController {
     required String confirm,
     required String telephone,
     required BuildContext context,
+    required int agree,
   }) async {
     try {
       isRegisterLoading(true);
@@ -34,6 +35,7 @@ class AuthController extends GetxController {
         confirm: confirm,
         telephone: '+966$telephone',
         context: context,
+        agree: agree,
       );
       if (user != null) {
         return user;

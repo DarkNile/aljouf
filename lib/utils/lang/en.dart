@@ -215,4 +215,11 @@ const Map<String, String> en = {
   "Something went wrong please try again":
       "Something went wrong please try again",
   "version": "version",
+  "agree": "By clicking on register, you acknowledge and agree to the",
+  "termsAndConditions": "terms and conditions",
+  "privacyPolicy": "privacy policy",
+  "forApp": "of the application",
+  "and": "and",
+  "notifyMe": "Notify me when available",
+  "notifyMeResponse": "Your request has been sent successfully!"
 };
