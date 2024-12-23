@@ -1,13 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.DigitalPartner.aljouf"
           xmlns:tools="http://schemas.android.com/tools">
-    <uses-permission android:name="android.permission.INTERNET"/>
+   <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="Al Jouf | الجوف"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        tools:replace="android:fullBackupContent"
-        android:fullBackupContent="true">
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:dataExtractionRules="@xml/appsflyer_data_extraction_rules"
+        tools:replace="android:allowBackup, android:dataExtractionRules, android:fullBackupContent">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -35,4 +37,5 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
 </manifest>

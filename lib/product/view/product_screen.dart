@@ -26,6 +26,7 @@ import 'package:aljouf/widgets/custom_loading_widget.dart';
 import 'package:aljouf/widgets/custom_product_card.dart';
 import 'package:aljouf/widgets/custom_text.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:gtm/gtm.dart';
 
 class ProductScreen extends StatefulWidget {
   const ProductScreen({
@@ -56,6 +57,7 @@ class _ProductScreenState extends State<ProductScreen>
   int _tabIndex = 0;
   Option? option;
   int? productOptionId;
+  final gtm = Gtm.instance;
 
   @override
   void initState() {
@@ -677,9 +679,36 @@ class _ProductScreenState extends State<ProductScreen>
           padding: const EdgeInsets.symmetric(horizontal: 12),
           child: int.parse(widget.product.quantity.toString()) < 1
               ? CustomButton(
-                  onPressed: null,
-                  title: 'outOfStock'.tr,
-                  color: brownishGrey,
+                  onPressed: () async {
+                    print('mego');
+                    final getStorage = GetStorage();
+                    final String? customerId = getStorage.read('customerId');
+
+                    if (customerId != null &&
+                        customerId.isNotEmpty &&
+                        customerId ==
+                            _profileController.user.value.id.toString()) {
+                      final isSuccess = await _checkoutController.notifyMe(
+                        name:
+                            '${_profileController.user.value.firstName ?? ''} ${_profileController.user.value.lastName ?? ''}',
+                        email: _profileController.user.value.email ?? '',
+                        comment: 'أريد التنبيه عند توفر هذا المنتج',
+                        productId: widget.product.productId.toString(),
+                      );
+                      if (isSuccess) {
+                        if (context.mounted) {
+                          AppUtil.successToast(
+                            context,
+                            'notifyMeResponse'.tr,
+                          );
+                        }
+                      }
+                    } else {
+                      print('out of stock');
+                    }
+                  },
+                  title: 'notifyMe'.tr,
+                  color: vermillion,
                 )
               : CustomButton(
                   onPressed: () async {
@@ -701,6 +730,30 @@ class _ProductScreenState extends State<ProductScreen>
                             'productAddedToCart'.tr,
                           );
                         }
+                        final gtmResult = await gtm.push(
+                          'add_to_cart',
+                          parameters: {
+                            'item_id': widget.product.id.toString(),
+                            'item_name': widget.product.name!
+                                .split('-')
+                                .join()
+                                .replaceAll('"', ''),
+                            'price': double.tryParse(
+                                (widget.product.special != null &&
+                                        widget.product.special != 0)
+                                    ? widget.product.special
+                                        .toString()
+                                        .split(',')
+                                        .join()
+                                    : widget.product.price
+                                        .toString()
+                                        .split(',')
+                                        .join()),
+                            'currency': 'SAR',
+                            'quantity': 1,
+                          },
+                        );
+                        print(gtmResult);
                         AppsFlyerService.logAddToCart(
                           id: widget.product.id.toString(),
                           name: widget.product.name!,
@@ -745,6 +798,30 @@ class _ProductScreenState extends State<ProductScreen>
                             'productAddedToCart'.tr,
                           );
                         }
+                        final gtmResult = await gtm.push(
+                          'add_to_cart',
+                          parameters: {
+                            'item_id': widget.product.id.toString(),
+                            'item_name': widget.product.name!
+                                .split('-')
+                                .join()
+                                .replaceAll('"', ''),
+                            'price': double.tryParse(
+                                (widget.product.special != null &&
+                                        widget.product.special != 0)
+                                    ? widget.product.special
+                                        .toString()
+                                        .split(',')
+                                        .join()
+                                    : widget.product.price
+                                        .toString()
+                                        .split(',')
+                                        .join()),
+                            'currency': 'SAR',
+                            'quantity': 1,
+                          },
+                        );
+                        print(gtmResult);
                         AppsFlyerService.logAddToCart(
                           id: widget.product.id.toString(),
                           name: widget.product.name!,

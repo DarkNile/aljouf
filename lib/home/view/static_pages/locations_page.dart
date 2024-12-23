@@ -44,6 +44,7 @@ class LocationsPage extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
                 onTap: () async {
+                  print(homeController.locations[index].geocode!);
                   await launchUrlString(
                       homeController.locations[index].geocode!);
                 },

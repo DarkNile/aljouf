@@ -211,4 +211,11 @@ const Map<String, String> ar = {
   "Something went wrong please try again":
       "حدث خطأ ما الرجاء المحاولة مرة أخرى",
   "version": "الإصدار",
+  "agree": "بالضغط على التسجيل فإنك تقرّ وتوافق على",
+  "termsAndConditions": "الشروط والأحكام",
+  "privacyPolicy": "سياسة الخصوصية",
+  "forApp": "للتطبيق",
+  "and": "و",
+  "notifyMe": "ابلغني عند التوفر",
+  "notifyMeResponse": "تم إرسال طلبك بنجاح!"
 };
