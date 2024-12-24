@@ -38,7 +38,7 @@ dependencies:
   get: ^4.6.5
   get_storage: ^2.1.1
   http: ^1.1.0
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.0.0
   animated_splash_screen: ^1.3.0
   cached_network_image: ^3.2.3
   flutter_svg: ^2.0.4
@@ -47,29 +47,29 @@ dependencies:
   another_flushbar: ^1.12.30
   page_transition: ^2.0.9
   url_launcher: ^6.3.0
-  lottie: ^2.3.2
+  lottie: ^3.1.3
   webview_flutter: ^4.4.1
   # flutter_paytabs_bridge: ^2.6.5
   flutter_paytabs_bridge: ^2.6.18
   # flutter_app_version_checker: ^0.3.2
-  firebase_core: ^2.15.0
-  firebase_messaging: ^14.6.5
-  device_info_plus: ^8.2.2
-  android_id: ^0.3.3
-  cloud_firestore: ^4.8.3
+  firebase_core: ^3.4.0
+  firebase_messaging: ^15.1.0
+  device_info_plus: ^10.1.2
+  android_id: ^0.4.0
+  cloud_firestore: ^5.4.0
   flutter_rating_bar: ^4.0.1
-  firebase_auth: ^4.7.0
+  firebase_auth: ^5.2.0
   the_apple_sign_in: ^1.1.1
   flutter_phoenix: ^1.1.1
   flutter_share: ^2.0.0
   in_app_review: ^2.0.6
   # appsflyer_sdk: ^6.11.3
   appsflyer_sdk: ^6.15.1
-  firebase_in_app_messaging: ^0.7.4+8
+  firebase_in_app_messaging: ^0.8.0+5
   new_version_plus: ^0.0.11
-  package_info_plus: ^4.0.2
+  package_info_plus: ^8.0.2
   gtm: ^1.0.0
-  firebase_analytics: ^10.4.0
+  firebase_analytics: ^11.3.0
   
 dev_dependencies:
   flutter_test:
@@ -80,8 +80,8 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.1
-  flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
