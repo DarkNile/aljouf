@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:developer';
 
+import 'package:aljouf/product/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
@@ -62,7 +64,34 @@ class CheckoutService {
       if (data is List) {
         return null;
       }
-      return Cart.fromJson(data);
+      // *  --  We Need To Check If Product Is Available --
+      Cart cart = Cart.fromJson(data);
+      //
+      int totalProductCount =
+          int.parse((cart.totalProductCount ?? 0).toString());
+      log(" FFFFFF cart.products  -> \n  ${cart.products?.length} \n ");
+      log("FFFFFF totalProductCount => $totalProductCount");
+      if (cart.products != null && cart.products!.isNotEmpty) {
+        List<Product>? products = [];
+
+        for (var prod in cart.products!) {
+          if (prod.stock == true) {
+            products.add(prod);
+          } else {
+            int productCount = int.parse((prod.quantity ?? 0).toString());
+            totalProductCount = totalProductCount - productCount;
+            log("productCount => $productCount");
+          }
+        }
+
+        cart.products = products;
+        cart.totalProductCount = totalProductCount;
+      }
+      log(" NNNN cart.products  -> \n  ${cart.products?.length} \n ");
+      log("NNNN totalProductCount => $totalProductCount");
+
+      // log("getCartItems -> \n  $data \n ");
+      return cart;
     } else {
       return null;
     }
