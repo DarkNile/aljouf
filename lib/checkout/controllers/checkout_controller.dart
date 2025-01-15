@@ -83,18 +83,27 @@ class CheckoutController extends GetxController {
         total(0.0);
         for (var element in cart!.products!) {
           total(total.value += element.totalRaw);
-          log("++++++++=========+++++++++==");
-          log("priceRaw ${element.priceRaw}");
-          log("price ${element.price}");
-          log("priceExcludingTax ${element.priceExcludingTax}");
-          log("originPrice ${element.originPrice}");
-          log("priceExcludingTaxFormated ${element.priceExcludingTaxFormated}");
-          log("priceFormated ${element.priceFormated}");
-          log("++++++++=========+++++++++==");
+          // log("++++++++=========+++++++++==");
+          // log("priceRaw ${element.priceRaw}");
+          // log("price ${element.price}");
+          // log("priceExcludingTax ${element.priceExcludingTax}");
+          // log("originPrice ${element.originPrice}");
+          // log("priceExcludingTaxFormated ${element.priceExcludingTaxFormated}");
+          // log("priceFormated ${element.priceFormated}");
+          // log("++++++++=========+++++++++==");
         }
 
         log("API CART ${cart!.products!.length}");
-        log("  cartItems Last ${cartItems.value}");
+        log("  Cart Items Last ${cartItems.value}");
+        log(" ---------- \n ");
+        data.products?.forEach((pro) {
+          log("  Cart Products ( Id  )  ${pro.id}");
+          log("  Cart Products ( name  )  ${pro.name}");
+          log("  Cart Products ( quantity  )  ${pro.quantity}");
+          log("  Cart Products ( qty  )  ${pro.qty}");
+          log("  Cart Products ( stock  )  ${pro.stock}");
+          log("  ---------- \n ");
+        });
         return cart;
       } else {
         //      ===>>> IF Read From Cache ===>>>

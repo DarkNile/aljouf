@@ -69,8 +69,8 @@ class CheckoutService {
       //
       int totalProductCount =
           int.parse((cart.totalProductCount ?? 0).toString());
-      log(" FFFFFF cart.products  -> \n  ${cart.products?.length} \n ");
-      log("FFFFFF totalProductCount => $totalProductCount");
+      log(" Start cart.products  -> \n  ${cart.products?.length} \n ");
+      log("Start totalProductCount => $totalProductCount");
       if (cart.products != null && cart.products!.isNotEmpty) {
         List<Product>? products = [];
 
@@ -78,17 +78,20 @@ class CheckoutService {
           if (prod.stock == true) {
             products.add(prod);
           } else {
+            // * -----  We Will Remove Product From Cart -----
+            log("We Will Remove Product From Cart", name: "CartService");
             int productCount = int.parse((prod.quantity ?? 0).toString());
             totalProductCount = totalProductCount - productCount;
             log("productCount => $productCount");
+            await deleteCartItem(productId: prod.id.toString());
           }
         }
 
         cart.products = products;
         cart.totalProductCount = totalProductCount;
       }
-      log(" NNNN cart.products  -> \n  ${cart.products?.length} \n ");
-      log("NNNN totalProductCount => $totalProductCount");
+      log(" End cart.products  -> \n  ${cart.products?.length} \n ");
+      log("End totalProductCount => $totalProductCount");
 
       // log("getCartItems -> \n  $data \n ");
       return cart;
@@ -227,6 +230,7 @@ class CheckoutService {
         // 'Authorization': 'Bearer $token'
       },
     );
+    log('deleteCartItem : ID ($productId)  ${response.statusCode}');
     print('response status code: ${response.statusCode}');
     if (jsonDecode(response.body)['success'] == 1) {
       var data = jsonDecode(response.body)['data'];
