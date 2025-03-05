@@ -75,12 +75,12 @@ class CheckoutService {
         List<Product>? products = [];
 
         for (var prod in cart.products!) {
-          if (prod.stock == true) {
+          if (int.parse(prod.quantity.toString()) > 0) {
             products.add(prod);
           } else {
             // * -----  We Will Remove Product From Cart -----
             log("We Will Remove Product From Cart", name: "CartService");
-            int productCount = int.parse((prod.quantity ?? 0).toString());
+            int productCount = int.parse(prod.quantity.toString());
             totalProductCount = totalProductCount - productCount;
             log("productCount => $productCount");
             await deleteCartItem(productId: prod.id.toString());

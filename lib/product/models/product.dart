@@ -70,8 +70,6 @@ class Product {
   dynamic reward;
   dynamic points;
   List<ProductCategory>? category;
-  // --- I Add Stock To Check Products On Cart ---
-  bool? stock;
   dynamic quantity;
   dynamic qty;
   Reviews? reviews;
@@ -147,7 +145,6 @@ class Product {
     this.reward,
     this.points,
     this.category,
-    this.stock,
     this.quantity,
     this.reviews,
     this.recurrings,
@@ -162,9 +159,6 @@ class Product {
     manufacturer = json["manufacturer"];
     sku = json["sku"];
     model = json["model"];
-    // --- Form Json Only To Read ---
-    stock = json["stock"];
-    // ---
     url = json["url"];
     image = json["image"];
     images = json["images"] == null ? null : List<String>.from(json["images"]);
