@@ -101,7 +101,6 @@ class CheckoutController extends GetxController {
           log("  Cart Products ( name  )  ${pro.name}");
           log("  Cart Products ( quantity  )  ${pro.quantity}");
           log("  Cart Products ( qty  )  ${pro.qty}");
-          log("  Cart Products ( stock  )  ${pro.stock}");
           log("  ---------- \n ");
         });
         return cart;

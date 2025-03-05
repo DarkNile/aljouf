@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 6.6.0+66
+version: 6.8.0+68
 
 environment:
   sdk: '>=3.0.3 <4.0.0'
@@ -54,7 +54,7 @@ dependencies:
   # flutter_app_version_checker: ^0.3.2
   firebase_core: ^3.4.0
   firebase_messaging: ^15.1.0
-  device_info_plus: ^10.1.2
+  device_info_plus: ^11.3.0
   android_id: ^0.4.0
   cloud_firestore: ^5.4.0
   flutter_rating_bar: ^4.0.1
@@ -66,7 +66,7 @@ dependencies:
   # appsflyer_sdk: ^6.11.3
   appsflyer_sdk: ^6.15.1
   firebase_in_app_messaging: ^0.8.0+5
-  new_version_plus: ^0.0.11
+  new_version_plus: ^0.1.0
   package_info_plus: ^8.0.2
   gtm: ^1.0.0
   firebase_analytics: ^11.3.0
@@ -80,7 +80,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
   flutter_launcher_icons: ^0.14.2
 
 # For information on the generic Dart part of this file, see the
