@@ -495,13 +495,15 @@ class OrderSummaryPage extends StatelessWidget {
                                   )
                                 else
                                   CustomText(
-                                      text: checkoutController
-                                          .order!.totals![index].title!),
+                                    text: checkoutController
+                                        .order!.totals![index].title!,
+                                  ),
                                 CustomText(
                                   text: checkoutController
                                       .order!.totals![index].text!,
                                   fontSize: 16,
                                   fontWeight: FontWeight.w600,
+                                  fontFamily: 'sar',
                                 ),
                               ],
                             );

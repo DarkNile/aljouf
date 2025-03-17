@@ -113,6 +113,7 @@ class CustomCartItem extends StatelessWidget {
                         fontSize: 12,
                         color: primaryGreen,
                         fontWeight: FontWeight.w400,
+                        fontFamily: 'sar',
                       ),
                     ),
                   ]),

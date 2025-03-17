@@ -341,6 +341,7 @@ class _ProductScreenState extends State<ProductScreen>
                                                 : 14,
                                             color: primaryGreen,
                                             fontWeight: FontWeight.w400,
+                                            fontFamily: 'sar',
                                           ),
                                         ),
                                       ]),
@@ -366,6 +367,7 @@ class _ProductScreenState extends State<ProductScreen>
                                               fontSize: 14,
                                               color: vermillion,
                                               fontWeight: FontWeight.w400,
+                                              fontFamily: 'sar',
                                             ),
                                           ),
                                         ]),
@@ -400,6 +402,7 @@ class _ProductScreenState extends State<ProductScreen>
                                       style: const TextStyle(
                                         fontSize: 10,
                                         color: brownishGrey,
+                                        fontFamily: 'sar',
                                       ),
                                     ),
                                   ]),

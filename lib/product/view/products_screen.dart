@@ -230,12 +230,14 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                       text:
                                           '${currentRangeValues.start.toStringAsFixed(2)} ${'riyal'.tr}',
                                       color: primaryGreen,
+                                      fontFamily: 'sar',
                                     ),
                                     const Spacer(),
                                     CustomText(
                                       text:
                                           '${currentRangeValues.end.toStringAsFixed(2)} ${'riyal'.tr}',
                                       color: primaryGreen,
+                                      fontFamily: 'sar',
                                     ),
                                   ],
                                 ),

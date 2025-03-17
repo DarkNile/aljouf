@@ -55,6 +55,7 @@ class CustomCheckoutItem extends StatelessWidget {
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
                 color: black,
+                fontFamily: 'sar',
               ),
               Row(
                 children: [
