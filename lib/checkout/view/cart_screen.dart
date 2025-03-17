@@ -405,6 +405,7 @@ class _CartScreenState extends State<CartScreen> {
                                   fontSize: 14,
                                   color: primaryGreen,
                                   fontWeight: FontWeight.w400,
+                                  fontFamily: 'sar',
                                 ),
                               ),
                             ]),

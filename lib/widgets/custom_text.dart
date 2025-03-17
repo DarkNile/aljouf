@@ -15,6 +15,7 @@ class CustomText extends StatelessWidget {
     this.textOverflow,
     this.textDirection,
     this.height,
+    this.fontFamily,
   });
 
   final String text;
@@ -27,6 +28,7 @@ class CustomText extends StatelessWidget {
   final TextOverflow? textOverflow;
   final TextDirection? textDirection;
   final double? height;
+  final String? fontFamily;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +44,7 @@ class CustomText extends StatelessWidget {
         fontWeight: fontWeight,
         decoration: textDecoration,
         height: height,
+        fontFamily: fontFamily,
       ),
       textDirection: textDirection ??
           (AppUtil.rtlDirection(context)

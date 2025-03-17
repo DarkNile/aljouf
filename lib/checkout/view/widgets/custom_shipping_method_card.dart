@@ -67,6 +67,7 @@ class CustomShippingMethodCard extends StatelessWidget {
                   color: black,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
+                  fontFamily: 'sar',
                 ),
                 const SizedBox(
                   height: 4,

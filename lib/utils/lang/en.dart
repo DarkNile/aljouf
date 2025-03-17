@@ -36,7 +36,7 @@ const Map<String, String> en = {
   'customerService': 'Customer Service',
   'complaint': 'Complaints & Inquiries',
   'viewAll': 'View All',
-  'riyal': 'SAR',
+  'riyal': '\$',
   'bestSelling': 'Best Selling',
   'shopAndEnjoy':
       'Shop our products and get the following features and services',

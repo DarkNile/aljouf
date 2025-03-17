@@ -36,7 +36,7 @@ const Map<String, String> ar = {
   'customerService': 'خدمة العملاء',
   'complaint': 'الشكاوى و الاستفسارات',
   'viewAll': 'عرض الكل',
-  'riyal': 'ريال',
+  'riyal': '\$',
   'bestSelling': 'الأكثر مبيعاً',
   'shopAndEnjoy': 'تسوقي منتجاتنا واحصلي على المميزات و الخدمات التالية',
   'freeShipping': 'شحن مجاني',
