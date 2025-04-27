@@ -56,6 +56,7 @@ class _HomePageState extends State<HomePage> {
     _checkoutController.getCartItems();
     // checkAppVersion();
     _checkAppVersion();
+    _homeController.getWelcomePopup();
   }
 
   @override

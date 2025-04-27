@@ -1,4 +1,7 @@
+import 'package:aljouf/home/models/popup.dart';
 import 'package:aljouf/product/controllers/product_controller.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aljouf/home/models/category.dart';
 import 'package:aljouf/home/models/location.dart';
@@ -33,6 +36,8 @@ class HomeController extends GetxController {
   var isCreatingCouponLoading = false.obs;
   var isCouponLoading = false.obs;
   var coupon = ''.obs;
+  var isPopupLoading = false.obs;
+  var popup = Popup().obs;
 
   Future<List<dynamic>?> getBanners({required String id}) async {
     try {
@@ -418,6 +423,47 @@ class HomeController extends GetxController {
       return null;
     } finally {
       isCouponLoading(false);
+    }
+  }
+
+  Future<Popup?> getWelcomePopup() async {
+    try {
+      isPopupLoading(true);
+      final data = await HomeService.getWelcomePopup();
+      if (data != null) {
+        popup(data);
+        if (popup.value.showPopup == true &&
+            popup.value.imageUrl != null &&
+            popup.value.imageUrl!.isNotEmpty) {
+          Get.dialog(
+            Material(
+              type: MaterialType.transparency,
+              child: Container(
+                alignment: Alignment.center,
+                child: Stack(
+                  children: [
+                    CachedNetworkImage(
+                      imageUrl: popup.value.imageUrl!,
+                    ),
+                    IconButton(
+                      onPressed: () => Get.back(),
+                      icon: Icon(Icons.close),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }
+        return popup.value;
+      } else {
+        return null;
+      }
+    } catch (e) {
+      print(e);
+      return null;
+    } finally {
+      isPopupLoading(false);
     }
   }
 }
