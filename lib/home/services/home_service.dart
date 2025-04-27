@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:aljouf/home/models/popup.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:aljouf/constants/urls.dart';
@@ -359,6 +360,30 @@ class HomeService {
       print('success');
     } else {
       print('error');
+    }
+  }
+
+  static Future<Popup?> getWelcomePopup() async {
+    final getStorage = GetStorage();
+    final String? token = getStorage.read('token');
+    print(token);
+    final String? lang = getStorage.read('lang');
+    print(lang);
+    final response = await http.get(
+      Uri.parse('${baseUrl}route=feed/rest_api/setPopup&language=$lang'),
+      headers: {
+        'Accept': 'application/json',
+        "Cookie": "OCSESSID=8d87b6a83c38ea74f58b36afc3; currency=SAR;",
+      },
+    );
+    print('response status code: ${response.statusCode}');
+    print('${baseUrl}route=feed/rest_api/setPopup&language=$lang');
+    if (jsonDecode(response.body)['success'] == 1) {
+      Map<String, dynamic> data = jsonDecode(response.body)['data'][0];
+      print('data: $data');
+      return Popup.fromJson(data);
+    } else {
+      return null;
     }
   }
 }
