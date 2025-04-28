@@ -298,13 +298,27 @@ class _CustomDrawerState extends State<CustomDrawer> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 CustomCard(
-                  icon: 'twitter',
+                  icon: 'tiktok',
                   onTap: () async {
-                    await launchUrlString('https://twitter.com/AljoufAgri');
+                    await launchUrlString('https://www.tiktok.com/@aljoufagri');
                   },
                   width: 36,
                   height: 36,
                   radius: 18,
+                  isPng: true,
+                ),
+                const SizedBox(
+                  width: 8,
+                ),
+                CustomCard(
+                  icon: 'x',
+                  onTap: () async {
+                    await launchUrlString('https://x.com/AljoufAgri');
+                  },
+                  width: 36,
+                  height: 36,
+                  radius: 18,
+                  isPng: true,
                 ),
                 const SizedBox(
                   width: 8,
