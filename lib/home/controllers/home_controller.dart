@@ -438,18 +438,42 @@ class HomeController extends GetxController {
           Get.dialog(
             Material(
               type: MaterialType.transparency,
-              child: Container(
-                alignment: Alignment.center,
-                child: Stack(
-                  children: [
-                    CachedNetworkImage(
-                      imageUrl: popup.value.imageUrl!,
-                    ),
-                    IconButton(
-                      onPressed: () => Get.back(),
-                      icon: Icon(Icons.close),
-                    ),
-                  ],
+              child: Center(
+                child: Container(
+                  width: Get.width *
+                      (double.tryParse(popup.value.width ?? '100') ?? 100) /
+                      100,
+                  height: Get.height *
+                      (double.tryParse(popup.value.height ?? '100') ?? 100) /
+                      100,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: CachedNetworkImage(
+                          imageUrl: popup.value.imageUrl!,
+                          width: Get.width *
+                              (double.tryParse(popup.value.width ?? '100') ??
+                                  100) /
+                              100,
+                          height: Get.height *
+                              (double.tryParse(popup.value.height ?? '100') ??
+                                  100) /
+                              100,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () => Get.back(),
+                        icon: Icon(Icons.close, color: Colors.black),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
